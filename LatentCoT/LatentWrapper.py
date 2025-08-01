@@ -11,9 +11,9 @@ import torch.nn.functional as F
 # attn_scores = [B, H, L, L~]
 # attn_scores @ V => [B, H, L, D] (Restored but now attention happened over historical sequence) 
 
-
+# FLow =>
 # Iter1: x -> block1 -> block2 -> block3 -> get cls_token from sequences (cls_prim) -> cls_prim to history
-# Iter2: Restore x to original but update cls_token to cls_prim 
+# Iter2: Restore x to original but update cls_token to cls_prim  
 
 class LatentRepeat(nn.Module):
     def __init__(self, blocks, nrepeat):
