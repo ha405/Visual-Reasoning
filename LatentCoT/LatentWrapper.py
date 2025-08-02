@@ -24,11 +24,11 @@ class LatentRepeat(nn.Module):
         self.D = 384
 
     def forward(self, x):
-        x_prime = x
+        self.history = []
+        x_prime = x.clone()
         for _ in range(self.nrepeat):
+            # if (len(self.history > 0)):
             mem = torch.cat([x] + [m for m in self.history], dim=1)
-            x_prime[:, 0] = x[:, 0]
-            x = x_prime
             for block in self.blocks:
                 weight = block.attn.qkv.weight
                 bias = block.attn.qkv.bias
@@ -46,5 +46,11 @@ class LatentRepeat(nn.Module):
                 v = F.linear(mem,v_projs,v_bias)
                 x = block(x)
 
-            self.history.append(x[:,0])
-            
+            new_cls = x[:,0:1].clone()
+            patches = x_prime[:,1:]
+            x = torch.cat((new_cls,patches),dim=1)
+    
+            # print(x[:,0:1].shape)    
+            self.history.append(new_cls)
+        # self.history = []
+        return x
