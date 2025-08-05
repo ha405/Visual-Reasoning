@@ -28,10 +28,15 @@ class LatentRepeat(nn.Module):
         x_prime = x.clone()
         for _ in range(self.nrepeat):
             # if (len(self.history > 0)):
+            new_cls = x[:,0:1].clone()
+            patches = x_prime[:,1:]
+            x = torch.cat((new_cls,patches),dim=1)   
             mem = torch.cat([x] + [m for m in self.history], dim=1)
             for block in self.blocks:
+                res1 = x
+                x = block.norm1(x)
                 weight = block.attn.qkv.weight
-                bias = block.attn.qkv.bias
+                bias   = block.attn.qkv.bias
 
                 q_projs = weight[:self.D]
                 k_projs = weight[self.D:2*self.D]
@@ -41,16 +46,59 @@ class LatentRepeat(nn.Module):
                 k_bias = bias[self.D:2*self.D]
                 v_bias = bias[2*self.D:]
 
-                q = F.linear(x,q_projs,q_bias)
-                k = F.linear(mem,k_projs,k_bias)
-                v = F.linear(mem,v_projs,v_bias)
-                x = block(x)
+                q = F.linear(x,        q_projs, q_bias)
+                k = F.linear(mem,      k_projs, k_bias)
+                v = F.linear(mem,      v_projs, v_bias)
+                
+                q = block.attn.q_norm(q)
+                k = block.attn.k_norm(k)
 
-            new_cls = x[:,0:1].clone()
-            patches = x_prime[:,1:]
-            x = torch.cat((new_cls,patches),dim=1)
-    
-            # print(x[:,0:1].shape)    
+                product = F.scaled_dot_product_attention(q, k, v, dropout_p=block.attn.attn_drop.p if self.training else 0.0)
+
+                product = block.attn.norm(product)
+                proj      = block.attn.proj(product)
+                proj_drop = block.attn.proj_drop(proj)
+
+                proj_drop = block.ls1(proj_drop)
+                x = block.drop_path1(proj_drop) + res1
+
+                res2 = x
+                x2   = block.norm2(x)
+                x1   = block.mlp(x2)
+                x1 = block.ls2(x1)
+                x    = block.drop_path2(x1) + res2
+
+
+            # new_cls2 = x[:,0:1].clone()
             self.history.append(new_cls)
+
         # self.history = []
         return x
+
+
+
+# Block(
+#       (norm1): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+#       (attn): Attention(
+#         (qkv): Linear(in_features=384, out_features=1152, bias=True)
+#         (q_norm): Identity()
+#         (k_norm): Identity()
+#         (attn_drop): Dropout(p=0.0, inplace=False)
+#         (norm): Identity()
+#         (proj): Linear(in_features=384, out_features=384, bias=True)
+#         (proj_drop): Dropout(p=0.0, inplace=False)
+#       )
+#       (ls1): Identity()
+#       (drop_path1): Identity()
+#       (norm2): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
+#       (mlp): Mlp(
+#         (fc1): Linear(in_features=384, out_features=1536, bias=True)
+#         (act): GELU(approximate='none')
+#         (drop1): Dropout(p=0.0, inplace=False)
+#         (norm): Identity()
+#         (fc2): Linear(in_features=1536, out_features=384, bias=True)
+#         (drop2): Dropout(p=0.0, inplace=False)
+#       )
+#       (ls2): Identity()
+#       (drop_path2): Identity()
+#     )

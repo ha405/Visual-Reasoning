@@ -37,6 +37,7 @@ class LatenViTSmall(nn.Module):
         # cls token is [1,1,D] -> after expansion its [B, 1, D]
         cls_token = self.model.cls_token.expand(x.shape[0], -1, -1) # expand cls token across all batch of images
         x = torch.cat((cls_token, x), dim=1)
+        x = x + self.model.pos_embed
         x = self.model.pos_drop(x)
         x = self.model.patch_drop(x)
         x = self.model.norm_pre(x)
@@ -48,6 +49,8 @@ class LatenViTSmall(nn.Module):
         
         x = self.model.norm(x)
         x = x[:, 0]
+        x = self.model.fc_norm(x)
+        x = self.model.head_drop(x)
         x = self.model.head(x)
 
         return x 
