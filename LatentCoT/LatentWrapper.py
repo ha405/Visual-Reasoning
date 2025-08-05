@@ -77,6 +77,8 @@ class LatentRepeat(nn.Module):
 
 
 
+
+
 # Block(
 #       (norm1): LayerNorm((384,), eps=1e-06, elementwise_affine=True)
 #       (attn): Attention(
@@ -102,3 +104,75 @@ class LatentRepeat(nn.Module):
 #       (ls2): Identity()
 #       (drop_path2): Identity()
 #     )
+
+
+class LatentRepeat(nn.Module):
+    def __init__(self, blocks, nrepeat):
+        super().__init__()
+        self.blocks = blocks
+        self.nrepeat = nrepeat
+        self.history = []
+        self.D = 384
+
+    def forward(self, x):
+        self.history = []
+        for _ in range(self.nrepeat):
+            if (len(self.history > 0)): 
+              mem = torch.cat([x] + [m for m in self.history], dim=1)
+            else:
+              mem = x
+            for block in self.blocks:
+                res1 = x
+                x = block.norm1(x)
+                weight = block.attn.qkv.weight
+                bias   = block.attn.qkv.bias
+
+                q_projs = weight[:self.D]
+                k_projs = weight[self.D:2*self.D]
+                v_projs = weight[2*self.D:]
+
+                q_bias = bias[:self.D]
+                k_bias = bias[self.D:2*self.D]
+                v_bias = bias[2*self.D:]
+
+                q = F.linear(x,        q_projs, q_bias)
+                k = F.linear(mem,      k_projs, k_bias)
+                v = F.linear(mem,      v_projs, v_bias)
+                
+                product = F.scaled_dot_product_attention(q, k, v, dropout_p=block.attn.attn_drop.p if self.training else 0.0)
+
+                projection = block.attn.proj(product)
+                x = block.drop_path1(projection) + res1
+                res2 = x
+                x = block.mlp(x)
+                x    = block.drop_path2(x) + res2
+                x = block.local_conv(x)
+            self.history.append(x)
+        return x
+
+
+
+
+    #  (blocks): Sequential(
+#         (0): TinyVitBlock(
+#           dim=384, num_heads=12, window_size=14, mlp_ratio=4.0
+#           (attn): Attention(
+#             (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+#             (qkv): Linear(in_features=384, out_features=1152, bias=True)
+#             (proj): Linear(in_features=384, out_features=384, bias=True)
+#           )
+#           (drop_path1): DropPath(drop_prob=0.073)
+#           (mlp): NormMlp(
+#             (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+#             (fc1): Linear(in_features=384, out_features=1536, bias=True)
+#             (act): GELU(approximate='none')
+#             (drop1): Dropout(p=0.0, inplace=False)
+#             (fc2): Linear(in_features=1536, out_features=384, bias=True)
+#             (drop2): Dropout(p=0.0, inplace=False)
+#           )
+#           (drop_path2): DropPath(drop_prob=0.073)
+#           (local_conv): ConvNorm(
+#             (conv): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=384, bias=False)
+#             (bn): BatchNorm2d(384, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+#           )
+#         )

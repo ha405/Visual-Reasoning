@@ -6,7 +6,8 @@ import torch
 
 # [DEBUG]
 # nrepeat = 3
-# model = timm.create_model('vit_small_patch16_224.augreg_in21k', pretrained=True)
+# model = timm.create_model('tiny_vit_21m_224.dist_in22k_ft_in1k', pretrained=True)
+# print(model.pos_embed)
 # blocks = model.blocks
 # head = model.head
 # print(head)
@@ -55,5 +56,22 @@ class LatenViTSmall(nn.Module):
 
         return x 
   
-
-
+class LatenViTtiny(nn.Module):
+    def __init__(self, model, nrepeat, stage):
+        super().__init__()
+        self.model = model
+        self.nrepeat = nrepeat
+        self.stage = stage
+        self.cotformers = self.model.stages[stage].blocks
+        self.latent_module = LatentRepeat(self.cotformers, self.nrepeat)
+    
+    def forward(self, x):
+        # x is a batch of images (B, H, E) 
+        x = self.model.patch_embed(x)
+        x = self.model.stages[0](x)
+        x = self.model.stages[1](x)
+        x = self.model.stages[2].downsample(x)
+        x = self.latent_module(x)
+        x = self.model.stages[3]
+        x = self.head(x)
+        return x 
