@@ -1,7 +1,7 @@
 import torchvision
 import torch.nn as nn
 import timm
-from LatentWrapper import LatentRepeat
+from LatentWrapper import LatentRepeat, LatentRepeatTiny
 import torch
 
 # [DEBUG]
@@ -63,7 +63,7 @@ class LatenViTtiny(nn.Module):
         self.nrepeat = nrepeat
         self.stage = stage
         self.cotformers = self.model.stages[stage].blocks
-        self.latent_module = LatentRepeat(self.cotformers, self.nrepeat)
+        self.latent_module = LatentRepeatTiny(self.cotformers, self.nrepeat)
     
     def forward(self, x):
         # x is a batch of images (B, H, E) 
@@ -72,6 +72,6 @@ class LatenViTtiny(nn.Module):
         x = self.model.stages[1](x)
         x = self.model.stages[2].downsample(x)
         x = self.latent_module(x)
-        x = self.model.stages[3]
-        x = self.head(x)
+        x = self.model.stages[3](x)
+        x = self.model.head(x)
         return x 

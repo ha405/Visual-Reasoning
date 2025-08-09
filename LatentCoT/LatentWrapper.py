@@ -106,7 +106,7 @@ class LatentRepeat(nn.Module):
 #     )
 
 
-class LatentRepeat(nn.Module):
+class LatentRepeatTiny(nn.Module):
     def __init__(self, blocks, nrepeat):
         super().__init__()
         self.blocks = blocks
@@ -116,14 +116,13 @@ class LatentRepeat(nn.Module):
 
     def forward(self, x):
         self.history = []
+        B, E, H, W = x.shape
+        x = x.view(B,E,H*W,).transpose(-2,-1)
         for _ in range(self.nrepeat):
-            if (len(self.history > 0)): 
-              mem = torch.cat([x] + [m for m in self.history], dim=1)
-            else:
-              mem = x
+            mem = torch.cat([x] + [m for m in self.history], dim=1)
             for block in self.blocks:
                 res1 = x
-                x = block.norm1(x)
+                x = block.attn.norm(x)
                 weight = block.attn.qkv.weight
                 bias   = block.attn.qkv.bias
 
@@ -139,15 +138,22 @@ class LatentRepeat(nn.Module):
                 k = F.linear(mem,      k_projs, k_bias)
                 v = F.linear(mem,      v_projs, v_bias)
                 
-                product = F.scaled_dot_product_attention(q, k, v, dropout_p=block.attn.attn_drop.p if self.training else 0.0)
+                product = F.scaled_dot_product_attention(q, k, v)
 
                 projection = block.attn.proj(product)
                 x = block.drop_path1(projection) + res1
                 res2 = x
                 x = block.mlp(x)
                 x    = block.drop_path2(x) + res2
+                # print(x.shape)
+                B,N,D = x.shape
+                gs = 14
+                x = x.transpose(1,2).view(B,D,gs,gs)
                 x = block.local_conv(x)
+                x = x.view(B, D, gs * gs).transpose(1, 2)
             self.history.append(x)
+        # print(x.shape)
+        x = x.view(B,D,gs,gs)
         return x
 
 
