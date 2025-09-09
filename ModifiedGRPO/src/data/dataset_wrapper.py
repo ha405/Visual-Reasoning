@@ -1,4 +1,9 @@
-from configuration import *
+import os
+import torch
+from torch.utils.data import DataLoader, Subset
+import torchvision.datasets as datasets
+from sklearn.model_selection import train_test_split
+from src.utils.configuration import SEED, BATCH_SIZE
 
 class PACSDataset:
     def __init__(self, data_root, domains, transform):

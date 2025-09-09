@@ -1,4 +1,7 @@
-from configuration import *
+import torch
+import torch.nn as nn
+from tqdm import tqdm
+from src.utils.configuration import DEVICE
 
 class Trainer:
     def __init__(self, model, optimizer, criterion):

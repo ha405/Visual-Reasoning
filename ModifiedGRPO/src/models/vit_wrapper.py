@@ -1,9 +1,11 @@
-from configuration import *
+import torch
+import torch.nn as nn
+from transformers import ViTModel as ViTModelBase
+from src.utils.configuration import MODELS
 
 class ViTModel(nn.Module):
     def __init__(self, num_classes, model_size="base"):
         super(ViTModel, self).__init__()
-        # Change 1: Load the base ViTModel using the alias 'ViTModelBase'
         self.model = ViTModelBase.from_pretrained(
             MODELS[model_size]
         )
