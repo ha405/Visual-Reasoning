@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import timm  
 
 class ViTGRQO(nn.Module):
-    def __init__(self, num_classes, vit_model='vit_small_patch16_224', token_dim=384, topk=16):
+    def __init__(self, num_classes, vit_model='vit_small_patch16_224.augreg_in21k', token_dim=384, topk=16):
         super().__init__()
         self.vit = timm.create_model(vit_model, pretrained=True)
         self.num_classes = num_classes
@@ -49,7 +49,11 @@ def grqo_loss_from_gradients(
     
     for b in range(B):
         loss_b = per_sample_loss[b]
-        grads = torch.autograd.grad(loss_b, patch_tokens, retain_graph=True, create_graph=False)[0]
+        grads = torch.autograd.grad(
+            loss_b, patch_tokens, retain_graph=True, create_graph=False, allow_unused=True
+        )[0]
+        if grads is None:
+            grads = torch.zeros_like(patch_tokens[b])
         token_rewards[b] = grads[b].norm(dim=-1)
     
     token_rewards = token_rewards.detach()
@@ -69,10 +73,11 @@ def grqo_loss_from_gradients(
     sigma = rewards_topk.std(dim=1, unbiased=False, keepdim=True) + eps
     advantage = (rewards_topk - mu) / sigma
     
-    if teacher_probs is None:
+    if teacher_probs is None or teacher_probs.numel() <= 1:
         O_ref_topk = torch.full_like(probs_topk, 1.0 / float(K))
     else:
-        O_ref_topk = teacher_probs.gather(1, topk_idx).clamp(min=eps)
+        O_ref_exp = teacher_probs.expand(B, -1)
+        O_ref_topk = O_ref_exp.gather(1, topk_idx).clamp(min=eps)
     
     O_theta = probs_topk.clamp(min=eps)
     kl_per_image = (O_theta * (O_theta.log() - O_ref_topk.log())).sum(dim=1)

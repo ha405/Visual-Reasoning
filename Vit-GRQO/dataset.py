@@ -2,6 +2,9 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 from torch.utils.data import DataLoader, Subset, ConcatDataset
 from sklearn.model_selection import train_test_split
+import os
+
+SEED = 42  # Define a constant seed for reproducibility
 
 class PACSDataset:
     def __init__(self, data_root, domains, transform,batch_size):
