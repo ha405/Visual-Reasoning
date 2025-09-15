@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import timm  
 
 class ViTGRQO(nn.Module):
-    def __init__(self, num_classes, vit_model='vit_small_patch16_224.augreg_in21k', token_dim=384, topk=16):
+    def __init__(self, num_classes, vit_model='tiny_vit_21m_224.dist_in22k_ft_in1k', token_dim=384, topk=16):
         super().__init__()
         self.vit = timm.create_model(vit_model, pretrained=True)
         self.num_classes = num_classes
@@ -16,12 +16,10 @@ class ViTGRQO(nn.Module):
     def forward(self, x):
         # x: [B, 3, H, W]
         B = x.size(0)
-        features = self.vit.forward_features(x)  # [B, N+1, token_dim], includes CLS
-        cls_token = features[:, 0]               # CLS token
-        patch_tokens = features[:, 1:, :]        # [B, N, token_dim]
-        
-        # Classification logits
-        logits = self.vit.head(cls_token)
+        features = self.vit.forward_features(x) # [B,N,D]
+        patch_tokens = features  
+
+        logits = self.vit.forward_head(features)
         
         # Token importance scores
         token_scores = self.selection_head(patch_tokens).squeeze(-1)  # [B, N]
