@@ -38,15 +38,40 @@ def run_phase2_lodo(train_domains, test_domain):
     
     # 1. Load consensus masks
     consensus_masks = {}
-    ffn_temp = FeedForwardHead(config.EMBEDDING_DIM) # Temp model to get param names
+    ffn_temp = FeedForwardHead(config.EMBEDDING_DIM)  # Temp model to get param names and shapes
     param_names = get_param_names(ffn_temp)
     
+    # Build a dict of temp params to inspect shapes if needed
+    temp_params = dict(ffn_temp.named_parameters())
+
     for name in param_names:
         mask_path = os.path.join(
             config.PHASE1_IMPORTANCE_DIR, "consensus", 
             f"{name.replace('.', '_')}_binary.npy"
         )
-        mask = torch.from_numpy(np.load(mask_path)).to(config.DEVICE)
+
+        if os.path.exists(mask_path):
+            try:
+                mask_np = np.load(mask_path)
+                mask = torch.from_numpy(mask_np).to(config.DEVICE)
+            except Exception as e:
+                # If file exists but failed to load for some reason, fallback to ones and warn
+                print(f"Warning: failed to load mask for '{name}' ({e}). Using all-ones mask.")
+                if name in temp_params:
+                    mask = torch.ones_like(temp_params[name].data).to(config.DEVICE)
+                else:
+                    # safety fallback: scalar 1
+                    mask = torch.tensor(1.0, device=config.DEVICE)
+        else:
+            # Mask file not found -> create an all-ones mask of the same shape as the parameter
+            if name in temp_params:
+                mask = torch.ones_like(temp_params[name].data).to(config.DEVICE)
+                print(f"Warning: mask not found for '{name}'. Using all-ones mask (trainable).")
+            else:
+                # shouldn't normally happen; fallback to scalar 1
+                mask = torch.tensor(1.0, device=config.DEVICE)
+                print(f"Warning: '{name}' not present in temp model; using scalar-1 fallback mask.")
+
         consensus_masks[name] = mask
 
     # 2. Initialize models
@@ -96,12 +121,17 @@ def run_phase2_lodo(train_domains, test_domain):
                     if param.grad is None:
                         continue
                     
-                    # Load the binary mask (1=important, 0=non-important)
+                    # If we don't have a mask for this parameter, skip masking (leave gradients intact)
+                    if name not in consensus_masks:
+                        # Option A: skip masking (recommended for BN, biases, etc.)
+                        continue
+
                     mask = consensus_masks[name]
-                    imp_mask = mask.float()
+                    # ensure mask is float and same device; broadcasting is OK if scalar fallback used
+                    imp_mask = mask.float().to(param.grad.device)
                     nonimp_mask = 1.0 - imp_mask
                     
-                    # Scale gradients
+                    # Scale gradients: keep important gradients, scale non-important by nonimp_scale
                     param.grad *= (imp_mask + nonimp_mask * nonimp_scale)
 
             optimizer.step()

@@ -23,6 +23,7 @@ class PACSDataset:
 
     def get_full_domain_dataset(self, domain):
         """Returns the full ImageFolder dataset for a domain."""
+        print(f"self.dataroot: {self.data_root}")
         return datasets.ImageFolder(os.path.join(self.data_root, domain), transform=self.transform)
 
     def get_split_dataloader(self, domain, batch_size, train=True, shuffle=True):
