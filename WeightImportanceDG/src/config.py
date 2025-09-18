@@ -9,7 +9,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {DEVICE}")
 
 # --- Dataset Settings ---
-DATA_ROOT = "../pacs_data/pacs_data" # Adjust this path to your dataset location
+# DATA_ROOT = "../pacs_data/pacs_data" # Adjust this path to your dataset location
+DATA_ROOT = 'D:\Haseeb\SPROJ\PACS ViT\pacs_data\pacs_data'
 DOMAINS = ["art_painting", "cartoon", "photo", "sketch"]
 NUM_CLASSES = 7
 
