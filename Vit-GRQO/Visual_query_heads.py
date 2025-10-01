@@ -41,7 +41,8 @@ class GRQO(nn.Module):
                  # GRQO hyperparams:
                  alpha=1.0, beta=1.0, tau=1e-3,
                  lambda_grqo=1.0, teacher_ema=0.99,
-                 reward_proxy="taylor"  # either "taylor" or "gradnorm"
+                 reward_proxy="taylor",  # either "taylor" or "gradnorm"
+                 resnet = False
                  ):
         super().__init__()
         # QueryLosses does decoding + heads
@@ -55,7 +56,7 @@ class GRQO(nn.Module):
         self.teacher_ema = teacher_ema
         assert reward_proxy in ("taylor", "gradnorm"), "reward_proxy must be 'taylor' or 'gradnorm'"
         self.reward_proxy = reward_proxy
-
+        self.resnet = resnet
         # teacher reference distribution for queries (vector of length M). We'll
         # lazily initialize once we know M (after first forward) and register as buffer.
         self.register_buffer("teacher_ref", None)
@@ -67,12 +68,15 @@ class GRQO(nn.Module):
 
     def forward(self, x, y):
         """
-        x: encoder tokens [B, N, D]
+        x: backbone tokens [B, N, D] - ViT
+        x: backbone tokens [B,D,H,W] - Resnet
         y: labels [B]
         Returns dict with 'loss' and diagnostics
         """
         device = x.device
-
+        if self.resnet:
+            B,D,H,W = x.shape
+            x = x.flatten(2).transpose(1,2)
         # --- 1) Base forward: classification and selection ---
         cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out = self.ql(x, y)
         # cls_loss: scalar tensor
