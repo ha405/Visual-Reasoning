@@ -1,5 +1,4 @@
-# grqo_module.py
-from encoder_decoder_vit import VisualDecoder
+from decoder import VisualDecoder
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -23,7 +22,7 @@ class QueryLosses(nn.Module):
         preds = img_logits.argmax(dim=1)    # [B]
         return cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out
 
-# GPT Implemented (carefull)
+# AI code (needs to be reviewed and fixed)
 class GRQO(nn.Module):
     """
     Wraps QueryLosses and adds GRQO loss terms:
