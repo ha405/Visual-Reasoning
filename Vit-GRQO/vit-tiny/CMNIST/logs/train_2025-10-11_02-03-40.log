@@ -1,0 +1,67 @@
+2025-10-11 02:03:40,804 | INFO | Initialized experiment directories for CMNIST
+2025-10-11 02:03:40,804 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\CMNIST\logs
+2025-10-11 02:03:40,804 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\CMNIST\checkpoints
+2025-10-11 02:03:40,804 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\CMNIST\plots
+2025-10-11 02:03:46,181 | INFO | === LODO: Leaving out domain 'red' ===
+2025-10-11 02:04:12,782 | INFO | [red] Epoch 1/5 | Train - Loss: 0.7781, Cls: 0.7701, GRQO: 0.0080, Acc: 0.7615 | Val - Loss: 0.2058, Cls: 0.2049, GRQO: 0.0008, Acc: 0.9353
+2025-10-11 02:04:12,827 | INFO | [red] New best val acc: 0.9353
+2025-10-11 02:04:38,472 | INFO | [red] Epoch 2/5 | Train - Loss: 0.0932, Cls: 0.0901, GRQO: 0.0030, Acc: 0.9770 | Val - Loss: 0.0897, Cls: 0.0892, GRQO: 0.0005, Acc: 0.9749
+2025-10-11 02:04:38,516 | INFO | [red] New best val acc: 0.9749
+2025-10-11 02:05:04,418 | INFO | [red] Epoch 3/5 | Train - Loss: 0.0579, Cls: 0.0555, GRQO: 0.0025, Acc: 0.9844 | Val - Loss: 0.0948, Cls: 0.0946, GRQO: 0.0002, Acc: 0.9722
+2025-10-11 02:05:30,047 | INFO | [red] Epoch 4/5 | Train - Loss: 0.0364, Cls: 0.0343, GRQO: 0.0020, Acc: 0.9902 | Val - Loss: 0.0722, Cls: 0.0721, GRQO: 0.0001, Acc: 0.9792
+2025-10-11 02:05:30,102 | INFO | [red] New best val acc: 0.9792
+2025-10-11 02:05:56,248 | INFO | [red] Epoch 5/5 | Train - Loss: 0.0324, Cls: 0.0307, GRQO: 0.0017, Acc: 0.9915 | Val - Loss: 0.0821, Cls: 0.0820, GRQO: 0.0001, Acc: 0.9763
+2025-10-11 02:05:56,248 | INFO | [red] Best Acc: 0.9792
+2025-10-11 02:05:56,248 | INFO | ------------------------------------------------------------
+2025-10-11 02:05:57,669 | INFO | === LODO: Leaving out domain 'green' ===
+2025-10-11 02:06:23,634 | INFO | [green] Epoch 1/5 | Train - Loss: 0.7329, Cls: 0.7253, GRQO: 0.0076, Acc: 0.7919 | Val - Loss: 0.3424, Cls: 0.3416, GRQO: 0.0008, Acc: 0.8879
+2025-10-11 02:06:23,670 | INFO | [green] New best val acc: 0.8879
+2025-10-11 02:06:49,431 | INFO | [green] Epoch 2/5 | Train - Loss: 0.0869, Cls: 0.0838, GRQO: 0.0031, Acc: 0.9784 | Val - Loss: 0.1295, Cls: 0.1291, GRQO: 0.0004, Acc: 0.9626
+2025-10-11 02:06:49,477 | INFO | [green] New best val acc: 0.9626
+2025-10-11 02:07:15,400 | INFO | [green] Epoch 3/5 | Train - Loss: 0.0476, Cls: 0.0451, GRQO: 0.0025, Acc: 0.9889 | Val - Loss: 0.1111, Cls: 0.1108, GRQO: 0.0002, Acc: 0.9658
+2025-10-11 02:07:15,453 | INFO | [green] New best val acc: 0.9658
+2025-10-11 02:07:41,206 | INFO | [green] Epoch 4/5 | Train - Loss: 0.0325, Cls: 0.0303, GRQO: 0.0021, Acc: 0.9923 | Val - Loss: 0.2128, Cls: 0.2126, GRQO: 0.0002, Acc: 0.9359
+2025-10-11 02:08:06,814 | INFO | [green] Epoch 5/5 | Train - Loss: 0.0220, Cls: 0.0202, GRQO: 0.0018, Acc: 0.9952 | Val - Loss: 0.0895, Cls: 0.0894, GRQO: 0.0001, Acc: 0.9711
+2025-10-11 02:08:06,859 | INFO | [green] New best val acc: 0.9711
+2025-10-11 02:08:06,859 | INFO | [green] Best Acc: 0.9711
+2025-10-11 02:08:06,859 | INFO | ------------------------------------------------------------
+2025-10-11 02:08:07,853 | INFO | === LODO: Leaving out domain 'blue' ===
+2025-10-11 02:08:33,315 | INFO | [blue] Epoch 1/5 | Train - Loss: 0.8156, Cls: 0.8083, GRQO: 0.0073, Acc: 0.7534 | Val - Loss: 0.1818, Cls: 0.1811, GRQO: 0.0007, Acc: 0.9476
+2025-10-11 02:08:33,370 | INFO | [blue] New best val acc: 0.9476
+2025-10-11 02:08:59,098 | INFO | [blue] Epoch 2/5 | Train - Loss: 0.0921, Cls: 0.0889, GRQO: 0.0033, Acc: 0.9772 | Val - Loss: 0.1041, Cls: 0.1038, GRQO: 0.0003, Acc: 0.9706
+2025-10-11 02:08:59,146 | INFO | [blue] New best val acc: 0.9706
+2025-10-11 02:09:24,700 | INFO | [blue] Epoch 3/5 | Train - Loss: 0.0449, Cls: 0.0423, GRQO: 0.0026, Acc: 0.9881 | Val - Loss: 0.0974, Cls: 0.0972, GRQO: 0.0002, Acc: 0.9700
+2025-10-11 02:09:50,500 | INFO | [blue] Epoch 4/5 | Train - Loss: 0.0319, Cls: 0.0297, GRQO: 0.0022, Acc: 0.9928 | Val - Loss: 0.1429, Cls: 0.1428, GRQO: 0.0001, Acc: 0.9561
+2025-10-11 02:10:16,064 | INFO | [blue] Epoch 5/5 | Train - Loss: 0.0364, Cls: 0.0345, GRQO: 0.0019, Acc: 0.9912 | Val - Loss: 0.0802, Cls: 0.0801, GRQO: 0.0001, Acc: 0.9758
+2025-10-11 02:10:16,126 | INFO | [blue] New best val acc: 0.9758
+2025-10-11 02:10:16,126 | INFO | [blue] Best Acc: 0.9758
+2025-10-11 02:10:16,126 | INFO | ------------------------------------------------------------
+2025-10-11 02:10:16,126 | INFO | LODO finished | Mean Acc: 0.9754 | Summary saved to c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\CMNIST\logs\lodo_summary_20251011_021016.json
+2025-10-11 02:10:16,137 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-11 02:10:17,144 | INFO | === Baseline LODO: Leaving out domain 'red' ===
+2025-10-11 02:10:40,714 | INFO | [red] Epoch 1/5 | Train - Loss: 0.5103, Acc: 0.8295 | Val Acc: 0.9495
+2025-10-11 02:11:04,528 | INFO | [red] Epoch 2/5 | Train - Loss: 0.0626, Acc: 0.9809 | Val Acc: 0.9703
+2025-10-11 02:11:28,347 | INFO | [red] Epoch 3/5 | Train - Loss: 0.0347, Acc: 0.9894 | Val Acc: 0.9633
+2025-10-11 02:11:52,114 | INFO | [red] Epoch 4/5 | Train - Loss: 0.0283, Acc: 0.9904 | Val Acc: 0.9814
+2025-10-11 02:12:16,141 | INFO | [red] Epoch 5/5 | Train - Loss: 0.0144, Acc: 0.9954 | Val Acc: 0.9782
+2025-10-11 02:12:16,141 | INFO | [red] Best Val Acc: 0.9814
+2025-10-11 02:12:16,141 | INFO | ------------------------------------------------------------
+2025-10-11 02:12:16,147 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-11 02:12:17,359 | INFO | === Baseline LODO: Leaving out domain 'green' ===
+2025-10-11 02:12:40,981 | INFO | [green] Epoch 1/5 | Train - Loss: 0.5686, Acc: 0.8130 | Val Acc: 0.8088
+2025-10-11 02:13:04,680 | INFO | [green] Epoch 2/5 | Train - Loss: 0.0758, Acc: 0.9776 | Val Acc: 0.9072
+2025-10-11 02:13:28,447 | INFO | [green] Epoch 3/5 | Train - Loss: 0.0417, Acc: 0.9876 | Val Acc: 0.9015
+2025-10-11 02:13:52,214 | INFO | [green] Epoch 4/5 | Train - Loss: 0.0282, Acc: 0.9903 | Val Acc: 0.9068
+2025-10-11 02:14:15,897 | INFO | [green] Epoch 5/5 | Train - Loss: 0.0152, Acc: 0.9955 | Val Acc: 0.9482
+2025-10-11 02:14:15,897 | INFO | [green] Best Val Acc: 0.9482
+2025-10-11 02:14:15,897 | INFO | ------------------------------------------------------------
+2025-10-11 02:14:15,897 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-11 02:14:16,914 | INFO | === Baseline LODO: Leaving out domain 'blue' ===
+2025-10-11 02:14:40,432 | INFO | [blue] Epoch 1/5 | Train - Loss: 0.7108, Acc: 0.7583 | Val Acc: 0.9411
+2025-10-11 02:15:04,194 | INFO | [blue] Epoch 2/5 | Train - Loss: 0.0841, Acc: 0.9744 | Val Acc: 0.9647
+2025-10-11 02:15:27,862 | INFO | [blue] Epoch 3/5 | Train - Loss: 0.0339, Acc: 0.9890 | Val Acc: 0.9713
+2025-10-11 02:15:51,681 | INFO | [blue] Epoch 4/5 | Train - Loss: 0.0213, Acc: 0.9933 | Val Acc: 0.9695
+2025-10-11 02:16:15,663 | INFO | [blue] Epoch 5/5 | Train - Loss: 0.0183, Acc: 0.9943 | Val Acc: 0.9666
+2025-10-11 02:16:15,663 | INFO | [blue] Best Val Acc: 0.9713
+2025-10-11 02:16:15,663 | INFO | ------------------------------------------------------------
+2025-10-11 02:16:15,663 | INFO | Baseline LODO (WinKawaks/vit-tiny-patch16-224) finished | Mean Acc: 0.9670

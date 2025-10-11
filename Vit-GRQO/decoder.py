@@ -20,8 +20,8 @@ class VisualDecoder(nn.Module):
         pos_queries = torch.einsum('bmn,bnd->bmd', weights, latent_tokens)  # [B, M, D]
         decoder_out,_ = self.cross_attention[0](pos_queries,latent_tokens)
         for layer in self.cross_attention[1:]:
-            decoder_out, _ = layer(decoder_out, latent_tokens)
-        return decoder_out
+            decoder_out, attn = layer(decoder_out, latent_tokens)
+        return decoder_out, attn
 
 class MultiheadAttn(nn.Module):
     def __init__(self, dim: int, num_heads: int, num_queries: int, dropout: float = 0.0):

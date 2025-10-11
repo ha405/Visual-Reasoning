@@ -1,5 +1,12 @@
 /plots
 
-/resnet/PACS
-/vit-tiny/PACS
-/vit-small/PACS
+/vit-tiny/PACS/checkpoints
+/vit-tiny/CMNIST/checkpoints
+/vit-tiny/VLCS/checkpoints
+/vit-tiny/officeHome/checkpoints
+
+/resnet/PACS/checkpoints
+/resnet/VLCS/checkpoints
+/resnet/officeHome/checkpoints
+/resnet/CMNIST/checkpoints
+/resnet/TerraIncognita/checkpoints

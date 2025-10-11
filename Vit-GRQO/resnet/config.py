@@ -24,8 +24,8 @@ CFG = {
         "tau": 1e-3,
         "temperature": 0.1,
         "hidden_dim": 192,
-        "num_heads": 8,
-        "num_tokens": 24,
+        "num_heads": 4,
+        "num_tokens": 48,
         "num_layers":4,
         "dropout": 0.1,
         "ddropout": 0.1,
@@ -36,23 +36,40 @@ CFG = {
 
     "datasets": {
         "PACS": {
-            "root": r"D:\Haseeb\Datasets\pacs_data",
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\pacs_data\pacs_data",
             "domains": ["art_painting", "cartoon", "photo", "sketch"],
             "classes": ["dog", "elephant", "giraffe", "guitar", "horse", "house", "person"],
             "num_classes": 7,
         },
 
         "OfficeHome": {
-            "root": r"D:\Haseeb\Datasets\OfficeHomeDataset_10072016",
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\OfficeHome\OfficeHomeDataset_10072016",
             "domains": ["Art", "Clipart", "Product", "Real World"],
             "num_classes": 65,
         },
 
         "VLCS": {
-            "root": r"D:\Haseeb\Datasets\VLCS",
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\VLCS",
             "domains": ["VOC2007", "LabelMe", "Caltech101", "SUN09"],
             "classes": ["bird", "car", "chair", "dog", "person"],
             "num_classes": 5,
+        },
+
+         "RMNIST": {
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\ROTMNIST\rmnist",
+            "domains": ["0", "15", "30", "45", "60", "75"],  
+            "num_classes": 10,  
+        },
+
+        "CMNIST": {
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\CMNIST",
+            "domains": ["red", "green", "blue"],  
+            "num_classes": 10,  
+        },
+        "TerraIncognita": {
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\terraincog\terra_incognita",
+            "domains": ["location_38", "location_43", "location_46", "location_100"],
+            "num_classes": 10,
         },
     },
 

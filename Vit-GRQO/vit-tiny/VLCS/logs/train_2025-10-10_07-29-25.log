@@ -1,0 +1,5 @@
+2025-10-10 07:29:25,722 | INFO | Initialized experiment directories for VLCS
+2025-10-10 07:29:25,722 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\VLCS\logs
+2025-10-10 07:29:25,723 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\VLCS\checkpoints
+2025-10-10 07:29:25,723 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\VLCS\plots
+2025-10-10 07:29:26,945 | INFO | === LODO: Leaving out domain 'VOC2007' ===

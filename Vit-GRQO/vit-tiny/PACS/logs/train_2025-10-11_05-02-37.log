@@ -1,0 +1,14 @@
+2025-10-11 05:02:37,326 | INFO | Initialized experiment directories for PACS
+2025-10-11 05:02:37,326 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\logs
+2025-10-11 05:02:37,326 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\checkpoints
+2025-10-11 05:02:37,326 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\plots
+2025-10-11 05:08:08,558 | INFO | Starting visualization of visual queries.
+2025-10-11 05:08:08,559 | INFO | Loading model for query visualization for domain: art_painting
+2025-10-11 05:08:09,608 | ERROR | Checkpoint not found for domain art_painting at c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\checkpoints\art_painting_best_model.pth. Skipping visualization.
+2025-10-11 05:08:09,610 | INFO | Loading model for query visualization for domain: cartoon
+2025-10-11 05:08:10,670 | ERROR | Checkpoint not found for domain cartoon at c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\checkpoints\cartoon_best_model.pth. Skipping visualization.
+2025-10-11 05:08:10,672 | INFO | Loading model for query visualization for domain: photo
+2025-10-11 05:08:11,736 | ERROR | Checkpoint not found for domain photo at c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\checkpoints\photo_best_model.pth. Skipping visualization.
+2025-10-11 05:08:11,737 | INFO | Loading model for query visualization for domain: sketch
+2025-10-11 05:08:12,787 | ERROR | Checkpoint not found for domain sketch at c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\PACS\checkpoints\sketch_best_model.pth. Skipping visualization.
+2025-10-11 05:08:12,789 | INFO | Finished visualization of visual queries.

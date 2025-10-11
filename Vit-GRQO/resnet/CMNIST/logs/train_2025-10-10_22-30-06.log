@@ -1,0 +1,4 @@
+2025-10-10 22:30:06,106 | INFO | Initialized experiment directories for CMNIST
+2025-10-10 22:30:06,107 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\CMNIST\logs
+2025-10-10 22:30:06,107 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\CMNIST\checkpoints
+2025-10-10 22:30:06,107 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\CMNIST\plots

@@ -1,0 +1,4 @@
+2025-10-11 07:27:37,057 | INFO | Initialized experiment directories for PACS
+2025-10-11 07:27:37,057 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\PACS\logs
+2025-10-11 07:27:37,057 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\PACS\checkpoints
+2025-10-11 07:27:37,057 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\PACS\plots

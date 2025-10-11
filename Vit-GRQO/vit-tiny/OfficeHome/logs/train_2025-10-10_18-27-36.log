@@ -1,0 +1,12 @@
+2025-10-10 18:27:36,035 | INFO | Initialized experiment directories for OfficeHome
+2025-10-10 18:27:36,036 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\logs
+2025-10-10 18:27:36,036 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\checkpoints
+2025-10-10 18:27:36,036 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\plots
+2025-10-10 18:27:37,334 | INFO | === LODO: Leaving out domain 'Art' ===
+2025-10-10 18:35:14,660 | INFO | [Art] Epoch 1/5 | Train - Loss: 2.9101, Cls: 2.9009, GRQO: 0.0092, Acc: 0.4038 | Val - Loss: 2.0753, Cls: 2.0732, GRQO: 0.0021, Acc: 0.5665
+2025-10-10 18:35:14,752 | INFO | [Art] New best val acc: 0.5665
+2025-10-10 18:42:43,563 | INFO | [Art] Epoch 2/5 | Train - Loss: 1.0872, Cls: 1.0833, GRQO: 0.0039, Acc: 0.7999 | Val - Loss: 1.4954, Cls: 1.4941, GRQO: 0.0013, Acc: 0.6457
+2025-10-10 18:42:43,640 | INFO | [Art] New best val acc: 0.6457
+2025-10-10 18:50:18,397 | INFO | [Art] Epoch 3/5 | Train - Loss: 0.4811, Cls: 0.4777, GRQO: 0.0034, Acc: 0.9141 | Val - Loss: 1.4154, Cls: 1.4144, GRQO: 0.0010, Acc: 0.6457
+2025-10-10 18:57:53,762 | INFO | [Art] Epoch 4/5 | Train - Loss: 0.2348, Cls: 0.2319, GRQO: 0.0030, Acc: 0.9616 | Val - Loss: 1.4522, Cls: 1.4515, GRQO: 0.0008, Acc: 0.6502
+2025-10-10 18:57:53,806 | INFO | [Art] New best val acc: 0.6502

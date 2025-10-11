@@ -1,0 +1,5 @@
+2025-10-10 17:41:42,706 | INFO | Initialized experiment directories for OfficeHome
+2025-10-10 17:41:42,706 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\logs
+2025-10-10 17:41:42,706 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\checkpoints
+2025-10-10 17:41:42,706 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\plots
+2025-10-10 17:41:48,424 | INFO | === LODO: Leaving out domain 'Art' ===

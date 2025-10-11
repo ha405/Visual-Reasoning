@@ -13,14 +13,14 @@ class QueryLosses(nn.Module):
         self.cls_head = nn.Linear(Hidden_dim, num_classes)
 
     def forward(self, tokens, labels):
-        decoder_out = self.decoder(tokens)           # [B, M, D]
+        decoder_out,attn = self.decoder(tokens)           # [B, M, D]
         per_query_logits = self.cls_head(decoder_out)  # [B, M, C]
         sel_scores = self.selection_head(decoder_out).squeeze(-1)  # [B, M]
         prob_scores = F.softmax(sel_scores, dim=1)    # [B, M]
         img_logits = torch.einsum("bq,bqc->bc", prob_scores, per_query_logits)  # [B, C]
         cls_loss = F.cross_entropy(img_logits, labels)  # scalar
         preds = img_logits.argmax(dim=1)    # [B]
-        return cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out
+        return cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out, attn
 
 # AI code (needs to be reviewed and fixed)
 class GRQO(nn.Module):
@@ -77,7 +77,7 @@ class GRQO(nn.Module):
             B,D,H,W = x.shape
             x = x.flatten(2).transpose(1,2)
         # --- 1) Base forward: classification and selection ---
-        cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out = self.ql(x, y)
+        cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out, attn = self.ql(x, y)
         # cls_loss: scalar tensor
         # prob_scores: [B, M]
         # per_query_logits: [B, M, C]
@@ -168,6 +168,7 @@ class GRQO(nn.Module):
             "ent": -(prob_scores * torch.log(prob_scores + 1e-12)).sum(dim=1).mean().detach(),
             "prob_scores": prob_scores.detach(),
             "img_logits": img_logits.detach(),
-            "preds": preds.detach()
+            "preds": preds.detach(),
+            "attention_map": attn.detach(),
         }
         return out

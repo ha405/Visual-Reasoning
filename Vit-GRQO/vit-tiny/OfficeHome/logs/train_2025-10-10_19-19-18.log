@@ -1,0 +1,92 @@
+2025-10-10 19:19:18,672 | INFO | Initialized experiment directories for OfficeHome
+2025-10-10 19:19:18,672 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\logs
+2025-10-10 19:19:18,672 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\checkpoints
+2025-10-10 19:19:18,672 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\plots
+2025-10-10 19:19:19,660 | INFO | === LODO: Leaving out domain 'Art' ===
+2025-10-10 19:20:21,020 | INFO | [Art] Epoch 1/5 | Train - Loss: 2.9347, Cls: 2.9256, GRQO: 0.0091, Acc: 0.3950 | Val - Loss: 2.1056, Cls: 2.1035, GRQO: 0.0022, Acc: 0.5550
+2025-10-10 19:20:21,120 | INFO | [Art] New best val acc: 0.5550
+2025-10-10 19:21:20,786 | INFO | [Art] Epoch 2/5 | Train - Loss: 1.1081, Cls: 1.1042, GRQO: 0.0039, Acc: 0.7948 | Val - Loss: 1.5050, Cls: 1.5038, GRQO: 0.0013, Acc: 0.6498
+2025-10-10 19:21:20,835 | INFO | [Art] New best val acc: 0.6498
+2025-10-10 19:22:09,270 | INFO | [Art] Epoch 3/5 | Train - Loss: 0.4939, Cls: 0.4905, GRQO: 0.0034, Acc: 0.9068 | Val - Loss: 1.3829, Cls: 1.3820, GRQO: 0.0010, Acc: 0.6506
+2025-10-10 19:22:09,323 | INFO | [Art] New best val acc: 0.6506
+2025-10-10 19:22:56,570 | INFO | [Art] Epoch 4/5 | Train - Loss: 0.2419, Cls: 0.2389, GRQO: 0.0030, Acc: 0.9600 | Val - Loss: 1.4163, Cls: 1.4155, GRQO: 0.0008, Acc: 0.6539
+2025-10-10 19:22:56,629 | INFO | [Art] New best val acc: 0.6539
+2025-10-10 19:23:43,920 | INFO | [Art] Epoch 5/5 | Train - Loss: 0.1367, Cls: 0.1341, GRQO: 0.0026, Acc: 0.9802 | Val - Loss: 1.4257, Cls: 1.4251, GRQO: 0.0006, Acc: 0.6560
+2025-10-10 19:23:43,977 | INFO | [Art] New best val acc: 0.6560
+2025-10-10 19:23:43,977 | INFO | [Art] Best Acc: 0.6560
+2025-10-10 19:23:43,977 | INFO | ------------------------------------------------------------
+2025-10-10 19:23:44,838 | INFO | === LODO: Leaving out domain 'Clipart' ===
+2025-10-10 19:24:32,455 | INFO | [Clipart] Epoch 1/5 | Train - Loss: 2.9481, Cls: 2.9382, GRQO: 0.0099, Acc: 0.4172 | Val - Loss: 2.4870, Cls: 2.4852, GRQO: 0.0018, Acc: 0.4628
+2025-10-10 19:24:32,503 | INFO | [Clipart] New best val acc: 0.4628
+2025-10-10 19:25:19,943 | INFO | [Clipart] Epoch 2/5 | Train - Loss: 1.1487, Cls: 1.1440, GRQO: 0.0047, Acc: 0.7990 | Val - Loss: 1.9822, Cls: 1.9811, GRQO: 0.0012, Acc: 0.5315
+2025-10-10 19:25:19,989 | INFO | [Clipart] New best val acc: 0.5315
+2025-10-10 19:26:11,679 | INFO | [Clipart] Epoch 3/5 | Train - Loss: 0.5124, Cls: 0.5085, GRQO: 0.0040, Acc: 0.9147 | Val - Loss: 1.8810, Cls: 1.8800, GRQO: 0.0009, Acc: 0.5611
+2025-10-10 19:26:11,773 | INFO | [Clipart] New best val acc: 0.5611
+2025-10-10 19:27:19,395 | INFO | [Clipart] Epoch 4/5 | Train - Loss: 0.2400, Cls: 0.2365, GRQO: 0.0034, Acc: 0.9680 | Val - Loss: 1.9225, Cls: 1.9218, GRQO: 0.0007, Acc: 0.5544
+2025-10-10 19:28:17,419 | INFO | [Clipart] Epoch 5/5 | Train - Loss: 0.1246, Cls: 0.1216, GRQO: 0.0030, Acc: 0.9861 | Val - Loss: 2.0537, Cls: 2.0531, GRQO: 0.0006, Acc: 0.5434
+2025-10-10 19:28:17,419 | INFO | [Clipart] Best Acc: 0.5611
+2025-10-10 19:28:17,419 | INFO | ------------------------------------------------------------
+2025-10-10 19:28:18,253 | INFO | === LODO: Leaving out domain 'Product' ===
+2025-10-10 19:29:06,036 | INFO | [Product] Epoch 1/5 | Train - Loss: 3.0762, Cls: 3.0655, GRQO: 0.0107, Acc: 0.3553 | Val - Loss: 1.9816, Cls: 1.9804, GRQO: 0.0012, Acc: 0.5598
+2025-10-10 19:29:06,092 | INFO | [Product] New best val acc: 0.5598
+2025-10-10 19:30:04,386 | INFO | [Product] Epoch 2/5 | Train - Loss: 1.3563, Cls: 1.3520, GRQO: 0.0042, Acc: 0.7372 | Val - Loss: 1.2087, Cls: 1.2080, GRQO: 0.0007, Acc: 0.7222
+2025-10-10 19:30:04,436 | INFO | [Product] New best val acc: 0.7222
+2025-10-10 19:30:52,185 | INFO | [Product] Epoch 3/5 | Train - Loss: 0.6698, Cls: 0.6660, GRQO: 0.0038, Acc: 0.8783 | Val - Loss: 1.0059, Cls: 1.0053, GRQO: 0.0006, Acc: 0.7547
+2025-10-10 19:30:52,230 | INFO | [Product] New best val acc: 0.7547
+2025-10-10 19:31:38,941 | INFO | [Product] Epoch 4/5 | Train - Loss: 0.3378, Cls: 0.3343, GRQO: 0.0034, Acc: 0.9439 | Val - Loss: 0.9799, Cls: 0.9794, GRQO: 0.0005, Acc: 0.7567
+2025-10-10 19:31:38,988 | INFO | [Product] New best val acc: 0.7567
+2025-10-10 19:32:25,718 | INFO | [Product] Epoch 5/5 | Train - Loss: 0.2024, Cls: 0.1993, GRQO: 0.0031, Acc: 0.9685 | Val - Loss: 0.9581, Cls: 0.9577, GRQO: 0.0004, Acc: 0.7596
+2025-10-10 19:32:25,764 | INFO | [Product] New best val acc: 0.7596
+2025-10-10 19:32:25,764 | INFO | [Product] Best Acc: 0.7596
+2025-10-10 19:32:25,764 | INFO | ------------------------------------------------------------
+2025-10-10 19:32:28,388 | INFO | === LODO: Leaving out domain 'Real World' ===
+2025-10-10 19:33:08,298 | INFO | [Real World] Epoch 1/5 | Train - Loss: 3.1082, Cls: 3.0986, GRQO: 0.0096, Acc: 0.3446 | Val - Loss: 1.8902, Cls: 1.8886, GRQO: 0.0016, Acc: 0.6114
+2025-10-10 19:33:08,344 | INFO | [Real World] New best val acc: 0.6114
+2025-10-10 19:33:47,868 | INFO | [Real World] Epoch 2/5 | Train - Loss: 1.3603, Cls: 1.3561, GRQO: 0.0042, Acc: 0.7454 | Val - Loss: 1.0906, Cls: 1.0896, GRQO: 0.0009, Acc: 0.7576
+2025-10-10 19:33:47,916 | INFO | [Real World] New best val acc: 0.7576
+2025-10-10 19:34:27,456 | INFO | [Real World] Epoch 3/5 | Train - Loss: 0.6431, Cls: 0.6393, GRQO: 0.0037, Acc: 0.8857 | Val - Loss: 0.8849, Cls: 0.8842, GRQO: 0.0007, Acc: 0.7838
+2025-10-10 19:34:27,502 | INFO | [Real World] New best val acc: 0.7838
+2025-10-10 19:35:06,968 | INFO | [Real World] Epoch 4/5 | Train - Loss: 0.3198, Cls: 0.3165, GRQO: 0.0033, Acc: 0.9509 | Val - Loss: 0.7930, Cls: 0.7925, GRQO: 0.0005, Acc: 0.8006
+2025-10-10 19:35:07,030 | INFO | [Real World] New best val acc: 0.8006
+2025-10-10 19:35:46,364 | INFO | [Real World] Epoch 5/5 | Train - Loss: 0.1719, Cls: 0.1690, GRQO: 0.0029, Acc: 0.9777 | Val - Loss: 0.7734, Cls: 0.7730, GRQO: 0.0005, Acc: 0.8033
+2025-10-10 19:35:46,401 | INFO | [Real World] New best val acc: 0.8033
+2025-10-10 19:35:46,401 | INFO | [Real World] Best Acc: 0.8033
+2025-10-10 19:35:46,401 | INFO | ------------------------------------------------------------
+2025-10-10 19:35:46,401 | INFO | LODO finished | Mean Acc: 0.6950 | Summary saved to c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\OfficeHome\logs\lodo_summary_20251010_193546.json
+2025-10-10 19:35:46,437 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-10 19:35:47,642 | INFO | === Baseline LODO: Leaving out domain 'Art' ===
+2025-10-10 19:36:34,128 | INFO | [Art] Epoch 1/5 | Train - Loss: 1.7685, Acc: 0.5955 | Val Acc: 0.5834
+2025-10-10 19:37:21,605 | INFO | [Art] Epoch 2/5 | Train - Loss: 0.4521, Acc: 0.8946 | Val Acc: 0.6246
+2025-10-10 19:38:09,079 | INFO | [Art] Epoch 3/5 | Train - Loss: 0.1791, Acc: 0.9647 | Val Acc: 0.6300
+2025-10-10 19:38:56,851 | INFO | [Art] Epoch 4/5 | Train - Loss: 0.0865, Acc: 0.9831 | Val Acc: 0.6300
+2025-10-10 19:39:44,059 | INFO | [Art] Epoch 5/5 | Train - Loss: 0.0555, Acc: 0.9872 | Val Acc: 0.6428
+2025-10-10 19:39:44,059 | INFO | [Art] Best Val Acc: 0.6428
+2025-10-10 19:39:44,059 | INFO | ------------------------------------------------------------
+2025-10-10 19:39:44,059 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-10 19:39:45,557 | INFO | === Baseline LODO: Leaving out domain 'Clipart' ===
+2025-10-10 19:40:34,918 | INFO | [Clipart] Epoch 1/5 | Train - Loss: 1.8172, Acc: 0.5814 | Val Acc: 0.4696
+2025-10-10 19:41:22,630 | INFO | [Clipart] Epoch 2/5 | Train - Loss: 0.4404, Acc: 0.9009 | Val Acc: 0.5129
+2025-10-10 19:42:10,787 | INFO | [Clipart] Epoch 3/5 | Train - Loss: 0.1565, Acc: 0.9734 | Val Acc: 0.5372
+2025-10-10 19:42:58,614 | INFO | [Clipart] Epoch 4/5 | Train - Loss: 0.0638, Acc: 0.9909 | Val Acc: 0.5276
+2025-10-10 19:43:46,782 | INFO | [Clipart] Epoch 5/5 | Train - Loss: 0.0357, Acc: 0.9951 | Val Acc: 0.5375
+2025-10-10 19:43:46,782 | INFO | [Clipart] Best Val Acc: 0.5375
+2025-10-10 19:43:46,782 | INFO | ------------------------------------------------------------
+2025-10-10 19:43:46,782 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-10 19:43:48,901 | INFO | === Baseline LODO: Leaving out domain 'Product' ===
+2025-10-10 19:44:36,909 | INFO | [Product] Epoch 1/5 | Train - Loss: 2.0915, Acc: 0.5183 | Val Acc: 0.7189
+2025-10-10 19:45:25,066 | INFO | [Product] Epoch 2/5 | Train - Loss: 0.6015, Acc: 0.8565 | Val Acc: 0.7605
+2025-10-10 19:46:12,578 | INFO | [Product] Epoch 3/5 | Train - Loss: 0.2429, Acc: 0.9517 | Val Acc: 0.7572
+2025-10-10 19:47:00,477 | INFO | [Product] Epoch 4/5 | Train - Loss: 0.1285, Acc: 0.9775 | Val Acc: 0.7725
+2025-10-10 19:47:48,866 | INFO | [Product] Epoch 5/5 | Train - Loss: 0.0724, Acc: 0.9850 | Val Acc: 0.7740
+2025-10-10 19:47:48,866 | INFO | [Product] Best Val Acc: 0.7740
+2025-10-10 19:47:48,866 | INFO | ------------------------------------------------------------
+2025-10-10 19:47:48,866 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-10 19:47:50,524 | INFO | === Baseline LODO: Leaving out domain 'Real World' ===
+2025-10-10 19:48:30,474 | INFO | [Real World] Epoch 1/5 | Train - Loss: 2.0106, Acc: 0.5341 | Val Acc: 0.7448
+2025-10-10 19:49:10,094 | INFO | [Real World] Epoch 2/5 | Train - Loss: 0.5484, Acc: 0.8729 | Val Acc: 0.7822
+2025-10-10 19:49:49,912 | INFO | [Real World] Epoch 3/5 | Train - Loss: 0.2108, Acc: 0.9586 | Val Acc: 0.7994
+2025-10-10 19:50:29,836 | INFO | [Real World] Epoch 4/5 | Train - Loss: 0.0985, Acc: 0.9825 | Val Acc: 0.7957
+2025-10-10 19:51:09,759 | INFO | [Real World] Epoch 5/5 | Train - Loss: 0.0607, Acc: 0.9876 | Val Acc: 0.8033
+2025-10-10 19:51:09,759 | INFO | [Real World] Best Val Acc: 0.8033
+2025-10-10 19:51:09,759 | INFO | ------------------------------------------------------------
+2025-10-10 19:51:09,760 | INFO | Baseline LODO (WinKawaks/vit-tiny-patch16-224) finished | Mean Acc: 0.6894
