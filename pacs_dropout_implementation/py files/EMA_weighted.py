@@ -28,30 +28,26 @@ np.random.seed(42)
 
 # %%
 # =================================================================================
-# SECTION 1.2: CONFIGURATION CLASS (WITH LOSS WEIGHTS)
+# SECTION 1.2: CONFIGURATION CLASS (FOR EMA WEIGHT TRANSFER)
 # =================================================================================
 class Config:
     # --- Data Paths and Domains ---
-    DATA_DIR = r"D:\Salaar Masood\pacs-dataset\pacs_data"
+    DATA_DIR = r"C:\Users\Haseeb\OneDrive - Higher Education Commission\sproj\PACS\pacs_data"
     DOMAINS = ["art_painting", "cartoon", "photo", "sketch"]
     
     # --- Model & Architecture ---
     MODEL_NAME = "WinKawaks/vit-tiny-patch16-224"
     NUM_CLASSES = 7
     NUM_HEADS = 4
-    DROPOUT_OPTIONS = [0.1, 0.2, 0.3, 0.4, 0.5, 0.7]
+    DROPOUT_OPTIONS = [0.3, 0.4, 0.5, 0.6, 0.7]
     
-    ### NEW: Loss Weighting Hyperparameters ###
-    # ALPHA controls the weight of the main winner's loss (most important)
-    ALPHA = 1.0
-    # BETA controls the weight of the losers' self-training
-    BETA = 0.5
-    # GAMMA controls the weight of the dummy head's training
-    GAMMA = 0.5
+    ### NEW: EMA Hyperparameter ###
+    # Controls how much of the old student weights to keep. 0.999 is a common value.
+    EMA_DECAY = 0.999
     
     # --- Training Hyperparameters ---
     BATCH_SIZE = 128
-    NUM_EPOCHS = 10
+    NUM_EPOCHS = 20 # Train longer to let the EMA stabilize
     LEARNING_RATE = 1e-4
     OPTIMIZER = "AdamW"
     
@@ -62,9 +58,7 @@ class Config:
 # Instantiate the config
 config = Config()
 
-print("--- Project Configuration (Distillation with Loss Weights) ---")
-
-# Print out the configuration to verify
+print("--- Project Configuration (EMA Weight Transfer) ---")
 for key, value in config.__class__.__dict__.items():
     if not key.startswith('__'):
         print(f"{key}: {value}")
@@ -225,7 +219,7 @@ def get_dataloaders(root_dir, target_domain, all_domains, batch_size, seed):
 
 # %%
 # =================================================================================
-# SECTION 3: THE MODEL ARCHITECTURE (CORRECTED DISTILLATION)
+# SECTION 3: THE MODEL ARCHITECTURE (EMA WEIGHT TRANSFER)
 # =================================================================================
 
 class DistillationViT(nn.Module):
@@ -235,6 +229,7 @@ class DistillationViT(nn.Module):
         self.vit_backbone = ViTModel.from_pretrained(model_name)
         hidden_dim = self.vit_backbone.config.hidden_size
         
+        # The 4 "teacher" heads
         self.heads = nn.ModuleList([
             nn.Sequential(
                 nn.Dropout(p=rate),
@@ -242,10 +237,16 @@ class DistillationViT(nn.Module):
             ) for rate in dropout_rates
         ])
         
+        ### CRITICAL CHANGE ###
+        # The "student" head MUST have the same architecture as the teachers
+        # so that their weights can be averaged.
         self.dummy_head = nn.Sequential(
             nn.Dropout(p=dummy_dropout_rate),
             nn.Linear(hidden_dim, num_classes)
         )
+        # We initialize the dummy head with the same weights as the first teacher head
+        self.dummy_head.load_state_dict(self.heads[0].state_dict())
+
 
     def update_dropout_rates(self, new_rates: list):
         for i, head in enumerate(self.heads):
@@ -254,39 +255,33 @@ class DistillationViT(nn.Module):
     def update_dummy_dropout_rate(self, new_rate: float):
         self.dummy_head[0].p = new_rate
         
-    ### CHANGED: The forward pass now only returns the feature vector z ###
     def forward(self, images):
-        """ The forward pass now simply returns the shared feature vector z. """
         z = self.vit_backbone(pixel_values=images).last_hidden_state[:, 0, :]
         return z
 
-print("Corrected DistillationViT class defined.")
+print("EMA-ready DistillationViT class defined.")
 
 # %%
 # =================================================================================
-# SECTION 4: TRAINING & EVALUATION LOGIC (FINAL VERSION WITH LOSS WEIGHTING)
+# SECTION 4: TRAINING & EVALUATION LOGIC (WEIGHTED EMA + FULL DIAGNOSTICS)
 # =================================================================================
 
-# Define the two loss functions used in training
-distillation_criterion = nn.MSELoss()
 classification_criterion = nn.CrossEntropyLoss()
 
 def train_one_epoch(model, train_loader, optimizer, device):
-    """
-    Trains the model for one epoch using the weighted distillation logic.
-    - The winner trains the backbone.
-    - The losers train themselves.
-    - The dummy head learns from the winner and the true labels.
-    - Loss weights (ALPHA, BETA, GAMMA) are used to balance these tasks.
-    """
     model.train()
     
-    # Trackers for all epoch-level statistics
-    batch_backbone_losses, batch_dummy_losses = [], []
+    # Trackers for ALL losses (used for plotting)
+    batch_backbone_losses = []
+    batch_dummy_losses = []
     batch_head_losses = [[] for _ in range(len(model.heads))]
+    
     head_correct_preds = defaultdict(int)
-    dummy_correct_preds = 0
     total_samples = 0
+
+    # Temporary holder for weighted average teacher
+    with torch.no_grad():
+        weighted_avg_teacher = copy.deepcopy(model.dummy_head)
 
     progress_bar = tqdm(train_loader, desc="Training Epoch", leave=False)
 
@@ -294,107 +289,101 @@ def train_one_epoch(model, train_loader, optimizer, device):
         images, labels = images.to(device), labels.to(device)
         total_samples += len(labels)
         
-        # 1. Get feature vectors z (live) and z_detached (dead-end)
         z = model(images)
         z_detached = z.detach()
 
-        # 2. Calculate logits for all heads
+        # --- PHASE 1: DIAGNOSTICS (Calculate all losses for plotting) ---
+        with torch.no_grad():
+            # 1. Dummy Head Diagnostic Loss
+            dummy_logits = model.dummy_head(z)
+            batch_dummy_losses.append(classification_criterion(dummy_logits, labels).item())
+            
+            # 2. All Teacher Heads Diagnostic Losses (on live z for fair comparison)
+            for i, head in enumerate(model.heads):
+                head_logits_diag = head(z)
+                batch_head_losses[i].append(classification_criterion(head_logits_diag, labels).item())
+
+        # --- PHASE 2: TRAINING (The actual work) ---
         head_logits = {f'head_{i+1}': head(z) for i, head in enumerate(model.heads)}
-        dummy_logits = model.dummy_head(z)
-        
-        # 3. Calculate training accuracies for this batch
-        _, dummy_preds = torch.max(dummy_logits, 1)
-        dummy_correct_preds += torch.sum(dummy_preds == labels).item()
-        
+
+        # Find the winner
         batch_accuracies = {}
         for head_name, logits in head_logits.items():
             _, preds = torch.max(logits, 1)
             correct = torch.sum(preds == labels).item()
             batch_accuracies[head_name] = correct / len(labels)
             head_correct_preds[head_name] += correct
-        
         winner_head_name = max(batch_accuracies, key=batch_accuracies.get)
 
-        # 4. Calculate all component losses
+        # Calculate Training Losses
         winner_loss = classification_criterion(head_logits[winner_head_name], labels)
-        batch_backbone_losses.append(winner_loss.item())
-        batch_head_losses[int(winner_head_name[-1])-1].append(winner_loss.item())
+        batch_backbone_losses.append(winner_loss.item()) # Winner drives backbone loss
 
         losers_loss = 0
         for i, head in enumerate(model.heads):
-            head_name = f'head_{i+1}'
-            if head_name != winner_head_name:
+            if i != (int(winner_head_name[-1])-1):
                 loser_logits = head(z_detached)
-                loss = classification_criterion(loser_logits, labels)
-                losers_loss += loss
-                batch_head_losses[i].append(loss.item())
+                losers_loss += classification_criterion(loser_logits, labels)
         
-        dummy_loss_distill = distillation_criterion(dummy_logits, head_logits[winner_head_name].detach())
-        dummy_loss_classify = classification_criterion(dummy_logits, labels)
-        total_dummy_loss = dummy_loss_distill + dummy_loss_classify
-        batch_dummy_losses.append(total_dummy_loss.item())
-
-        # 5. Combine losses using the weights from the Config class
-        final_loss = (config.ALPHA * winner_loss) + \
-                     (config.BETA * losers_loss) + \
-                     (config.GAMMA * total_dummy_loss)
+        final_loss = winner_loss + losers_loss
         
         optimizer.zero_grad()
         final_loss.backward()
         optimizer.step()
+        
+        # --- PHASE 3: EMA UPDATE ---
+        with torch.no_grad():
+            accuracies_tensor = torch.tensor(list(batch_accuracies.values()), device=device)
+            accuracy_weights = torch.nn.functional.softmax(accuracies_tensor, dim=0)
 
-    # 6. Collate and return all metrics
+            for param in weighted_avg_teacher.parameters():
+                param.data.zero_()
+            
+            for i, teacher_head in enumerate(model.heads):
+                weight = accuracy_weights[i]
+                for avg_param, teacher_param in zip(weighted_avg_teacher.parameters(), teacher_head.parameters()):
+                    avg_param.data.add_(teacher_param.data, alpha=weight)
+
+            for student_param, avg_teacher_param in zip(model.dummy_head.parameters(), weighted_avg_teacher.parameters()):
+                student_param.data.mul_(config.EMA_DECAY).add_(avg_teacher_param.data, alpha=1 - config.EMA_DECAY)
+
+    # Collate all metrics for return
     epoch_metrics = {
         "avg_backbone_loss": np.mean(batch_backbone_losses),
-        "avg_dummy_loss": np.mean(batch_dummy_losses),
-        "head_accuracies": {name: correct / total_samples for name, correct in head_correct_preds.items()},
-        "dummy_head_accuracy": dummy_correct_preds / total_samples
+        "avg_dummy_loss": np.mean(batch_dummy_losses), # Now correctly populated
+        "head_accuracies": {name: correct / total_samples for name, correct in head_correct_preds.items()}
     }
-    
     for i in range(len(model.heads)):
-        try:
-            epoch_metrics[f"avg_head_{i+1}_loss"] = np.mean(batch_head_losses[i])
-        except (ValueError, IndexError):
-             epoch_metrics[f"avg_head_{i+1}_loss"] = 0 
+        epoch_metrics[f"avg_head_{i+1}_loss"] = np.mean(batch_head_losses[i])
         
     return epoch_metrics
 
 def evaluate(model, data_loader, device):
-    """
-    This is the CORRECT evaluation function. It evaluates the model's performance
-    by using ONLY the dummy_head, which is the final output of our distillation process.
-    """
     model.eval()
     total_loss, correct_preds, total_samples = 0.0, 0, 0
     with torch.no_grad():
         for images, labels in tqdm(data_loader, desc="Evaluating", leave=False):
             images, labels = images.to(device), labels.to(device)
             total_samples += len(labels)
-
-            # Get z and then pass it to the dummy_head for evaluation
             z = model(images)
             dummy_logits = model.dummy_head(z)
-            
             loss = classification_criterion(dummy_logits, labels)
             total_loss += loss.item()
-            
             _, preds = torch.max(dummy_logits, 1)
             correct_preds += torch.sum(preds == labels).item()
-
     avg_loss = total_loss / len(data_loader)
     accuracy = correct_preds / total_samples
-    
     return {"avg_loss": avg_loss, "accuracy": accuracy}
 
-print("Section 4 Updated: train_one_epoch (with loss weighting) and evaluate (using dummy head) are ready.")
+print("Diagnostic-ready train_one_epoch and evaluate functions defined.")
 
 # %%
 # =================================================================================
-# SECTION 5: THE MAIN EXPERIMENT LOOP (DISTILLATION METHOD - UPDATED)
+# SECTION 5: THE MAIN EXPERIMENT LOOP (WEIGHTED EMA + DIAGNOSTICS)
 # =================================================================================
 
 config = Config()
-lodo_histories = {} # To store learning curves for each run
+lodo_histories = {} 
 
 for target_domain in config.DOMAINS:
     print(f"==============================================================")
@@ -417,7 +406,10 @@ for target_domain in config.DOMAINS:
         dummy_dropout_rate=current_dummy_rate
     ).to(config.DEVICE)
     
-    optimizer = torch.optim.AdamW(model.parameters(), lr=config.LEARNING_RATE)
+    optimizer = torch.optim.AdamW(
+        list(model.vit_backbone.parameters()) + list(model.heads.parameters()), 
+        lr=config.LEARNING_RATE
+    )
     
     best_val_accuracy = 0.0
     best_model_state = None
@@ -428,29 +420,26 @@ for target_domain in config.DOMAINS:
         print(f"Current Teacher Rates: { {f'head_{i+1}': rate for i, rate in enumerate(current_dropout_rates)} }")
         print(f"Current Dummy Head Rate: {current_dummy_rate}")
 
-        
         train_metrics = train_one_epoch(model, train_loader, optimizer, config.DEVICE)
         val_metrics = evaluate(model, val_loader, config.DEVICE)
         
         print(f"Epoch {epoch+1} Summary:")
-        print(f"  Backbone Loss (from Winner): {train_metrics['avg_backbone_loss']:.4f}")
+        print(f"  Backbone Loss: {train_metrics['avg_backbone_loss']:.4f}")
+        print(f"  Dummy Diagnostic Loss: {train_metrics['avg_dummy_loss']:.4f}") # NEW PRINT
         print(f"  Validation Loss: {val_metrics['avg_loss']:.4f}")
         print(f"  Validation Accuracy: {val_metrics['accuracy']:.4f}")
         
-        print(f"  Epoch Training Accuracies:")
-        ### NEW: Print the dummy head's training accuracy ###
-        print(f"    Dummy Head (Student): {train_metrics['dummy_head_accuracy']:.4f}")
+        print(f"  Epoch Training Accuracies (Teachers):")
         epoch_winner_head_name = max(train_metrics['head_accuracies'], key=train_metrics['head_accuracies'].get)
         for name, acc in sorted(train_metrics['head_accuracies'].items()):
             marker = "<- EPOCH WINNER" if name == epoch_winner_head_name else ""
-            print(f"    {name} (Teacher): {acc:.4f} {marker}")
+            print(f"    {name}: {acc:.4f} {marker}")
         
-        # --- Store all metrics for plotting ---
+        # --- Store ALL metrics for plotting ---
         history["backbone_loss"].append(train_metrics['avg_backbone_loss'])
-        history["dummy_loss"].append(train_metrics['avg_dummy_loss'])
-        history["dummy_accuracy"].append(train_metrics['dummy_head_accuracy']) # Store it
+        history["dummy_loss"].append(train_metrics['avg_dummy_loss']) # NEW STORAGE
         for i in range(config.NUM_HEADS):
-            history[f"head_{i+1}_loss"].append(train_metrics[f"avg_head_{i+1}_loss"])
+             history[f"head_{i+1}_loss"].append(train_metrics[f"avg_head_{i+1}_loss"]) # NEW STORAGE
         history["val_loss"].append(val_metrics['avg_loss'])
         history["val_accuracy"].append(val_metrics['accuracy'])
 
@@ -459,13 +448,12 @@ for target_domain in config.DOMAINS:
             best_val_accuracy = val_metrics['accuracy']
             best_model_state = copy.deepcopy(model.state_dict())
             
-        print("  Updating dropout rates for next epoch...")
+        print("  Updating all dropout rates for next epoch...")
         current_dropout_rates = list(np.random.choice(config.DROPOUT_OPTIONS, config.NUM_HEADS, replace=False))
         model.update_dropout_rates(current_dropout_rates)
         
         current_dummy_rate = np.random.choice(config.DROPOUT_OPTIONS)
         model.update_dummy_dropout_rate(current_dummy_rate)
-
 
     lodo_histories[target_domain] = history
 
@@ -482,53 +470,59 @@ for target_domain in config.DOMAINS:
         "best_val_accuracy": best_val_accuracy
     })
 
-print("\n\nALL DISTILLATION LODO EXPERIMENTS COMPLETE")
+print("\n\nALL DIAGNOSTIC EMA LODO EXPERIMENTS COMPLETE")
 
 # %%
 # =================================================================================
-# SECTION 7: VISUALIZE COMPONENT LOSS CURVES
+# SECTION 7: VISUALIZE COMPONENT LOSS CURVES (SUBPLOTS VERSION)
 # =================================================================================
 print("\n" + "="*70)
-print("--- Visualizing Component Loss Curves ---")
+print("--- Visualizing Component Loss Curves (Subplots) ---")
 print("="*70)
 
-for domain, history in lodo_histories.items():
+# Create a figure with a 2x2 grid of subplots
+fig, axes = plt.subplots(2, 2, figsize=(20, 16))
+# Flatten the 2x2 array of axes to make it easy to loop over
+axes = axes.flatten()
+
+# Define the colors and line styles to be consistent across all subplots
+colors = ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'] 
+
+# Loop through each domain's history and its corresponding subplot axis
+for i, (domain, history) in enumerate(lodo_histories.items()):
+    ax = axes[i]
     epochs = range(1, config.NUM_EPOCHS + 1)
     
-    fig, ax1 = plt.subplots(figsize=(14, 8))
+    # 1. Backbone Loss (Red Solid) - This is the winner's loss
+    ax.plot(epochs, history['backbone_loss'], 'r-', linewidth=3, label='Backbone Loss (Winner)')
     
-    # Plotting losses on the primary y-axis
-    ax1.set_xlabel('Epochs', fontsize=14)
-    ax1.set_ylabel('Loss', fontsize=14, color='tab:blue')
+    # 2. Dummy Head Diagnostic Loss (Blue Solid)
+    ax.plot(epochs, history['dummy_loss'], 'b-', linewidth=3, label='Dummy Head Loss')
     
-    # Plot the primary losses
-    p1, = ax1.plot(epochs, history['backbone_loss'], 'r-', linewidth=2.5, label='Backbone Loss')
-    p2, = ax1.plot(epochs, history['dummy_loss'], 'b-', linewidth=2.5, label='Dummy Head (Distillation) Loss')
-    p3, = ax1.plot(epochs, history['val_loss'], 'k:', linewidth=2.5, label='Validation Loss')
+    # 3. Validation Loss (Black Dotted)
+    ax.plot(epochs, history['val_loss'], 'k:', linewidth=2, label='Validation Loss')
     
-    # Plot the competing head losses
-    colors = ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3'] # Colorblind-friendly palette
-    head_plots = []
-    for i in range(config.NUM_HEADS):
-        p, = ax1.plot(epochs, history[f'head_{i+1}_loss'], linestyle='--', color=colors[i], label=f'Head {i+1} Loss')
-        head_plots.append(p)
-    
-    ax1.tick_params(axis='y', labelcolor='tab:blue')
-    
-    # Creating a secondary y-axis for accuracy
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Accuracy', fontsize=14, color='tab:green')
-    p_acc, = ax2.plot(epochs, history['val_accuracy'], 'g-s', linewidth=2, markersize=8, label='Validation Accuracy')
-    ax2.tick_params(axis='y', labelcolor='tab:green')
+    # 4-7. Individual Teacher Head Losses (Various Colored Dashed Lines)
+    for j in range(config.NUM_HEADS):
+        ax.plot(epochs, history[f'head_{j+1}_loss'], linestyle='--', color=colors[j], alpha=0.8, label=f'Head {j+1} Loss')
 
-    plt.title(f'Learning & Loss Dynamics (Target Domain: {domain.upper()})', fontsize=18, fontweight='bold')
-    
-    # Combined legend
-    all_plots = [p1, p2, p3] + head_plots + [p_acc]
-    ax1.legend(all_plots, [p.get_label() for p in all_plots], loc='upper center', bbox_to_anchor=(0.5, -0.1), fancybox=True, shadow=True, ncol=4, fontsize=12)
-    
-    fig.tight_layout(rect=[0, 0.05, 1, 1])
-    plt.show()
+    # --- Subplot Styling ---
+    ax.set_title(f'Target Domain: {domain.upper()}', fontsize=16, fontweight='bold')
+    ax.set_xlabel('Epochs', fontsize=12)
+    ax.set_ylabel('Loss', fontsize=12)
+    ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+    ax.set_ylim(bottom=0) # Ensure y-axis starts at 0 for fair comparison
+
+# --- Overall Figure Styling ---
+# Create a single, shared legend for the entire figure
+handles, labels = axes[0].get_legend_handles_labels()
+fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 1.0), ncol=7, fontsize=14, fancybox=True)
+
+fig.suptitle('Full Training Loss Dynamics Across All LODO Experiments', fontsize=24, fontweight='bold', y=1.05)
+
+# Adjust layout to prevent titles and labels from overlapping
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.show()
 
 # %%
 # =================================================================================
