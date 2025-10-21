@@ -6,7 +6,7 @@ Creates binary masks for selective learning rate application
 
 import torch
 import numpy as np
-from config import *
+from config_file import *
 
 
 class ImportanceCalculator:

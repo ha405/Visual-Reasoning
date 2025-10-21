@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
 import os
-from config import *
+from config_file import *
 
 
 def visualize_weight_matrices_grid(weight_matrices, title, save_path=None, value_range=None):

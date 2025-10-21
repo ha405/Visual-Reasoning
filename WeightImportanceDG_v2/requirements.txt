@@ -1,0 +1,14 @@
+# Core dependencies for WeightImportanceDG_v2
+# Note: torch and torchvision may already be installed in your conda env
+# pip install will skip already installed packages when using -r requirements.txt
+
+transformers>=4.30.0
+scikit-learn>=1.3.0
+tqdm>=4.65.0
+
+# These are likely already installed but included for completeness
+# numpy>=1.24.0
+# torch>=2.0.0
+# torchvision>=0.15.0
+# matplotlib>=3.7.0
+# Pillow>=10.0.0
