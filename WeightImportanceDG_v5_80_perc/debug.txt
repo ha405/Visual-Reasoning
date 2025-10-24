@@ -1,0 +1,60 @@
+PS D:\Haseeb\SPROJ\PACS ViT\Experiments\Visual-Reasoning\WeightImportanceDG_v5> python main_script.py
+Using device: cuda
+
+====================================================================================================
+DOMAIN GENERALIZATION WITH IMPORTANCE-BASED WEIGHT MASKING
+====================================================================================================
+
+Using device: cuda
+Random seed: 42
+Created output directories in ./results
+
+Initializing dataset from: ../../../../../Datasets/pacs_data
+Domains: ['art_painting', 'cartoon', 'photo', 'sketch']
+Number of classes: 7
+
+====================================================================================================
+LODO CONFIGURATION: Test Domain = art_painting
+====================================================================================================
+
+>>> PHASE 1: Training on domains ['cartoon', 'photo', 'sketch']
+
+================================================================================
+PHASE 1: DOMAIN-SPECIFIC TRAINING
+Training on 3 domains: ['cartoon', 'photo', 'sketch']
+================================================================================
+
+
+>>> Starting training on domain: cartoon
+Stored shared initial weights (same for all domains)
+
+============================================================
+Phase 1 Training on domain: cartoon
+============================================================
+Recorded initial weights (4 layers of 10x10 matrices)
+Epoch [1/10] - Loss: 1.9247, Accuracy: 0.1160                                                                                                                                                                                       
+Epoch [2/10] - Loss: 1.5049, Accuracy: 0.3208                                                                                                                                                                                       
+Epoch [3/10] - Loss: 1.1346, Accuracy: 0.5102                                                                                                                                                                                       
+Epoch [4/10] - Loss: 0.9733, Accuracy: 0.5631                                                                                                                                                                                       
+Epoch [5/10] - Loss: 0.8577, Accuracy: 0.6561                                                                                                                                                                                       
+Epoch [6/10] - Loss: 0.6872, Accuracy: 0.7607                                                                                                                                                                                       
+Epoch [7/10] - Loss: 0.5154, Accuracy: 0.7995                                                                                                                                                                                       
+Epoch [8/10] - Loss: 0.4294, Accuracy: 0.8358                                                                                                                                                                                       
+Epoch [9/10] - Loss: 0.3674, Accuracy: 0.8720                                                                                                                                                                                       
+Epoch [10/10] - Loss: 0.3410, Accuracy: 0.8938                                                                                                                                                                                      
+Recorded final weights after 10 epochs
+Phase 1 training completed for cartoon
+Final Loss: 0.3410, Final Accuracy: 0.8938
+WARNING: Using legacy importance computation (absolute weight change)
+Consider using OBD saliency computation instead
+Traceback (most recent call last):
+  File "D:\Haseeb\SPROJ\PACS ViT\Experiments\Visual-Reasoning\WeightImportanceDG_v5\main_script.py", line 269, in <module>
+    main()
+  File "D:\Haseeb\SPROJ\PACS ViT\Experiments\Visual-Reasoning\WeightImportanceDG_v5\main_script.py", line 77, in main
+    phase1_results = run_phase1_all_domains(
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Haseeb\SPROJ\PACS ViT\Experiments\Visual-Reasoning\WeightImportanceDG_v5\trainer_phase1_file.py", line 425, in run_phase1_all_domains
+    normalized_importance = importance_calc.normalize_importance_global(importance_matrices)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ImportanceCalculator' object has no attribute 'normalize_importance_global'
+PS D:\Haseeb\SPROJ\PACS ViT\Experiments\Visual-Reasoning\WeightImportanceDG_v5> 
