@@ -1,0 +1,7 @@
+2025-10-25 04:38:52,853 | INFO | Initialized experiment directories for PACS
+2025-10-25 04:38:52,854 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet34\PACS\logs
+2025-10-25 04:38:52,854 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet34\PACS\checkpoints
+2025-10-25 04:38:52,855 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet34\PACS\plots
+2025-10-25 04:38:53,447 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-10-25 04:39:25,746 | INFO | [art_painting] Epoch 1/5 | Train - Loss: 0.5563, Cls: 0.5474, GRQO: 0.0089, Acc: 0.8139 | Val - Loss: 0.7795, Cls: 0.7782, GRQO: 0.0013, Acc: 0.7713
+2025-10-25 04:39:25,894 | INFO | [art_painting] New best val acc: 0.7713

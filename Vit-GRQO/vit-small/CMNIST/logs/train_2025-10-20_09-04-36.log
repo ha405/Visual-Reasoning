@@ -1,0 +1,5 @@
+2025-10-20 09:04:36,757 | INFO | Initialized experiment directories for CMNIST
+2025-10-20 09:04:36,757 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\logs
+2025-10-20 09:04:36,757 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\checkpoints
+2025-10-20 09:04:36,757 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\plots
+2025-10-20 09:04:41,916 | INFO | === LODO: Leaving out domain 'red' ===

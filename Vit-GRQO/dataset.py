@@ -10,6 +10,8 @@ from PIL import Image, ImageFile, UnidentifiedImageError
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 SEED = 42
 
+
+
 def seed_worker(worker_id):
     worker_seed = torch.initial_seed() % 2**32
     np.random.seed(worker_seed)
@@ -44,7 +46,7 @@ class BaseDomainDataset:
             dataset,
             batch_size=self.batch_size,
             shuffle=train,
-            num_workers=4,
+            num_workers=0,
             pin_memory=True,
             worker_init_fn=seed_worker,
             generator=g,
@@ -191,9 +193,24 @@ class TerraIncognitaDataset(BaseDomainDataset):
             dataset,
             batch_size=self.batch_size,
             shuffle=train,
-            num_workers=4,
+            num_workers=0,
             pin_memory=True,
             worker_init_fn=seed_worker,
             generator=g,
         )
         return loader
+
+
+DATASET_REGISTRY = {
+    "PACS": PACSDataset,
+    "VLCS": VLCSDataset,
+    "OfficeHome": OfficeHomeDataset,
+    "RMNIST": RMNISTDataset,
+    "CMNIST": CMNISTDataset,
+    "TerraIncognita": TerraIncognitaDataset,
+}
+
+def get_dataset_class(name: str):
+    if name not in DATASET_REGISTRY:
+        raise ValueError(f"Unknown dataset name '{name}'. Available: {list(DATASET_REGISTRY.keys())}")
+    return DATASET_REGISTRY[name]

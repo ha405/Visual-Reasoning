@@ -1,0 +1,18 @@
+2025-10-20 02:22:22,593 | INFO | Initialized experiment directories for TerraIncognita
+2025-10-20 02:22:22,595 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\logs
+2025-10-20 02:22:22,595 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\checkpoints
+2025-10-20 02:22:22,595 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\plots
+2025-10-20 02:22:22,772 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 02:22:23,785 | INFO | === Baseline LODO: Leaving out domain 'location_38' ===
+2025-10-20 02:23:23,485 | INFO | [location_38] Epoch 1/5 | Train - Loss: 1.0244, Acc: 0.6299 | Val Acc: 0.1098
+2025-10-20 02:24:23,386 | INFO | [location_38] Epoch 2/5 | Train - Loss: 0.4633, Acc: 0.8388 | Val Acc: 0.2106
+2025-10-20 02:25:23,084 | INFO | [location_38] Epoch 3/5 | Train - Loss: 0.2628, Acc: 0.9084 | Val Acc: 0.2300
+2025-10-20 02:26:22,534 | INFO | [location_38] Epoch 4/5 | Train - Loss: 0.1873, Acc: 0.9348 | Val Acc: 0.2043
+2025-10-20 02:27:23,251 | INFO | [location_38] Epoch 5/5 | Train - Loss: 0.1302, Acc: 0.9559 | Val Acc: 0.2764
+2025-10-20 02:27:23,251 | INFO | [location_38] Best Val Acc: 0.2764
+2025-10-20 02:27:23,251 | INFO | ------------------------------------------------------------
+2025-10-20 02:27:23,251 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 02:27:24,102 | INFO | === Baseline LODO: Leaving out domain 'location_43' ===
+2025-10-20 02:28:29,267 | INFO | [location_43] Epoch 1/5 | Train - Loss: 0.7649, Acc: 0.7400 | Val Acc: 0.3453
+2025-10-20 02:29:35,616 | INFO | [location_43] Epoch 2/5 | Train - Loss: 0.3395, Acc: 0.8913 | Val Acc: 0.4000
+2025-10-20 02:30:41,134 | INFO | [location_43] Epoch 3/5 | Train - Loss: 0.2081, Acc: 0.9322 | Val Acc: 0.3754

@@ -1,0 +1,50 @@
+2025-10-20 01:52:37,346 | INFO | Initialized experiment directories for TerraIncognita
+2025-10-20 01:52:37,346 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\logs
+2025-10-20 01:52:37,346 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\checkpoints
+2025-10-20 01:52:37,346 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\plots
+2025-10-20 01:52:40,243 | INFO | === LODO: Leaving out domain 'location_38' ===
+2025-10-20 01:53:43,809 | INFO | [location_38] Epoch 1/5 | Train - Loss: 1.2365, Cls: 1.2288, GRQO: 0.0077, Acc: 0.5573 | Val - Loss: 2.7832, Cls: 2.7822, GRQO: 0.0009, Acc: 0.1718
+2025-10-20 01:53:43,864 | INFO | [location_38] New best val acc: 0.1718
+2025-10-20 01:54:44,626 | INFO | [location_38] Epoch 2/5 | Train - Loss: 0.6363, Cls: 0.6333, GRQO: 0.0030, Acc: 0.7836 | Val - Loss: 3.1757, Cls: 3.1750, GRQO: 0.0007, Acc: 0.1909
+2025-10-20 01:54:44,674 | INFO | [location_38] New best val acc: 0.1909
+2025-10-20 01:55:45,007 | INFO | [location_38] Epoch 3/5 | Train - Loss: 0.3802, Cls: 0.3777, GRQO: 0.0025, Acc: 0.8756 | Val - Loss: 3.7000, Cls: 3.6995, GRQO: 0.0005, Acc: 0.2108
+2025-10-20 01:55:45,050 | INFO | [location_38] New best val acc: 0.2108
+2025-10-20 01:56:44,789 | INFO | [location_38] Epoch 4/5 | Train - Loss: 0.2461, Cls: 0.2439, GRQO: 0.0022, Acc: 0.9204 | Val - Loss: 4.2404, Cls: 4.2400, GRQO: 0.0004, Acc: 0.1928
+2025-10-20 01:57:45,830 | INFO | [location_38] Epoch 5/5 | Train - Loss: 0.1881, Cls: 0.1863, GRQO: 0.0019, Acc: 0.9382 | Val - Loss: 3.9361, Cls: 3.9358, GRQO: 0.0003, Acc: 0.2164
+2025-10-20 01:57:45,874 | INFO | [location_38] New best val acc: 0.2164
+2025-10-20 01:57:45,874 | INFO | [location_38] Best Acc: 0.2164
+2025-10-20 01:57:45,874 | INFO | ------------------------------------------------------------
+2025-10-20 01:57:46,624 | INFO | === LODO: Leaving out domain 'location_43' ===
+2025-10-20 01:58:53,374 | INFO | [location_43] Epoch 1/5 | Train - Loss: 1.0651, Cls: 1.0590, GRQO: 0.0061, Acc: 0.6378 | Val - Loss: 1.9662, Cls: 1.9650, GRQO: 0.0012, Acc: 0.3405
+2025-10-20 01:58:53,407 | INFO | [location_43] New best val acc: 0.3405
+2025-10-20 02:00:00,865 | INFO | [location_43] Epoch 2/5 | Train - Loss: 0.5587, Cls: 0.5559, GRQO: 0.0028, Acc: 0.8199 | Val - Loss: 1.9983, Cls: 1.9974, GRQO: 0.0009, Acc: 0.3405
+2025-10-20 02:01:26,556 | INFO | [location_43] Epoch 3/5 | Train - Loss: 0.3404, Cls: 0.3381, GRQO: 0.0022, Acc: 0.8944 | Val - Loss: 2.6407, Cls: 2.6400, GRQO: 0.0007, Acc: 0.3336
+2025-10-20 02:02:32,590 | INFO | [location_43] Epoch 4/5 | Train - Loss: 0.2227, Cls: 0.2208, GRQO: 0.0018, Acc: 0.9284 | Val - Loss: 2.2591, Cls: 2.2585, GRQO: 0.0006, Acc: 0.3983
+2025-10-20 02:02:32,642 | INFO | [location_43] New best val acc: 0.3983
+2025-10-20 02:03:39,173 | INFO | [location_43] Epoch 5/5 | Train - Loss: 0.1685, Cls: 0.1670, GRQO: 0.0015, Acc: 0.9467 | Val - Loss: 2.8915, Cls: 2.8911, GRQO: 0.0003, Acc: 0.3463
+2025-10-20 02:03:39,173 | INFO | [location_43] Best Acc: 0.3983
+2025-10-20 02:03:39,173 | INFO | ------------------------------------------------------------
+2025-10-20 02:03:40,076 | INFO | === LODO: Leaving out domain 'location_46' ===
+2025-10-20 02:04:44,891 | INFO | [location_46] Epoch 1/5 | Train - Loss: 1.0506, Cls: 1.0442, GRQO: 0.0064, Acc: 0.6407 | Val - Loss: 2.1091, Cls: 2.1076, GRQO: 0.0014, Acc: 0.3056
+2025-10-20 02:04:44,954 | INFO | [location_46] New best val acc: 0.3056
+2025-10-20 02:05:50,051 | INFO | [location_46] Epoch 2/5 | Train - Loss: 0.5179, Cls: 0.5150, GRQO: 0.0029, Acc: 0.8304 | Val - Loss: 2.3919, Cls: 2.3909, GRQO: 0.0010, Acc: 0.3055
+2025-10-20 02:06:55,055 | INFO | [location_46] Epoch 3/5 | Train - Loss: 0.3076, Cls: 0.3052, GRQO: 0.0024, Acc: 0.9020 | Val - Loss: 2.7498, Cls: 2.7491, GRQO: 0.0006, Acc: 0.3236
+2025-10-20 02:06:55,107 | INFO | [location_46] New best val acc: 0.3236
+2025-10-20 02:07:59,773 | INFO | [location_46] Epoch 4/5 | Train - Loss: 0.2025, Cls: 0.2006, GRQO: 0.0019, Acc: 0.9357 | Val - Loss: 2.9450, Cls: 2.9444, GRQO: 0.0005, Acc: 0.3293
+2025-10-20 02:07:59,827 | INFO | [location_46] New best val acc: 0.3293
+2025-10-20 02:09:04,072 | INFO | [location_46] Epoch 5/5 | Train - Loss: 0.1528, Cls: 0.1511, GRQO: 0.0016, Acc: 0.9517 | Val - Loss: 3.0241, Cls: 3.0237, GRQO: 0.0004, Acc: 0.2978
+2025-10-20 02:09:04,072 | INFO | [location_46] Best Acc: 0.3293
+2025-10-20 02:09:04,072 | INFO | ------------------------------------------------------------
+2025-10-20 02:09:07,177 | INFO | === LODO: Leaving out domain 'location_100' ===
+2025-10-20 02:10:12,521 | INFO | [location_100] Epoch 1/5 | Train - Loss: 1.1953, Cls: 1.1889, GRQO: 0.0065, Acc: 0.5845 | Val - Loss: 1.6153, Cls: 1.6139, GRQO: 0.0014, Acc: 0.4833
+2025-10-20 02:10:12,559 | INFO | [location_100] New best val acc: 0.4833
+2025-10-20 02:11:19,271 | INFO | [location_100] Epoch 2/5 | Train - Loss: 0.6202, Cls: 0.6173, GRQO: 0.0029, Acc: 0.7969 | Val - Loss: 1.6625, Cls: 1.6616, GRQO: 0.0009, Acc: 0.5196
+2025-10-20 02:11:19,321 | INFO | [location_100] New best val acc: 0.5196
+2025-10-20 02:12:24,273 | INFO | [location_100] Epoch 3/5 | Train - Loss: 0.3660, Cls: 0.3637, GRQO: 0.0024, Acc: 0.8814 | Val - Loss: 1.9961, Cls: 1.9956, GRQO: 0.0006, Acc: 0.4118
+2025-10-20 02:13:30,259 | INFO | [location_100] Epoch 4/5 | Train - Loss: 0.2548, Cls: 0.2528, GRQO: 0.0019, Acc: 0.9173 | Val - Loss: 2.8425, Cls: 2.8421, GRQO: 0.0004, Acc: 0.3306
+2025-10-20 02:14:36,287 | INFO | [location_100] Epoch 5/5 | Train - Loss: 0.1768, Cls: 0.1752, GRQO: 0.0016, Acc: 0.9423 | Val - Loss: 2.5443, Cls: 2.5440, GRQO: 0.0003, Acc: 0.3907
+2025-10-20 02:14:36,287 | INFO | [location_100] Best Acc: 0.5196
+2025-10-20 02:14:36,287 | INFO | ------------------------------------------------------------
+2025-10-20 02:14:36,287 | INFO | LODO finished | Mean Acc: 0.3659 | Summary saved to c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\logs\lodo_summary_20251020_021436.json
+2025-10-20 02:14:36,322 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 02:14:37,153 | INFO | === Baseline LODO: Leaving out domain 'location_38' ===

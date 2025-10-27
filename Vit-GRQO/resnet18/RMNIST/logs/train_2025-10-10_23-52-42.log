@@ -1,0 +1,43 @@
+2025-10-10 23:52:42,401 | INFO | Initialized experiment directories for RMNIST
+2025-10-10 23:52:42,401 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\RMNIST\logs
+2025-10-10 23:52:42,401 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\RMNIST\checkpoints
+2025-10-10 23:52:42,401 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\RMNIST\plots
+2025-10-10 23:53:00,750 | INFO | Initializing ResNet baseline: resnet18
+2025-10-10 23:53:00,901 | INFO | === Baseline LODO: Leaving out domain '0' ===
+2025-10-10 23:57:23,704 | INFO | [0] Epoch 1/5 | Train - Loss: 0.0425, Acc: 0.9875 | Val Acc: 0.9643
+2025-10-11 00:02:48,819 | INFO | [0] Epoch 2/5 | Train - Loss: 0.0153, Acc: 0.9953 | Val Acc: 0.9725
+2025-10-11 00:07:29,331 | INFO | [0] Epoch 3/5 | Train - Loss: 0.0107, Acc: 0.9966 | Val Acc: 0.9752
+2025-10-11 00:11:54,412 | INFO | [0] Epoch 4/5 | Train - Loss: 0.0081, Acc: 0.9974 | Val Acc: 0.9817
+2025-10-11 00:16:32,579 | INFO | [0] Epoch 5/5 | Train - Loss: 0.0059, Acc: 0.9981 | Val Acc: 0.9844
+2025-10-11 00:16:32,579 | INFO | [0] Best Val Acc: 0.9844
+2025-10-11 00:16:32,579 | INFO | ------------------------------------------------------------
+2025-10-11 00:16:32,579 | INFO | Initializing ResNet baseline: resnet18
+2025-10-11 00:16:32,662 | INFO | === Baseline LODO: Leaving out domain '15' ===
+2025-10-11 00:20:52,509 | INFO | [15] Epoch 1/5 | Train - Loss: 0.0424, Acc: 0.9878 | Val Acc: 0.9872
+2025-10-11 00:25:11,819 | INFO | [15] Epoch 2/5 | Train - Loss: 0.0160, Acc: 0.9950 | Val Acc: 0.9887
+2025-10-11 00:29:38,826 | INFO | [15] Epoch 3/5 | Train - Loss: 0.0114, Acc: 0.9963 | Val Acc: 0.9860
+2025-10-11 00:34:55,883 | INFO | [15] Epoch 4/5 | Train - Loss: 0.0085, Acc: 0.9973 | Val Acc: 0.9916
+2025-10-11 00:40:09,654 | INFO | [15] Epoch 5/5 | Train - Loss: 0.0068, Acc: 0.9978 | Val Acc: 0.9898
+2025-10-11 00:40:09,654 | INFO | [15] Best Val Acc: 0.9916
+2025-10-11 00:40:09,654 | INFO | ------------------------------------------------------------
+2025-10-11 00:40:09,654 | INFO | Initializing ResNet baseline: resnet18
+2025-10-11 00:40:09,741 | INFO | === Baseline LODO: Leaving out domain '30' ===
+2025-10-11 00:44:45,148 | INFO | [30] Epoch 1/5 | Train - Loss: 0.0424, Acc: 0.9879 | Val Acc: 0.9899
+2025-10-11 00:49:44,914 | INFO | [30] Epoch 2/5 | Train - Loss: 0.0161, Acc: 0.9950 | Val Acc: 0.9949
+2025-10-11 00:54:10,116 | INFO | [30] Epoch 3/5 | Train - Loss: 0.0111, Acc: 0.9965 | Val Acc: 0.9839
+2025-10-11 00:58:29,179 | INFO | [30] Epoch 4/5 | Train - Loss: 0.0086, Acc: 0.9972 | Val Acc: 0.9938
+2025-10-11 01:02:46,761 | INFO | [30] Epoch 5/5 | Train - Loss: 0.0064, Acc: 0.9979 | Val Acc: 0.9924
+2025-10-11 01:02:46,761 | INFO | [30] Best Val Acc: 0.9949
+2025-10-11 01:02:46,762 | INFO | ------------------------------------------------------------
+2025-10-11 01:02:46,762 | INFO | Initializing ResNet baseline: resnet18
+2025-10-11 01:02:46,836 | INFO | === Baseline LODO: Leaving out domain '45' ===
+2025-10-11 01:07:17,696 | INFO | [45] Epoch 1/5 | Train - Loss: 0.0431, Acc: 0.9876 | Val Acc: 0.9893
+2025-10-11 01:11:44,928 | INFO | [45] Epoch 2/5 | Train - Loss: 0.0160, Acc: 0.9950 | Val Acc: 0.9924
+2025-10-11 01:16:12,054 | INFO | [45] Epoch 3/5 | Train - Loss: 0.0113, Acc: 0.9963 | Val Acc: 0.9941
+2025-10-11 01:20:37,208 | INFO | [45] Epoch 4/5 | Train - Loss: 0.0082, Acc: 0.9973 | Val Acc: 0.9902
+2025-10-11 01:25:20,723 | INFO | [45] Epoch 5/5 | Train - Loss: 0.0064, Acc: 0.9979 | Val Acc: 0.9951
+2025-10-11 01:25:20,723 | INFO | [45] Best Val Acc: 0.9951
+2025-10-11 01:25:20,723 | INFO | ------------------------------------------------------------
+2025-10-11 01:25:20,723 | INFO | Initializing ResNet baseline: resnet18
+2025-10-11 01:25:20,823 | INFO | === Baseline LODO: Leaving out domain '60' ===
+2025-10-11 01:29:47,470 | INFO | [60] Epoch 1/5 | Train - Loss: 0.0434, Acc: 0.9874 | Val Acc: 0.9910

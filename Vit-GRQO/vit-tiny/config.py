@@ -4,7 +4,7 @@ CFG = {
     "system": {
         "device": torch.device("cuda" if torch.cuda.is_available() else "cpu"),
         "seed": 42,
-        "num_workers": 2,
+        "num_workers": 0,
         "log_dir": "./logs",
         "ckpt_dir": "./checkpoints",
         "save_freq": 1,       # Save every N epochs
@@ -65,6 +65,11 @@ CFG = {
             "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\CMNIST",
             "domains": ["red", "green", "blue"],  
             "num_classes": 10,  
+        },
+        "TerraIncognita": {
+            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\terraincog\terra_incognita",
+            "domains": ["location_38", "location_43", "location_46", "location_100"],
+            "num_classes": 10,
         },
     },
 

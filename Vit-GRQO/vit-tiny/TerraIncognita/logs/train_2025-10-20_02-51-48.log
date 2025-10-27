@@ -1,0 +1,41 @@
+2025-10-20 02:51:48,763 | INFO | Initialized experiment directories for TerraIncognita
+2025-10-20 02:51:48,763 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\logs
+2025-10-20 02:51:48,763 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\checkpoints
+2025-10-20 02:51:48,763 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-tiny\TerraIncognita\plots
+2025-10-20 02:51:48,949 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 02:51:49,798 | INFO | === Baseline LODO: Leaving out domain 'location_38' ===
+2025-10-20 02:55:55,973 | INFO | [location_38] Epoch 1/5 | Train - Loss: 1.0244, Acc: 0.6299 | Val Acc: 0.1098
+2025-10-20 03:02:17,261 | INFO | [location_38] Epoch 2/5 | Train - Loss: 0.4608, Acc: 0.8395 | Val Acc: 0.2883
+2025-10-20 03:06:57,263 | INFO | [location_38] Epoch 3/5 | Train - Loss: 0.2649, Acc: 0.9098 | Val Acc: 0.1878
+2025-10-20 03:11:52,163 | INFO | [location_38] Epoch 4/5 | Train - Loss: 0.1847, Acc: 0.9366 | Val Acc: 0.2721
+2025-10-20 03:14:28,215 | INFO | [location_38] Epoch 5/5 | Train - Loss: 0.1355, Acc: 0.9530 | Val Acc: 0.1488
+2025-10-20 03:14:28,215 | INFO | [location_38] Best Val Acc: 0.2883
+2025-10-20 03:14:28,216 | INFO | ------------------------------------------------------------
+2025-10-20 03:14:28,216 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 03:14:29,596 | INFO | === Baseline LODO: Leaving out domain 'location_43' ===
+2025-10-20 03:17:00,708 | INFO | [location_43] Epoch 1/5 | Train - Loss: 0.7596, Acc: 0.7422 | Val Acc: 0.3692
+2025-10-20 03:19:53,228 | INFO | [location_43] Epoch 2/5 | Train - Loss: 0.3393, Acc: 0.8892 | Val Acc: 0.3861
+2025-10-20 03:22:43,910 | INFO | [location_43] Epoch 3/5 | Train - Loss: 0.1998, Acc: 0.9367 | Val Acc: 0.3848
+2025-10-20 03:27:42,722 | INFO | [location_43] Epoch 4/5 | Train - Loss: 0.1386, Acc: 0.9548 | Val Acc: 0.4080
+2025-10-20 03:31:23,737 | INFO | [location_43] Epoch 5/5 | Train - Loss: 0.1129, Acc: 0.9629 | Val Acc: 0.3933
+2025-10-20 03:31:23,737 | INFO | [location_43] Best Val Acc: 0.4080
+2025-10-20 03:31:23,738 | INFO | ------------------------------------------------------------
+2025-10-20 03:31:23,738 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 03:31:25,573 | INFO | === Baseline LODO: Leaving out domain 'location_46' ===
+2025-10-20 03:36:25,053 | INFO | [location_46] Epoch 1/5 | Train - Loss: 0.7474, Acc: 0.7517 | Val Acc: 0.3122
+2025-10-20 03:39:09,686 | INFO | [location_46] Epoch 2/5 | Train - Loss: 0.3136, Acc: 0.8980 | Val Acc: 0.3058
+2025-10-20 03:42:20,812 | INFO | [location_46] Epoch 3/5 | Train - Loss: 0.1812, Acc: 0.9404 | Val Acc: 0.3502
+2025-10-20 03:45:35,362 | INFO | [location_46] Epoch 4/5 | Train - Loss: 0.1304, Acc: 0.9562 | Val Acc: 0.3399
+2025-10-20 03:48:28,903 | INFO | [location_46] Epoch 5/5 | Train - Loss: 0.1033, Acc: 0.9652 | Val Acc: 0.3386
+2025-10-20 03:48:28,903 | INFO | [location_46] Best Val Acc: 0.3502
+2025-10-20 03:48:28,903 | INFO | ------------------------------------------------------------
+2025-10-20 03:48:28,903 | INFO | Initializing ViT baseline: WinKawaks/vit-tiny-patch16-224
+2025-10-20 03:48:30,627 | INFO | === Baseline LODO: Leaving out domain 'location_100' ===
+2025-10-20 03:51:04,782 | INFO | [location_100] Epoch 1/5 | Train - Loss: 0.8952, Acc: 0.6914 | Val Acc: 0.2228
+2025-10-20 03:53:52,315 | INFO | [location_100] Epoch 2/5 | Train - Loss: 0.3954, Acc: 0.8713 | Val Acc: 0.3255
+2025-10-20 03:56:23,083 | INFO | [location_100] Epoch 3/5 | Train - Loss: 0.2318, Acc: 0.9234 | Val Acc: 0.4155
+2025-10-20 03:58:50,571 | INFO | [location_100] Epoch 4/5 | Train - Loss: 0.1650, Acc: 0.9455 | Val Acc: 0.4284
+2025-10-20 04:04:26,431 | INFO | [location_100] Epoch 5/5 | Train - Loss: 0.1239, Acc: 0.9596 | Val Acc: 0.3986
+2025-10-20 04:04:26,431 | INFO | [location_100] Best Val Acc: 0.4284
+2025-10-20 04:04:26,431 | INFO | ------------------------------------------------------------
+2025-10-20 04:04:26,431 | INFO | Baseline LODO (WinKawaks/vit-tiny-patch16-224) finished | Mean Acc: 0.3687

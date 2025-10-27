@@ -1,0 +1,8 @@
+2025-10-21 06:16:24,523 | INFO | Initialized experiment directories for CMNIST
+2025-10-21 06:16:24,523 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\logs
+2025-10-21 06:16:24,523 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\checkpoints
+2025-10-21 06:16:24,523 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\CMNIST\plots
+2025-10-21 06:16:26,572 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-21 06:16:27,972 | INFO | === Baseline LODO: Leaving out domain 'red' ===
+2025-10-21 06:17:07,339 | INFO | [red] Epoch 1/5 | Train - Loss: 0.3018, Acc: 0.9065 | Val Acc: 0.9687
+2025-10-21 06:17:46,539 | INFO | [red] Epoch 2/5 | Train - Loss: 0.0394, Acc: 0.9880 | Val Acc: 0.9828

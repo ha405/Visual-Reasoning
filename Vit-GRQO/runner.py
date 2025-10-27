@@ -95,9 +95,14 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
         elif "resnet" in model_name.lower():
             print(f"Initializing ResNet baseline: {model_name}")
             logger.info(f"Initializing ResNet baseline: {model_name}")
-            backbone = getattr(models, model_name)(
-                weights=models.ResNet18_Weights.IMAGENET1K_V1 if "18" in model_name else None
-            )
+            if "resnet18" in model_name.lower():
+                backbone = getattr(models, model_name)(
+                    weights=models.ResNet18_Weights.IMAGENET1K_V1 if "18" in model_name else None
+                )
+            elif "resnet34" in model_name.lower():
+                backbone = getattr(models, model_name)(
+                    weights=models.ResNet34_Weights.IMAGENET1K_V1 if "34" in model_name else None
+                )
             num_features = backbone.fc.in_features
             backbone.fc = nn.Linear(num_features, CFG["datasets"][dataset_key]["num_classes"])
             model = backbone.to(device)

@@ -1,7 +1,0 @@
-2025-10-10 17:36:41,821 | INFO | Initialized experiment directories for OfficeHome
-2025-10-10 17:36:41,821 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\OfficeHome\logs
-2025-10-10 17:36:41,822 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\OfficeHome\checkpoints
-2025-10-10 17:36:41,822 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\OfficeHome\plots
-2025-10-10 17:36:42,472 | INFO | === LODO: Leaving out domain 'Art' ===
-2025-10-10 17:41:17,938 | INFO | [Art] Epoch 1/5 | Train - Loss: 2.4436, Cls: 2.4351, GRQO: 0.0085, Acc: 0.4687 | Val - Loss: 1.9660, Cls: 1.9636, GRQO: 0.0024, Acc: 0.5200
-2025-10-10 17:41:18,005 | INFO | [Art] New best val acc: 0.5200

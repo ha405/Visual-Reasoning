@@ -1,0 +1,80 @@
+2025-10-20 08:51:21,816 | INFO | Initialized experiment directories for VLCS
+2025-10-20 08:51:21,816 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\VLCS\logs
+2025-10-20 08:51:21,820 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\VLCS\checkpoints
+2025-10-20 08:51:21,820 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\VLCS\plots
+2025-10-20 08:51:23,347 | INFO | === LODO: Leaving out domain 'VOC2007' ===
+2025-10-20 08:53:27,053 | INFO | [VOC2007] Epoch 1/5 | Train - Loss: 0.5643, Cls: 0.5552, GRQO: 0.0091, Acc: 0.7832 | Val - Loss: 0.4767, Cls: 0.4748, GRQO: 0.0019, Acc: 0.8294
+2025-10-20 08:53:27,156 | INFO | [VOC2007] New best val acc: 0.8294
+2025-10-20 08:55:09,286 | INFO | [VOC2007] Epoch 2/5 | Train - Loss: 0.3343, Cls: 0.3317, GRQO: 0.0026, Acc: 0.8780 | Val - Loss: 0.5077, Cls: 0.5065, GRQO: 0.0012, Acc: 0.8095
+2025-10-20 08:57:13,634 | INFO | [VOC2007] Epoch 3/5 | Train - Loss: 0.2148, Cls: 0.2126, GRQO: 0.0022, Acc: 0.9309 | Val - Loss: 0.5540, Cls: 0.5532, GRQO: 0.0007, Acc: 0.8027
+2025-10-20 08:59:56,166 | INFO | [VOC2007] Epoch 4/5 | Train - Loss: 0.1317, Cls: 0.1298, GRQO: 0.0020, Acc: 0.9604 | Val - Loss: 0.6793, Cls: 0.6788, GRQO: 0.0006, Acc: 0.7924
+2025-10-20 09:03:08,180 | INFO | [VOC2007] Epoch 5/5 | Train - Loss: 0.0991, Cls: 0.0973, GRQO: 0.0018, Acc: 0.9697 | Val - Loss: 0.7926, Cls: 0.7922, GRQO: 0.0004, Acc: 0.7728
+2025-10-20 09:03:08,181 | INFO | [VOC2007] Best Acc: 0.8294
+2025-10-20 09:03:08,182 | INFO | ------------------------------------------------------------
+2025-10-20 09:03:09,722 | INFO | === LODO: Leaving out domain 'LabelMe' ===
+2025-10-20 09:05:59,176 | INFO | [LabelMe] Epoch 1/5 | Train - Loss: 0.4545, Cls: 0.4481, GRQO: 0.0064, Acc: 0.8364 | Val - Loss: 1.5173, Cls: 1.5164, GRQO: 0.0009, Acc: 0.6453
+2025-10-20 09:05:59,376 | INFO | [LabelMe] New best val acc: 0.6453
+2025-10-20 09:09:28,897 | INFO | [LabelMe] Epoch 2/5 | Train - Loss: 0.2013, Cls: 0.1989, GRQO: 0.0024, Acc: 0.9296 | Val - Loss: 1.4990, Cls: 1.4985, GRQO: 0.0005, Acc: 0.6777
+2025-10-20 09:09:29,134 | INFO | [LabelMe] New best val acc: 0.6777
+2025-10-20 09:13:05,052 | INFO | [LabelMe] Epoch 3/5 | Train - Loss: 0.1236, Cls: 0.1217, GRQO: 0.0020, Acc: 0.9599 | Val - Loss: 1.8640, Cls: 1.8636, GRQO: 0.0004, Acc: 0.6849
+2025-10-20 09:13:05,242 | INFO | [LabelMe] New best val acc: 0.6849
+2025-10-20 09:16:42,976 | INFO | [LabelMe] Epoch 4/5 | Train - Loss: 0.0486, Cls: 0.0468, GRQO: 0.0018, Acc: 0.9859 | Val - Loss: 2.2091, Cls: 2.2088, GRQO: 0.0003, Acc: 0.6770
+2025-10-20 09:20:20,709 | INFO | [LabelMe] Epoch 5/5 | Train - Loss: 0.0513, Cls: 0.0497, GRQO: 0.0016, Acc: 0.9835 | Val - Loss: 2.6209, Cls: 2.6207, GRQO: 0.0003, Acc: 0.6544
+2025-10-20 09:20:20,710 | INFO | [LabelMe] Best Acc: 0.6849
+2025-10-20 09:20:20,711 | INFO | ------------------------------------------------------------
+2025-10-20 09:20:21,767 | INFO | === LODO: Leaving out domain 'Caltech101' ===
+2025-10-20 09:22:47,601 | INFO | [Caltech101] Epoch 1/5 | Train - Loss: 0.5780, Cls: 0.5712, GRQO: 0.0068, Acc: 0.7848 | Val - Loss: 0.0784, Cls: 0.0771, GRQO: 0.0013, Acc: 0.9887
+2025-10-20 09:22:47,710 | INFO | [Caltech101] New best val acc: 0.9887
+2025-10-20 09:26:41,394 | INFO | [Caltech101] Epoch 2/5 | Train - Loss: 0.3355, Cls: 0.3330, GRQO: 0.0024, Acc: 0.8808 | Val - Loss: 0.0448, Cls: 0.0441, GRQO: 0.0007, Acc: 0.9880
+2025-10-20 09:30:19,717 | INFO | [Caltech101] Epoch 3/5 | Train - Loss: 0.2299, Cls: 0.2279, GRQO: 0.0020, Acc: 0.9216 | Val - Loss: 0.0488, Cls: 0.0483, GRQO: 0.0006, Acc: 0.9802
+2025-10-20 09:34:14,167 | INFO | [Caltech101] Epoch 4/5 | Train - Loss: 0.1352, Cls: 0.1335, GRQO: 0.0017, Acc: 0.9577 | Val - Loss: 0.0436, Cls: 0.0433, GRQO: 0.0003, Acc: 0.9795
+2025-10-20 09:38:01,124 | INFO | [Caltech101] Epoch 5/5 | Train - Loss: 0.0793, Cls: 0.0777, GRQO: 0.0016, Acc: 0.9748 | Val - Loss: 0.0753, Cls: 0.0750, GRQO: 0.0002, Acc: 0.9731
+2025-10-20 09:38:01,124 | INFO | [Caltech101] Best Acc: 0.9887
+2025-10-20 09:38:01,124 | INFO | ------------------------------------------------------------
+2025-10-20 09:38:02,537 | INFO | === LODO: Leaving out domain 'SUN09' ===
+2025-10-20 09:41:50,564 | INFO | [SUN09] Epoch 1/5 | Train - Loss: 0.5140, Cls: 0.5073, GRQO: 0.0067, Acc: 0.8080 | Val - Loss: 0.5040, Cls: 0.5027, GRQO: 0.0012, Acc: 0.8087
+2025-10-20 09:41:50,803 | INFO | [SUN09] New best val acc: 0.8087
+2025-10-20 09:45:36,686 | INFO | [SUN09] Epoch 2/5 | Train - Loss: 0.2691, Cls: 0.2669, GRQO: 0.0022, Acc: 0.9037 | Val - Loss: 0.5682, Cls: 0.5675, GRQO: 0.0008, Acc: 0.8020
+2025-10-20 09:47:58,746 | INFO | [SUN09] Epoch 3/5 | Train - Loss: 0.1692, Cls: 0.1673, GRQO: 0.0019, Acc: 0.9431 | Val - Loss: 0.7304, Cls: 0.7298, GRQO: 0.0006, Acc: 0.7575
+2025-10-20 09:49:42,659 | INFO | [SUN09] Epoch 4/5 | Train - Loss: 0.1162, Cls: 0.1145, GRQO: 0.0017, Acc: 0.9607 | Val - Loss: 0.9750, Cls: 0.9745, GRQO: 0.0005, Acc: 0.7264
+2025-10-20 09:51:26,262 | INFO | [SUN09] Epoch 5/5 | Train - Loss: 0.0785, Cls: 0.0769, GRQO: 0.0016, Acc: 0.9762 | Val - Loss: 0.9503, Cls: 0.9499, GRQO: 0.0004, Acc: 0.7745
+2025-10-20 09:51:26,262 | INFO | [SUN09] Best Acc: 0.8087
+2025-10-20 09:51:26,262 | INFO | ------------------------------------------------------------
+2025-10-20 09:51:26,262 | INFO | LODO finished | Mean Acc: 0.8279 | Summary saved to c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\VLCS\logs\lodo_summary_20251020_095126.json
+2025-10-20 09:51:26,282 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 09:51:27,381 | INFO | === Baseline LODO: Leaving out domain 'VOC2007' ===
+2025-10-20 09:53:53,803 | INFO | [VOC2007] Epoch 1/5 | Train - Loss: 0.5182, Acc: 0.8031 | Val Acc: 0.7879
+2025-10-20 09:56:33,478 | INFO | [VOC2007] Epoch 2/5 | Train - Loss: 0.2185, Acc: 0.9267 | Val Acc: 0.8004
+2025-10-20 09:58:15,623 | INFO | [VOC2007] Epoch 3/5 | Train - Loss: 0.0871, Acc: 0.9738 | Val Acc: 0.8282
+2025-10-20 09:59:58,042 | INFO | [VOC2007] Epoch 4/5 | Train - Loss: 0.0367, Acc: 0.9899 | Val Acc: 0.8178
+2025-10-20 10:01:41,762 | INFO | [VOC2007] Epoch 5/5 | Train - Loss: 0.0246, Acc: 0.9929 | Val Acc: 0.8238
+2025-10-20 10:01:41,762 | INFO | [VOC2007] Best Val Acc: 0.8282
+2025-10-20 10:01:41,762 | INFO | ------------------------------------------------------------
+2025-10-20 10:01:41,762 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 10:01:44,449 | INFO | === Baseline LODO: Leaving out domain 'LabelMe' ===
+2025-10-20 10:03:29,374 | INFO | [LabelMe] Epoch 1/5 | Train - Loss: 0.4073, Acc: 0.8522 | Val Acc: 0.6706
+2025-10-20 10:05:14,159 | INFO | [LabelMe] Epoch 2/5 | Train - Loss: 0.1399, Acc: 0.9527 | Val Acc: 0.6517
+2025-10-20 10:07:01,461 | INFO | [LabelMe] Epoch 3/5 | Train - Loss: 0.0552, Acc: 0.9833 | Val Acc: 0.6875
+2025-10-20 10:09:07,982 | INFO | [LabelMe] Epoch 4/5 | Train - Loss: 0.0131, Acc: 0.9973 | Val Acc: 0.6645
+2025-10-20 10:10:52,241 | INFO | [LabelMe] Epoch 5/5 | Train - Loss: 0.0054, Acc: 0.9991 | Val Acc: 0.6721
+2025-10-20 10:10:52,241 | INFO | [LabelMe] Best Val Acc: 0.6875
+2025-10-20 10:10:52,241 | INFO | ------------------------------------------------------------
+2025-10-20 10:10:52,241 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 10:10:53,261 | INFO | === Baseline LODO: Leaving out domain 'Caltech101' ===
+2025-10-20 10:12:36,925 | INFO | [Caltech101] Epoch 1/5 | Train - Loss: 0.5682, Acc: 0.7913 | Val Acc: 0.9823
+2025-10-20 10:14:19,849 | INFO | [Caltech101] Epoch 2/5 | Train - Loss: 0.2409, Acc: 0.9185 | Val Acc: 0.9830
+2025-10-20 10:16:03,225 | INFO | [Caltech101] Epoch 3/5 | Train - Loss: 0.0840, Acc: 0.9751 | Val Acc: 0.9739
+2025-10-20 10:17:48,410 | INFO | [Caltech101] Epoch 4/5 | Train - Loss: 0.0357, Acc: 0.9903 | Val Acc: 0.9788
+2025-10-20 10:19:33,490 | INFO | [Caltech101] Epoch 5/5 | Train - Loss: 0.0102, Acc: 0.9972 | Val Acc: 0.9852
+2025-10-20 10:19:33,490 | INFO | [Caltech101] Best Val Acc: 0.9852
+2025-10-20 10:19:33,490 | INFO | ------------------------------------------------------------
+2025-10-20 10:19:33,490 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 10:19:37,193 | INFO | === Baseline LODO: Leaving out domain 'SUN09' ===
+2025-10-20 10:21:20,207 | INFO | [SUN09] Epoch 1/5 | Train - Loss: 0.4877, Acc: 0.8201 | Val Acc: 0.7937
+2025-10-20 10:23:03,589 | INFO | [SUN09] Epoch 2/5 | Train - Loss: 0.2105, Acc: 0.9240 | Val Acc: 0.7279
+2025-10-20 10:24:47,607 | INFO | [SUN09] Epoch 3/5 | Train - Loss: 0.0929, Acc: 0.9691 | Val Acc: 0.7508
+2025-10-20 10:26:31,706 | INFO | [SUN09] Epoch 4/5 | Train - Loss: 0.0345, Acc: 0.9905 | Val Acc: 0.7782
+2025-10-20 10:28:15,553 | INFO | [SUN09] Epoch 5/5 | Train - Loss: 0.0325, Acc: 0.9899 | Val Acc: 0.7791
+2025-10-20 10:28:15,553 | INFO | [SUN09] Best Val Acc: 0.7937
+2025-10-20 10:28:15,553 | INFO | ------------------------------------------------------------
+2025-10-20 10:28:15,553 | INFO | Baseline LODO (WinKawaks/vit-small-patch16-224) finished | Mean Acc: 0.8236

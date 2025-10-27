@@ -1,0 +1,4 @@
+2025-10-10 04:02:53,676 | INFO | Initialized experiment directories for VLCS
+2025-10-10 04:02:53,677 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\VLCS\logs
+2025-10-10 04:02:53,677 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\VLCS\checkpoints
+2025-10-10 04:02:53,677 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet\VLCS\plots

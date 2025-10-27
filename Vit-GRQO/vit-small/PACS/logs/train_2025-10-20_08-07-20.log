@@ -1,0 +1,87 @@
+2025-10-20 08:07:20,231 | INFO | Initialized experiment directories for PACS
+2025-10-20 08:07:20,232 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\PACS\logs
+2025-10-20 08:07:20,232 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\PACS\checkpoints
+2025-10-20 08:07:20,232 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\PACS\plots
+2025-10-20 08:07:27,336 | WARNING | Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+2025-10-20 08:07:31,693 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-10-20 08:08:05,429 | INFO | [art_painting] Epoch 1/5 | Train - Loss: 0.5071, Cls: 0.4990, GRQO: 0.0081, Acc: 0.8317 | Val - Loss: 0.3084, Cls: 0.3071, GRQO: 0.0013, Acc: 0.9009
+2025-10-20 08:08:05,530 | INFO | [art_painting] New best val acc: 0.9009
+2025-10-20 08:08:31,633 | INFO | [art_painting] Epoch 2/5 | Train - Loss: 0.0866, Cls: 0.0840, GRQO: 0.0026, Acc: 0.9723 | Val - Loss: 0.2972, Cls: 0.2964, GRQO: 0.0008, Acc: 0.9117
+2025-10-20 08:08:31,732 | INFO | [art_painting] New best val acc: 0.9117
+2025-10-20 08:08:57,998 | INFO | [art_painting] Epoch 3/5 | Train - Loss: 0.0232, Cls: 0.0210, GRQO: 0.0022, Acc: 0.9929 | Val - Loss: 0.2749, Cls: 0.2743, GRQO: 0.0006, Acc: 0.9215
+2025-10-20 08:08:58,102 | INFO | [art_painting] New best val acc: 0.9215
+2025-10-20 08:09:24,340 | INFO | [art_painting] Epoch 4/5 | Train - Loss: 0.0916, Cls: 0.0896, GRQO: 0.0020, Acc: 0.9722 | Val - Loss: 0.2947, Cls: 0.2943, GRQO: 0.0005, Acc: 0.9136
+2025-10-20 08:09:50,611 | INFO | [art_painting] Epoch 5/5 | Train - Loss: 0.0156, Cls: 0.0139, GRQO: 0.0017, Acc: 0.9955 | Val - Loss: 0.3389, Cls: 0.3385, GRQO: 0.0004, Acc: 0.9073
+2025-10-20 08:09:50,611 | INFO | [art_painting] Best Acc: 0.9215
+2025-10-20 08:09:50,611 | INFO | ------------------------------------------------------------
+2025-10-20 08:09:51,396 | INFO | === LODO: Leaving out domain 'cartoon' ===
+2025-10-20 08:10:17,585 | INFO | [cartoon] Epoch 1/5 | Train - Loss: 0.4832, Cls: 0.4766, GRQO: 0.0066, Acc: 0.8440 | Val - Loss: 0.5683, Cls: 0.5669, GRQO: 0.0014, Acc: 0.7935
+2025-10-20 08:10:17,663 | INFO | [cartoon] New best val acc: 0.7935
+2025-10-20 08:10:43,797 | INFO | [cartoon] Epoch 2/5 | Train - Loss: 0.0774, Cls: 0.0748, GRQO: 0.0026, Acc: 0.9768 | Val - Loss: 0.5402, Cls: 0.5391, GRQO: 0.0012, Acc: 0.8161
+2025-10-20 08:10:43,894 | INFO | [cartoon] New best val acc: 0.8161
+2025-10-20 08:11:09,956 | INFO | [cartoon] Epoch 3/5 | Train - Loss: 0.0289, Cls: 0.0267, GRQO: 0.0022, Acc: 0.9919 | Val - Loss: 0.5989, Cls: 0.5981, GRQO: 0.0008, Acc: 0.8225
+2025-10-20 08:11:10,048 | INFO | [cartoon] New best val acc: 0.8225
+2025-10-20 08:11:36,030 | INFO | [cartoon] Epoch 4/5 | Train - Loss: 0.0118, Cls: 0.0099, GRQO: 0.0019, Acc: 0.9963 | Val - Loss: 0.6954, Cls: 0.6948, GRQO: 0.0006, Acc: 0.8217
+2025-10-20 08:12:04,583 | INFO | [cartoon] Epoch 5/5 | Train - Loss: 0.0209, Cls: 0.0192, GRQO: 0.0017, Acc: 0.9952 | Val - Loss: 0.5910, Cls: 0.5904, GRQO: 0.0005, Acc: 0.8379
+2025-10-20 08:12:04,693 | INFO | [cartoon] New best val acc: 0.8379
+2025-10-20 08:12:04,693 | INFO | [cartoon] Best Acc: 0.8379
+2025-10-20 08:12:04,693 | INFO | ------------------------------------------------------------
+2025-10-20 08:12:05,487 | INFO | === LODO: Leaving out domain 'photo' ===
+2025-10-20 08:12:33,295 | INFO | [photo] Epoch 1/5 | Train - Loss: 0.4816, Cls: 0.4735, GRQO: 0.0081, Acc: 0.8468 | Val - Loss: 0.0357, Cls: 0.0345, GRQO: 0.0012, Acc: 0.9952
+2025-10-20 08:12:33,395 | INFO | [photo] New best val acc: 0.9952
+2025-10-20 08:13:01,364 | INFO | [photo] Epoch 2/5 | Train - Loss: 0.0654, Cls: 0.0630, GRQO: 0.0024, Acc: 0.9800 | Val - Loss: 0.0275, Cls: 0.0268, GRQO: 0.0008, Acc: 0.9946
+2025-10-20 08:13:28,748 | INFO | [photo] Epoch 3/5 | Train - Loss: 0.0369, Cls: 0.0349, GRQO: 0.0020, Acc: 0.9888 | Val - Loss: 0.0292, Cls: 0.0287, GRQO: 0.0005, Acc: 0.9916
+2025-10-20 08:13:56,348 | INFO | [photo] Epoch 4/5 | Train - Loss: 0.0201, Cls: 0.0184, GRQO: 0.0018, Acc: 0.9931 | Val - Loss: 0.0287, Cls: 0.0284, GRQO: 0.0003, Acc: 0.9916
+2025-10-20 08:14:23,898 | INFO | [photo] Epoch 5/5 | Train - Loss: 0.0181, Cls: 0.0165, GRQO: 0.0016, Acc: 0.9948 | Val - Loss: 0.0309, Cls: 0.0306, GRQO: 0.0003, Acc: 0.9928
+2025-10-20 08:14:23,898 | INFO | [photo] Best Acc: 0.9952
+2025-10-20 08:14:23,898 | INFO | ------------------------------------------------------------
+2025-10-20 08:14:24,756 | INFO | === LODO: Leaving out domain 'sketch' ===
+2025-10-20 08:15:05,195 | INFO | [sketch] Epoch 1/5 | Train - Loss: 0.4584, Cls: 0.4494, GRQO: 0.0090, Acc: 0.8736 | Val - Loss: 1.0944, Cls: 1.0932, GRQO: 0.0012, Acc: 0.6745
+2025-10-20 08:15:05,310 | INFO | [sketch] New best val acc: 0.6745
+2025-10-20 08:16:09,411 | INFO | [sketch] Epoch 2/5 | Train - Loss: 0.0402, Cls: 0.0375, GRQO: 0.0027, Acc: 0.9894 | Val - Loss: 0.9952, Cls: 0.9943, GRQO: 0.0009, Acc: 0.6806
+2025-10-20 08:16:09,528 | INFO | [sketch] New best val acc: 0.6806
+2025-10-20 08:17:12,759 | INFO | [sketch] Epoch 3/5 | Train - Loss: 0.0129, Cls: 0.0106, GRQO: 0.0023, Acc: 0.9977 | Val - Loss: 1.0678, Cls: 1.0670, GRQO: 0.0007, Acc: 0.7116
+2025-10-20 08:17:12,876 | INFO | [sketch] New best val acc: 0.7116
+2025-10-20 08:18:16,690 | INFO | [sketch] Epoch 4/5 | Train - Loss: 0.0051, Cls: 0.0032, GRQO: 0.0020, Acc: 0.9993 | Val - Loss: 1.2284, Cls: 1.2278, GRQO: 0.0007, Acc: 0.7009
+2025-10-20 08:19:20,177 | INFO | [sketch] Epoch 5/5 | Train - Loss: 0.0034, Cls: 0.0016, GRQO: 0.0018, Acc: 0.9997 | Val - Loss: 0.8929, Cls: 0.8924, GRQO: 0.0005, Acc: 0.7679
+2025-10-20 08:19:20,294 | INFO | [sketch] New best val acc: 0.7679
+2025-10-20 08:19:20,294 | INFO | [sketch] Best Acc: 0.7679
+2025-10-20 08:19:20,294 | INFO | ------------------------------------------------------------
+2025-10-20 08:19:20,294 | INFO | LODO finished | Mean Acc: 0.8806 | Summary saved to c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\vit-small\PACS\logs\lodo_summary_20251020_081920.json
+2025-10-20 08:19:20,331 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 08:19:21,261 | INFO | === Baseline LODO: Leaving out domain 'art_painting' ===
+2025-10-20 08:20:24,516 | INFO | [art_painting] Epoch 1/5 | Train - Loss: 0.4255, Acc: 0.8448 | Val Acc: 0.8960
+2025-10-20 08:21:27,804 | INFO | [art_painting] Epoch 2/5 | Train - Loss: 0.0735, Acc: 0.9767 | Val Acc: 0.9068
+2025-10-20 08:22:30,887 | INFO | [art_painting] Epoch 3/5 | Train - Loss: 0.0134, Acc: 0.9972 | Val Acc: 0.9225
+2025-10-20 08:23:33,878 | INFO | [art_painting] Epoch 4/5 | Train - Loss: 0.0032, Acc: 0.9994 | Val Acc: 0.9230
+2025-10-20 08:24:37,143 | INFO | [art_painting] Epoch 5/5 | Train - Loss: 0.0010, Acc: 1.0000 | Val Acc: 0.9284
+2025-10-20 08:24:37,143 | INFO | [art_painting] Best Val Acc: 0.9284
+2025-10-20 08:24:37,143 | INFO | ------------------------------------------------------------
+2025-10-20 08:24:37,143 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 08:24:39,990 | INFO | === Baseline LODO: Leaving out domain 'cartoon' ===
+2025-10-20 08:25:43,327 | INFO | [cartoon] Epoch 1/5 | Train - Loss: 0.3065, Acc: 0.8952 | Val Acc: 0.8387
+2025-10-20 08:26:46,640 | INFO | [cartoon] Epoch 2/5 | Train - Loss: 0.0393, Acc: 0.9883 | Val Acc: 0.7880
+2025-10-20 08:27:50,265 | INFO | [cartoon] Epoch 3/5 | Train - Loss: 0.0094, Acc: 0.9979 | Val Acc: 0.8127
+2025-10-20 08:28:53,091 | INFO | [cartoon] Epoch 4/5 | Train - Loss: 0.0053, Acc: 0.9988 | Val Acc: 0.8148
+2025-10-20 08:29:55,807 | INFO | [cartoon] Epoch 5/5 | Train - Loss: 0.0142, Acc: 0.9950 | Val Acc: 0.8110
+2025-10-20 08:29:55,807 | INFO | [cartoon] Best Val Acc: 0.8387
+2025-10-20 08:29:55,807 | INFO | ------------------------------------------------------------
+2025-10-20 08:29:55,807 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 08:29:56,675 | INFO | === Baseline LODO: Leaving out domain 'photo' ===
+2025-10-20 08:31:00,270 | INFO | [photo] Epoch 1/5 | Train - Loss: 0.4523, Acc: 0.8379 | Val Acc: 0.9946
+2025-10-20 08:32:03,545 | INFO | [photo] Epoch 2/5 | Train - Loss: 0.0524, Acc: 0.9830 | Val Acc: 0.9928
+2025-10-20 08:33:06,703 | INFO | [photo] Epoch 3/5 | Train - Loss: 0.0188, Acc: 0.9941 | Val Acc: 0.9928
+2025-10-20 08:34:10,571 | INFO | [photo] Epoch 4/5 | Train - Loss: 0.0077, Acc: 0.9976 | Val Acc: 0.9940
+2025-10-20 08:35:13,823 | INFO | [photo] Epoch 5/5 | Train - Loss: 0.0087, Acc: 0.9968 | Val Acc: 0.9916
+2025-10-20 08:35:13,823 | INFO | [photo] Best Val Acc: 0.9946
+2025-10-20 08:35:13,823 | INFO | ------------------------------------------------------------
+2025-10-20 08:35:13,823 | INFO | Initializing ViT baseline: WinKawaks/vit-small-patch16-224
+2025-10-20 08:35:14,807 | INFO | === Baseline LODO: Leaving out domain 'sketch' ===
+2025-10-20 08:36:16,576 | INFO | [sketch] Epoch 1/5 | Train - Loss: 0.2714, Acc: 0.9108 | Val Acc: 0.6714
+2025-10-20 08:37:18,089 | INFO | [sketch] Epoch 2/5 | Train - Loss: 0.0216, Acc: 0.9931 | Val Acc: 0.6493
+2025-10-20 08:38:20,172 | INFO | [sketch] Epoch 3/5 | Train - Loss: 0.0052, Acc: 0.9988 | Val Acc: 0.6824
+2025-10-20 08:39:21,942 | INFO | [sketch] Epoch 4/5 | Train - Loss: 0.0023, Acc: 0.9997 | Val Acc: 0.7086
+2025-10-20 08:40:23,588 | INFO | [sketch] Epoch 5/5 | Train - Loss: 0.0008, Acc: 1.0000 | Val Acc: 0.6974
+2025-10-20 08:40:23,588 | INFO | [sketch] Best Val Acc: 0.7086
+2025-10-20 08:40:23,588 | INFO | ------------------------------------------------------------
+2025-10-20 08:40:23,588 | INFO | Baseline LODO (WinKawaks/vit-small-patch16-224) finished | Mean Acc: 0.8676
