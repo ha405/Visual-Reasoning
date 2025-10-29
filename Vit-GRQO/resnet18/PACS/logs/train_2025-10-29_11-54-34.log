@@ -1,0 +1,12 @@
+2025-10-29 11:54:34,648 | INFO | Initialized experiment directories for PACS
+2025-10-29 11:54:34,648 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS\logs
+2025-10-29 11:54:34,648 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS\checkpoints
+2025-10-29 11:54:34,648 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS\plots
+2025-10-29 11:56:31,968 | INFO | Initialized experiment directories for PACS
+2025-10-29 11:56:31,968 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\{dataset_name}_MISC\logs
+2025-10-29 11:56:31,968 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\{dataset_name}_MISC\checkpoints
+2025-10-29 11:56:31,968 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\{dataset_name}_MISC\plots
+2025-10-29 11:56:41,400 | INFO | Initialized experiment directories for PACS
+2025-10-29 11:56:41,400 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\logs
+2025-10-29 11:56:41,400 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\checkpoints
+2025-10-29 11:56:41,400 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\plots

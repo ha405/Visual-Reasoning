@@ -1,0 +1,11 @@
+{
+  "lodo_results": {
+    "art_painting": 0.748046875,
+    "cartoon": 0.7585324232081911,
+    "photo": 0.9407185628742515,
+    "sketch": 0.7131585645202342
+  },
+  "timestamp": "20251029_121814",
+  "random_k":32,
+  "num_tokens":32
+}

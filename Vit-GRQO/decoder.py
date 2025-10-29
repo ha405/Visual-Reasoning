@@ -5,23 +5,32 @@ import math
 from typing import Tuple, Optional
 
 class VisualDecoder(nn.Module):
-    def __init__(self, Hidden_dim, num_heads, dropout, num_tokens, ddropout, num_layers, temperature):
+    def __init__(self, Hidden_dim, num_heads, dropout, num_tokens, ddropout, num_layers, temperature, random_k: Optional[int]=None):
         super().__init__()
         self.p = nn.Linear(Hidden_dim,1)
         self.cross_attention = nn.ModuleList(MultiheadAttn(Hidden_dim, num_heads,num_tokens,ddropout) for _ in range(num_layers))
         self.selector = nn.Parameter(torch.randn(num_tokens, Hidden_dim))
         self.temperature = temperature
         self.num_queries = num_tokens
-        
+        self.random_k = random_k  
+ 
     def forward(self, latent_tokens):
+        # latent_tokens: [B, N, D]
         B, N, D = latent_tokens.shape
-        logits = torch.einsum('bnd,md->bmn', latent_tokens, self.selector)
-        weights = F.softmax(logits / self.temperature, dim=-1)  # [B, M, N]
-        pos_queries = torch.einsum('bmn,bnd->bmd', weights, latent_tokens)  # [B, M, D]
-        decoder_out,_ = self.cross_attention[0](pos_queries,latent_tokens)
+        if self.random_k is not None:
+            K = min(self.random_k, N)
+            idx = torch.stack([torch.randperm(N, device=latent_tokens.device)[:K] for _ in range(B)], dim=0)
+            batch_idx = torch.arange(B, device=latent_tokens.device).unsqueeze(1).expand(-1, K)  # [B, K]
+            pos_queries = latent_tokens[batch_idx, idx]  # indexing
+        else:
+            logits = torch.einsum('bnd,md->bmn', latent_tokens, self.selector)
+            weights = F.softmax(logits / self.temperature, dim=-1)  # [B, M, N]
+            pos_queries = torch.einsum('bmn,bnd->bmd', weights, latent_tokens)  # [B, M, D]
+        decoder_out,_ = self.cross_attention[0](pos_queries, latent_tokens)
         for layer in self.cross_attention[1:]:
-            decoder_out, attn = layer(decoder_out, latent_tokens)
-        return decoder_out, attn
+            decoder_out, _ = layer(decoder_out, latent_tokens)
+        return decoder_out
+
 
 class MultiheadAttn(nn.Module):
     def __init__(self, dim: int, num_heads: int, num_queries: int, dropout: float = 0.0):

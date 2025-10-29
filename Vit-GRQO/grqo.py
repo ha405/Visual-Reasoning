@@ -2,25 +2,26 @@ from decoder import VisualDecoder
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from typing import Optional
 
 class QueryLosses(nn.Module):
     def __init__(self, Hidden_dim, num_heads, dropout,
-                 num_tokens, ddropout, num_layers, num_classes, temperature):
+                 num_tokens, ddropout, num_layers, num_classes, temperature, randomk: Optional[int]=None):
         super().__init__()
         self.decoder = VisualDecoder(Hidden_dim, num_heads, dropout,
-                                     num_tokens, ddropout, num_layers, temperature)
+                                     num_tokens, ddropout, num_layers, temperature, random_k=randomk)
         self.selection_head = nn.Linear(Hidden_dim, 1)
         self.cls_head = nn.Linear(Hidden_dim, num_classes)
 
     def forward(self, tokens, labels):
-        decoder_out,attn = self.decoder(tokens)           # [B, M, D]
+        decoder_out = self.decoder(tokens)           # [B, M, D]
         per_query_logits = self.cls_head(decoder_out)  # [B, M, C]
         sel_scores = self.selection_head(decoder_out).squeeze(-1)  # [B, M]
         prob_scores = F.softmax(sel_scores, dim=1)    # [B, M]
         img_logits = torch.einsum("bq,bqc->bc", prob_scores, per_query_logits)  # [B, C]
         cls_loss = F.cross_entropy(img_logits, labels)  # scalar
         preds = img_logits.argmax(dim=1)    # [B]
-        return cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out, attn
+        return cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out
 
 # AI code (needs to be reviewed and fixed)
 class GRQO(nn.Module):
@@ -41,12 +42,13 @@ class GRQO(nn.Module):
                  alpha=1.0, beta=1.0, tau=1e-3,
                  lambda_grqo=1.0, teacher_ema=0.99,
                  reward_proxy="taylor",  # either "taylor" or "gradnorm"
-                 resnet = False
+                 resnet = False,
+                 random_k: Optional[int]=None
                  ):
         super().__init__()
         # QueryLosses does decoding + heads
         self.ql = QueryLosses(Hidden_dim, num_heads, dropout,
-                              num_tokens, ddropout, num_layers, num_classes, temperature)
+                              num_tokens, ddropout, num_layers, num_classes, temperature, randomk=random_k)
 
         self.alpha = alpha
         self.beta = beta
@@ -77,7 +79,7 @@ class GRQO(nn.Module):
             B,D,H,W = x.shape
             x = x.flatten(2).transpose(1,2)
         # --- 1) Base forward: classification and selection ---
-        cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out, attn = self.ql(x, y)
+        cls_loss, prob_scores, img_logits, preds, per_query_logits, decoder_out = self.ql(x, y)
         # cls_loss: scalar tensor
         # prob_scores: [B, M]
         # per_query_logits: [B, M, C]
@@ -168,7 +170,6 @@ class GRQO(nn.Module):
             "ent": -(prob_scores * torch.log(prob_scores + 1e-12)).sum(dim=1).mean().detach(),
             "prob_scores": prob_scores.detach(),
             "img_logits": img_logits.detach(),
-            "preds": preds.detach(),
-            "attention_map": attn.detach(),
+            "preds": preds.detach()
         }
         return out

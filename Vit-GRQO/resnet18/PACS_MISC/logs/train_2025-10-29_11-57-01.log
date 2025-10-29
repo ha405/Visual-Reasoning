@@ -1,0 +1,4 @@
+2025-10-29 11:57:01,902 | INFO | Initialized experiment directories for PACS
+2025-10-29 11:57:01,902 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\logs
+2025-10-29 11:57:01,903 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\checkpoints
+2025-10-29 11:57:01,903 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18\PACS_MISC\plots
