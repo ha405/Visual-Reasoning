@@ -1,0 +1,28 @@
+================================================================================
+DOMAIN GENERALIZATION WITH IMPORTANCE-BASED WEIGHT MASKING
+================================================================================
+
+PHASE 1: DOMAIN-SPECIFIC TRAINING
+--------------------------------------------------------------------------------
+Domain: cartoon (for art_painting holdout) | Final Loss: 0.3445 | Final Acc: 0.8951
+Domain: photo (for art_painting holdout) | Final Loss: 0.0311 | Final Acc: 0.9982
+Domain: sketch (for art_painting holdout) | Final Loss: 0.7014 | Final Acc: 0.6724
+Domain: art_painting (for cartoon holdout) | Final Loss: 0.1520 | Final Acc: 0.9521
+Domain: photo (for cartoon holdout) | Final Loss: 0.0028 | Final Acc: 1.0000
+Domain: sketch (for cartoon holdout) | Final Loss: 0.5450 | Final Acc: 0.7875
+Domain: art_painting (for photo holdout) | Final Loss: 0.2060 | Final Acc: 0.9355
+Domain: cartoon (for photo holdout) | Final Loss: 0.5818 | Final Acc: 0.7718
+Domain: sketch (for photo holdout) | Final Loss: 0.4494 | Final Acc: 0.8285
+Domain: art_painting (for sketch holdout) | Final Loss: 0.3883 | Final Acc: 0.9023
+Domain: cartoon (for sketch holdout) | Final Loss: 0.2697 | Final Acc: 0.9177
+Domain: photo (for sketch holdout) | Final Loss: 0.0038 | Final Acc: 1.0000
+
+PHASE 2: LEAVE-ONE-DOMAIN-OUT GENERALIZATION
+--------------------------------------------------------------------------------
+Test Domain: art_painting         | Test Accuracy: 0.1927
+Test Domain: cartoon              | Test Accuracy: 0.2175
+Test Domain: photo                | Test Accuracy: 0.1946
+Test Domain: sketch               | Test Accuracy: 0.2316
+
+Average Test Accuracy: 0.2091 ± 0.0162
+================================================================================

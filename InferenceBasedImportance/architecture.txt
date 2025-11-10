@@ -1,0 +1,50 @@
+framework: nump and pytorch
+
+# High Level Model Summary:
+
+## Inference
+- CNN backbone: ResNet 18 (pre-trained on imagenet)
+- 4 hidden layers, 10 neurons each (trained during training stage)
+- Classification head with 7 classes
+- Input: single PACS image
+- Output: Image classification
+
+---
+
+## Training
+
+**Phase 1**
+- Input: PACS dataset (code for transformations and input pre-processing modules will be shared)
+- train-test split
+- Frozen CNN backbone: ResNet 18 (pre-trained on imagenet) (weights will NOT be updated)
+- 4 hidden layers: 10 neurons each. With weight updates.
+- Classification head
+- Loss: cross-entropy Loss
+- Train for 10 epochs on 3 domains (d1, d2, d3)
+- After training for 10 epochs, use method in attached pdf to find which neurons are most important:
+    - Run inference (train data only) just on d1 multiple times, until it can be safely measured which neurons are most important. Store this data 
+    - Run inference (train data only) just on d2 multiple times, until it can be safely measured which neurons are most important. Store this data
+    - Run inference (train data only) just on d2 multiple times, until it can be safely measured which neurons are most importnat. Store this data.
+
+**Phase 2**
+- See which neurons ACROSS the 3 domains are most important during inference
+- Make a pruned version of the 4 hidden layers:
+    - where only the top 50% of neurons that are important across the 3 domains are kept, rest are pruned
+- train (finetune) for 5 more epochs (on same data, but the model is now pruned)
+
+**Testing**
+- Test on images of the fourth domain
+
+**LODO (leave on domain out)**
+- There are a total of 4 domains in the pasc dataset (sketch, photo, are, cartoon)
+- Repeat the entire above process, from start to end, for all combinations of d1, d2, d3 from the 4 available domains.
+
+---
+
+## Purpose
+The purpose of this model is domain generalization. By pruning weights that are not common among the 3 domains, we only keep the weights that are useful for indentifying class based on just the class, and have no or minial influence from the domain.
+
+---
+
+## dataset
+PACS data. contains 4 domains. each domain contains 7 classes. dataset is already donwloaded loaclly.

@@ -24,7 +24,7 @@ if torch.cuda.is_available():
 # ============================================================================
 # DATASET CONFIGURATION
 # ============================================================================
-DATA_ROOT = "../../../../../Datasets/pacs_data"
+DATA_ROOT = "../../Dataset/pacs_data/pacs_data"
 DOMAINS = ["art_painting", "cartoon", "photo", "sketch"]
 NUM_CLASSES = 7
 
