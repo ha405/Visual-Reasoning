@@ -36,20 +36,20 @@ CFG = {
 
     "datasets": {
         "PACS": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\pacs_data\pacs_data",
+            "root": r"D:\Haseeb\Datasets\pacs_data",
             "domains": ["art_painting", "cartoon", "photo", "sketch"],
             "classes": ["dog", "elephant", "giraffe", "guitar", "horse", "house", "person"],
             "num_classes": 7,
         },
 
         "OfficeHome": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\OfficeHome\OfficeHomeDataset_10072016",
+            "root": r"D:\Haseeb\Datasets\OfficeHomeDataset_10072016",
             "domains": ["Art", "Clipart", "Product", "Real World"],
             "num_classes": 65,
         },
 
         "VLCS": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\VLCS",
+            "root": r"D:\Haseeb\Datasets\VLCS",
             "domains": ["VOC2007", "LabelMe", "Caltech101", "SUN09"],
             "classes": ["bird", "car", "chair", "dog", "person"],
             "num_classes": 5,

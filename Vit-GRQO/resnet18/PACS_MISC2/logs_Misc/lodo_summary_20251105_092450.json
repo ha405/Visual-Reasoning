@@ -1,0 +1,10 @@
+{
+  "lodo_results": {
+    "art_painting": 0.787109375,
+    "cartoon": 0.7632252559726962,
+    "photo": 0.948502994011976,
+    "sketch": 0.6599643675235429
+  },
+  "epochs 5 and lr 1e-4":"2 layers, 4 heads, 48 randomk",
+  "timestamp": "20251105_092450"
+}
