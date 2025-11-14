@@ -10,20 +10,29 @@ from PIL import Image, ImageFile, UnidentifiedImageError
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 SEED = 42
 
-
-
 def seed_worker(worker_id):
     worker_seed = torch.initial_seed() % 2**32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
 
 class SafeImageFolder(datasets.ImageFolder):
+    """
+    Extends ImageFolder to be robust to corrupted images and to return the domain index.
+    """
+    def __init__(self, root, transform=None, domain_idx=0):
+        super().__init__(root, transform=transform)
+        self.domain_idx = domain_idx
+
     def __getitem__(self, index):
         original_index = index
         for _ in range(len(self)):
             try:
-                return super().__getitem__(index)
+                # Original __getitem__ returns (image, class_label)
+                img, target = super().__getitem__(index)
+                # Return (image, class_label, domain_label)
+                return img, target, self.domain_idx
             except (OSError, UnidentifiedImageError):
+                # If an image is corrupt, try the next one
                 index = (index + 1) % len(self)
         raise RuntimeError(f"No valid images found starting from index {original_index}")
 
@@ -35,11 +44,18 @@ class BaseDomainDataset:
         self.batch_size = batch_size
     
     def get_dataset(self, domain, train=True):
-        dataset = SafeImageFolder(os.path.join(self.data_root, domain), transform=self.transform)
+        if domain not in self.domains:
+            raise ValueError(f"Unknown domain '{domain}'. Available: {self.domains}")
+        domain_idx = self.domains.index(domain)
+        dataset = SafeImageFolder(
+            os.path.join(self.data_root, domain),
+            transform=self.transform,
+            domain_idx=domain_idx
+        )
         return dataset
 
     def get_dataloader(self, domain, train=True):
-        dataset = SafeImageFolder(os.path.join(self.data_root, domain), transform=self.transform)
+        dataset = self.get_dataset(domain, train)
         g = torch.Generator()
         g.manual_seed(SEED)
         loader = DataLoader(
@@ -47,7 +63,7 @@ class BaseDomainDataset:
             batch_size=self.batch_size,
             shuffle=train,
             num_workers=0,
-            pin_memory=True,
+            # pin_memory=True,
             worker_init_fn=seed_worker,
             generator=g,
         )
@@ -63,12 +79,13 @@ class VLCSDataset(BaseDomainDataset):
 
 class OfficeHomeDataset(BaseDomainDataset):
     def __init__(self, data_root, transform, batch_size):
-        super().__init__(data_root, ["Art", "Clipart", "Product", "Real_World"], transform, batch_size)
+        super().__init__(data_root, ["Art", "Clipart", "Product", "Real World"], transform, batch_size)
 
 class RMNISTFolderSafe(torch.utils.data.Dataset):
-    def __init__(self, samples, transform=None):
+    def __init__(self, samples, transform=None, domain_idx=0):
         self.samples = samples
         self.transform = transform
+        self.domain_idx = domain_idx
 
     def __len__(self):
         return len(self.samples)
@@ -81,7 +98,8 @@ class RMNISTFolderSafe(torch.utils.data.Dataset):
                 img = Image.open(img_path).convert("L")
                 if self.transform:
                     img = self.transform(img)
-                return img, label
+                # Return (image, class_label, domain_label)
+                return img, label, self.domain_idx
             except (OSError, UnidentifiedImageError):
                 idx = (idx + 1) % len(self.samples)
         raise RuntimeError(f"No valid images found starting from index {original_idx}")
@@ -105,7 +123,10 @@ class RMNISTDataset(BaseDomainDataset):
                     continue
         if not samples:
             raise RuntimeError(f"No images found in domain {domain} at {path}")
-        dataset = RMNISTFolderSafe(samples, transform=self.transform)
+        
+        domain_idx = self.domains.index(domain)
+        dataset = RMNISTFolderSafe(samples, transform=self.transform, domain_idx=domain_idx)
+        
         g = torch.Generator()
         g.manual_seed(SEED)
         loader = DataLoader(
@@ -120,9 +141,10 @@ class RMNISTDataset(BaseDomainDataset):
         return loader
 
 class CMNISTFolderSafe(torch.utils.data.Dataset):
-    def __init__(self, samples, transform=None):
+    def __init__(self, samples, transform=None, domain_idx=0):
         self.samples = samples
         self.transform = transform
+        self.domain_idx = domain_idx
 
     def __len__(self):
         return len(self.samples)
@@ -135,7 +157,8 @@ class CMNISTFolderSafe(torch.utils.data.Dataset):
                 img = Image.open(img_path).convert("RGB")
                 if self.transform:
                     img = self.transform(img)
-                return img, label
+                # Return (image, class_label, domain_label)
+                return img, label, self.domain_idx
             except (OSError, UnidentifiedImageError):
                 idx = (idx + 1) % len(self.samples)
         raise RuntimeError(f"No valid images found starting from index {original_idx}")
@@ -163,7 +186,10 @@ class CMNISTDataset(BaseDomainDataset):
                         samples.append((full_path, int(label_str)))
         if not samples:
             raise RuntimeError(f"No images found for color domain {domain} in {self.data_root}")
-        dataset = CMNISTFolderSafe(samples, transform=self.transform)
+        
+        domain_idx = self.domains.index(domain)
+        dataset = CMNISTFolderSafe(samples, transform=self.transform, domain_idx=domain_idx)
+        
         g = torch.Generator()
         g.manual_seed(SEED)
         loader = DataLoader(
@@ -183,10 +209,13 @@ class TerraIncognitaDataset(BaseDomainDataset):
         super().__init__(data_root, domains, transform, batch_size)
 
     def get_dataloader(self, domain, train=True):
+        if domain not in self.domains:
+            raise ValueError(f"Unknown domain '{domain}'. Available: {self.domains}")
+        domain_idx = self.domains.index(domain)
         domain_path = os.path.join(self.data_root, domain)
-        if not os.path.exists(domain_path):
-            raise RuntimeError(f"Domain folder not found: {domain_path}")
-        dataset = SafeImageFolder(domain_path, transform=self.transform)
+        
+        dataset = SafeImageFolder(domain_path, transform=self.transform, domain_idx=domain_idx)
+        
         g = torch.Generator()
         g.manual_seed(SEED)
         loader = DataLoader(
@@ -199,7 +228,6 @@ class TerraIncognitaDataset(BaseDomainDataset):
             generator=g,
         )
         return loader
-
 
 DATASET_REGISTRY = {
     "PACS": PACSDataset,

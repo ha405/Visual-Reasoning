@@ -21,3 +21,9 @@
 /resnet34/officeHome/checkpoints
 /resnet34/CMNIST/checkpoints
 /resnet34/TerraIncognita/checkpoints
+
+/resnet18_experiments/PACS/checkpoints
+/resnet18_experiments/VLCS/checkpoints
+/resnet18_experiments/officeHome/checkpoints
+/resnet18_experiments/CMNIST/checkpoints
+/resnet18_experiments/TerraIncognita/checkpoints

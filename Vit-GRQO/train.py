@@ -9,13 +9,13 @@ def train_epoch(model, train_loader, optimizer, device):
     correct = 0
     total_samples = 0
 
-    for batch_idx, (images, labels) in enumerate(train_loader):
-        images, labels = images.to(device), labels.to(device)
+    for batch_idx, (images, labels, domain_labels) in enumerate(train_loader):
+        images, labels, domain_labels = images.to(device), labels.to(device), domain_labels.to(device)
         
         optimizer.zero_grad()
 
         # Forward pass
-        output = model(images, labels)
+        output = model(images, labels, domain_labels)
 
         # Extract losses
         loss = output['loss']
@@ -56,7 +56,7 @@ def evaluate(model, val_loader, device):
     correct = 0
     total_samples = 0
 
-    for images, labels in tqdm(val_loader, desc="Evaluating"):
+    for images, labels,_ in tqdm(val_loader, desc="Evaluating"):
         images, labels = images.to(device), labels.to(device)
         with torch.set_grad_enabled(True):
                 

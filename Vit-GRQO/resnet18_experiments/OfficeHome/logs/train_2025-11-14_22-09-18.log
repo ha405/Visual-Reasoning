@@ -1,0 +1,4 @@
+2025-11-14 22:09:18,273 | INFO | Initialized experiment directories for OfficeHome
+2025-11-14 22:09:18,273 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\OfficeHome\logs
+2025-11-14 22:09:18,273 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\OfficeHome\checkpoints
+2025-11-14 22:09:18,273 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\OfficeHome\plots

@@ -1,0 +1,6 @@
+2025-11-14 21:56:04,965 | INFO | Initialized experiment directories for PACS
+2025-11-14 21:56:04,966 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-14 21:56:04,966 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-14 21:56:04,967 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-14 21:56:05,155 | INFO | Initializing ResNet baseline: resnet18
+2025-11-14 21:56:05,437 | INFO | === Baseline LODO: Leaving out domain 'art_painting' ===

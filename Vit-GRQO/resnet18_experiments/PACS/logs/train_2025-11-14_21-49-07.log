@@ -1,0 +1,16 @@
+2025-11-14 21:49:07,589 | INFO | Initialized experiment directories for PACS
+2025-11-14 21:49:07,589 | INFO | Logs: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-14 21:49:07,589 | INFO | Checkpoints: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-14 21:49:07,589 | INFO | Plots: c:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\sproj\Visual-Reasoning\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-14 21:49:13,993 | INFO | Initializing ResNet baseline: resnet18
+2025-11-14 21:49:14,181 | INFO | === Baseline LODO: Leaving out domain 'art_painting' ===
+2025-11-14 21:49:43,113 | INFO | [art_painting] Epoch 1/5 | Train - Loss: 0.4854, Acc: 0.8439 | Val Acc: 0.7134
+2025-11-14 21:50:11,455 | INFO | [art_painting] Epoch 2/5 | Train - Loss: 0.0978, Acc: 0.9736 | Val Acc: 0.7399
+2025-11-14 21:50:41,429 | INFO | [art_painting] Epoch 3/5 | Train - Loss: 0.0351, Acc: 0.9941 | Val Acc: 0.7399
+2025-11-14 21:51:12,488 | INFO | [art_painting] Epoch 4/5 | Train - Loss: 0.0097, Acc: 0.9996 | Val Acc: 0.7375
+2025-11-14 21:51:43,725 | INFO | [art_painting] Epoch 5/5 | Train - Loss: 0.0052, Acc: 0.9999 | Val Acc: 0.7395
+2025-11-14 21:51:43,726 | INFO | [art_painting] Best Val Acc: 0.7399
+2025-11-14 21:51:43,727 | INFO | ------------------------------------------------------------
+2025-11-14 21:51:43,728 | INFO | Initializing ResNet baseline: resnet18
+2025-11-14 21:51:43,921 | INFO | === Baseline LODO: Leaving out domain 'cartoon' ===
+2025-11-14 21:52:14,637 | INFO | [cartoon] Epoch 1/5 | Train - Loss: 0.5388, Acc: 0.8287 | Val Acc: 0.6544

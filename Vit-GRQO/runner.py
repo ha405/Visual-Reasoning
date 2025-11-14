@@ -131,7 +131,7 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
             model.train()
             running_loss, running_corrects, running_samples = 0.0, 0, 0
 
-            for images, labels in combined_train_loader:
+            for images, labels, _ in combined_train_loader:
                 images, labels = images.to(device), labels.to(device)
 
                 optimizer.zero_grad()
@@ -154,7 +154,7 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
             model.eval()
             correct, total = 0, 0
             with torch.no_grad():
-                for images, labels in val_loader:
+                for images, labels, _ in val_loader:
                     images, labels = images.to(device), labels.to(device)
                     outputs = model(images)
                     logits = outputs.logits if hasattr(outputs, "logits") else outputs
