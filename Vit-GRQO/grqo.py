@@ -41,7 +41,9 @@ class GRQO(nn.Module):
                  alpha=1.0, beta=1.0, tau=1e-3,
                  lambda_grqo=1.0, teacher_ema=0.99,
                  reward_proxy="taylor",  # either "taylor" or "gradnorm"
-                 resnet = False
+                 resnet = False,
+                 alpha_invar=0.5, # Blends per-sample reward with global invariance score
+                 gamma_var=1.0    # Penalty on reward variance across domains
                  ):
         super().__init__()
         # QueryLosses does decoding + heads
@@ -56,6 +58,11 @@ class GRQO(nn.Module):
         assert reward_proxy in ("taylor", "gradnorm"), "reward_proxy must be 'taylor' or 'gradnorm'"
         self.reward_proxy = reward_proxy
         self.resnet = resnet
+        
+        # --- ADDITION: Store new hyperparameters ---
+        self.alpha_invar = alpha_invar
+        self.gamma_var = gamma_var
+
         # teacher reference distribution for queries (vector of length M). We'll
         # lazily initialize once we know M (after first forward) and register as buffer.
         self.register_buffer("teacher_ref", None)
@@ -65,11 +72,13 @@ class GRQO(nn.Module):
         if self.teacher_ref is None:
             self.teacher_ref = torch.full((M,), 1.0 / M, device=device)
 
-    def forward(self, x, y):
+    # --- ADDITION: forward() now accepts optional `domains` ---
+    def forward(self, x, y, domains=None):
         """
         x: backbone tokens [B, N, D] - ViT
         x: backbone tokens [B,D,H,W] - Resnet
         y: labels [B]
+        domains: optional tensor [B] with domain ids (ints) for per-domain invariance reward
         Returns dict with 'loss' and diagnostics
         """
         device = x.device
@@ -90,23 +99,79 @@ class GRQO(nn.Module):
         self._init_teacher(M, device)
 
         # --- 2) Reward proxy computation ---
-        # We use either Taylor first-order proxy:
-        #   r_{b,j} = - < G_{b,j}, decoder_out_{b,j} >
-        # where G = d(sum_b cls_loss_b)/d decoder_out (shape [B,M,D])
-        # or gradient-norm proxy:
-        #   r_{b,j} = || G_{b,j} ||_2
-        #
-        # compute grads of the scalar classification loss w.r.t decoder_out
-        # Note: cls_loss is scalar; ensure computation graph is present (it is).
-        grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0]  # [B,M,D]
+        # --- ADDITION: Conditional logic for domain-invariant reward calculation ---
+        if domains is not None:
+            unique_domains = torch.unique(domains)
+            per_domain_rewards = []
+            domain_masks = []
 
-        if self.reward_proxy == "taylor":
-            # Taylor proxy: negative dot product between grad and feature
-            # r = - sum_d G * q
-            raw_rewards = - (grads * decoder_out).sum(dim=-1)  # [B, M]
+            # Loop to calculate rewards for each domain present in the batch
+            for d in unique_domains:
+                mask = (domains == d)
+                if mask.sum() == 0:
+                    continue
+                domain_masks.append(mask)
+
+                # Classification loss for samples from the current domain
+                cls_loss_d = F.cross_entropy(img_logits[mask], y[mask])
+
+                # Gradients of this domain-specific loss w.r.t query features.
+                # retain_graph=True is CRITICAL to prevent errors, as the main `cls_loss`
+                # still needs the graph for the final backward() pass.
+                grads_d = torch.autograd.grad(cls_loss_d, decoder_out, retain_graph=True, create_graph=False)[0]
+
+                if self.reward_proxy == "taylor":
+                    raw_r_d = - (grads_d * decoder_out).sum(dim=-1)
+                else:
+                    raw_r_d = torch.norm(grads_d, p=2, dim=-1)
+                per_domain_rewards.append(raw_r_d)
+
+            # --- Combine per-domain rewards into a final, domain-invariant reward signal ---
+            if not per_domain_rewards: # Fallback if no valid domains were processed
+                 grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0]
+                 if self.reward_proxy == "taylor":
+                     raw_rewards = - (grads * decoder_out).sum(dim=-1)
+                 else:
+                     raw_rewards = torch.norm(grads, p=2, dim=-1)
+            else:
+                # Calculate the mean reward for each query *within* its domain
+                domain_mean_rewards = []
+                for i, mask in enumerate(domain_masks):
+                    domain_mean_rewards.append(per_domain_rewards[i][mask].mean(dim=0))
+                domain_mean_rewards = torch.stack(domain_mean_rewards, dim=0) # Shape: [num_domains, M]
+
+                # Calculate the mean and variance of rewards for each query *across* domains
+                mean_across_domains = domain_mean_rewards.mean(dim=0)      # Shape: [M]
+                var_across_domains = domain_mean_rewards.var(dim=0, unbiased=False) # Shape: [M]
+
+                # Invariance Score: A good query has high mean reward and low variance across domains
+                invariance_score = mean_across_domains - self.gamma_var * var_across_domains # Shape: [M]
+
+                # Per-sample reward is the sum of rewards from all domain calculations
+                raw_rewards_overall = torch.stack(per_domain_rewards).sum(dim=0) # Shape: [B, M]
+
+                # Final reward blends the per-sample score with the global invariance score
+                raw_rewards = self.alpha_invar * raw_rewards_overall + \
+                              (1.0 - self.alpha_invar) * invariance_score.unsqueeze(0)
+
         else:
-            # grad-norm proxy
-            raw_rewards = torch.norm(grads, p=2, dim=-1)  # [B, M]
+            # We use either Taylor first-order proxy:
+            #   r_{b,j} = - < G_{b,j}, decoder_out_{b,j} >
+            # where G = d(sum_b cls_loss_b)/d decoder_out (shape [B,M,D])
+            # or gradient-norm proxy:
+            #   r_{b,j} = || G_{b,j} ||_2
+            #
+            # compute grads of the scalar classification loss w.r.t decoder_out
+            # Note: cls_loss is scalar; ensure computation graph is present (it is).
+            grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0]  # [B,M,D]
+
+            if self.reward_proxy == "taylor":
+                # Taylor proxy: negative dot product between grad and feature
+                # r = - sum_d G * q
+                raw_rewards = - (grads * decoder_out).sum(dim=-1)  # [B, M]
+            else:
+                # grad-norm proxy
+                raw_rewards = torch.norm(grads, p=2, dim=-1)  # [B, M]
 
         # detach rewards -- they are targets for GRQO, not a path for grads
         rewards = raw_rewards.detach()
