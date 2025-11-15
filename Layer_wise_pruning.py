@@ -195,9 +195,9 @@ def combine_source_loaders(source_loaders, batch_size, num_workers):
 def iterative_pruning(model, source_loaders_list, target_loader, device,
                       retrain_epochs, lr, alpha, batch_size, num_workers, SFT=False,
                       pruning_strategy="target_error",
-                      candidate_rates=(0.20, 0.30, 0.40, 0.60),
+                      candidate_rates=(0.10, 0.20, 0.30, 0.40),
                       iterations=3, calibration_samples=1000,
-                      relative_acc_drop_threshold=0.05):
+                      relative_acc_drop_threshold=0.1):
     optimizer = optim.Adam(model.parameters(), lr=lr)
     cumulative_mask = {}
 
