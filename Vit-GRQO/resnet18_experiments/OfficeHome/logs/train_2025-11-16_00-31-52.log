@@ -1,0 +1,5 @@
+2025-11-16 00:31:52,828 | INFO | Initialized experiment directories for OfficeHome
+2025-11-16 00:31:52,828 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\logs
+2025-11-16 00:31:52,829 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\checkpoints
+2025-11-16 00:31:52,830 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\plots
+2025-11-16 00:31:53,125 | INFO | === LODO: Leaving out domain 'Art' ===

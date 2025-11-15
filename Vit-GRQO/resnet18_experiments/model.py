@@ -46,6 +46,7 @@ def get_model(cfg, dataset="VLCS"):
         lambda_grqo=grqo_cfg["lambda_grqo"],
         teacher_ema=grqo_cfg["teacher_ema"],
         reward_proxy=grqo_cfg["reward_proxy"],
+        random_k=grqo_cfg["random_k"]
     )
 
     model = resnetGRQO(backbone, grqo_model, HD).to(device)

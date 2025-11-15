@@ -60,7 +60,7 @@ def evaluate(model, val_loader, device):
         images, labels = images.to(device), labels.to(device)
         with torch.set_grad_enabled(True):
                 
-                output = model(images, labels)
+                output = model(images, labels, _)
                 loss = output['loss']
                 cls_loss = output['cls_loss']
                 grqo_loss = output['grqo_loss']

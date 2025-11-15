@@ -1,0 +1,10 @@
+2025-11-16 00:16:07,215 | INFO | Initialized experiment directories for PACS
+2025-11-16 00:16:07,215 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-16 00:16:07,216 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-16 00:16:07,216 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-16 00:16:07,445 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-11-16 00:16:21,850 | INFO | Initialized experiment directories for PACS
+2025-11-16 00:16:21,850 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-16 00:16:21,851 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-16 00:16:21,851 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-16 00:16:22,120 | INFO | === LODO: Leaving out domain 'art_painting' ===

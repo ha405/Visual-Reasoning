@@ -32,7 +32,9 @@ CFG = {
         "lambda_grqo": 1.0,
         "teacher_ema": 0.99,
         "reward_proxy": "taylor",  # or "gradnorm"
+        "random_k":48,
     },
+
 
     "datasets": {
         "PACS": {
