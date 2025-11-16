@@ -126,7 +126,6 @@ def compute_taylor_importance(model, loader, device, mask=None, num_batches=20):
     importance = OrderedDict()
     for name in conv_names:
         importance[name] = taylor[name] / count
-
     return importance
 
 
@@ -180,6 +179,56 @@ def generate_mask_from_importance(model, importance, prune_rate=0.1, cumulative_
             print(f"  - Layer '{layer_name}': No filters pruned.")
 
     return new_mask
+
+def compute_taylor_meanvar_importance(model, source_loaders, device, mask=None, eps=1e-6, num_batches_per_domain=20):
+    model.to(device)
+    apply_mask(model, mask)
+    model.train()
+    conv_names = []
+    for name, module in model.named_modules():
+        if isinstance(module, nn.Conv2d):
+            conv_names.append(name)
+
+    per_domain_taylor = OrderedDict()
+    for name in conv_names:
+        nf = get_layer(model, name).weight.shape[0]
+        per_domain_taylor[name] = torch.zeros((nf, len(source_loaders)), device=device)
+
+    loss_fn = nn.CrossEntropyLoss()
+
+    for d_idx, loader in enumerate(source_loaders):
+        count = 0
+        for xb, yb, _ in loader:
+            xb, yb = xb.to(device), yb.to(device)
+            model.zero_grad()
+            out = model(xb)
+            loss = loss_fn(out, yb)
+            loss.backward()
+
+            for name, module in model.named_modules():
+                if isinstance(module, nn.Conv2d):
+                    w = module.weight
+                    g = module.weight.grad
+                    if g is not None:
+                        score = (w * g).abs().mean(dim=[1, 2, 3])
+                        per_domain_taylor[name][:, d_idx] += score.detach()
+
+            count += 1
+            if count >= num_batches_per_domain:
+                break
+
+        if count > 0:
+            for name in conv_names:
+                per_domain_taylor[name][:, d_idx] /= float(count)
+
+    importance = OrderedDict()
+    for name, scores in per_domain_taylor.items():
+        mean = scores.mean(dim=1)
+        var = scores.var(dim=1)
+        importance[name] = (mean / (var + eps)).detach()
+
+    return importance
+
 
 
 def combine_source_loaders(source_loaders, batch_size, num_workers):

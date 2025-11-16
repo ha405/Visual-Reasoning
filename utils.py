@@ -1,6 +1,10 @@
 import torch
 import torch.nn as nn
 from tqdm.notebook import tqdm
+from torch.utils.data import ConcatDataset, DataLoader
+
+def get_layer(model, name):
+    return dict(model.named_modules())[name]
 
 def apply_mask(model, mask):
     if not mask:
@@ -9,6 +13,12 @@ def apply_mask(model, mask):
         for name, param in model.named_parameters():
             if name in mask:
                 param.data.mul_(mask[name])
+            
+
+def combine_source_loaders(source_loaders, batch_size, num_workers):
+    datasets = [loader.dataset for loader in source_loaders]
+    combined_dataset = ConcatDataset(datasets)
+    return DataLoader(combined_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 
 def evaluate(model, loader, device, mask=None):
     model.to(device)
