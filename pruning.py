@@ -188,13 +188,20 @@ def combine_source_loaders(source_loaders, batch_size, num_workers):
     return DataLoader(combined_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 
 def iterative_pruning(model, source_loaders_list, target_loader, device,
-                      prune_rates, retrain_epochs, lr, alpha, batch_size, num_workers, SFT=False, importance_type="activation"):
+                      prune_rates, retrain_epochs, lr, alpha, batch_size, num_workers,
+                      SFT=False, importance_type="activation", keep_overall_best=True):
+    
     optimizer = optim.Adam(model.parameters(), lr=lr)
     cumulative_mask = {} 
     
     _, best_overall_acc = evaluate(model, target_loader, device)
     print(f"Initial Baseline Target Accuracy: {best_overall_acc:.2f}%")
     torch.save(model.state_dict(), "best_pruned_model.pth")
+
+    if keep_overall_best:
+        overall_best_acc = best_overall_acc
+        overall_best_ckpt = "best_overall_model.pth"
+        torch.save(model.state_dict(), overall_best_ckpt)
 
     combined_source_loader = combine_source_loaders(source_loaders_list, batch_size, num_workers)
 
@@ -232,10 +239,25 @@ def iterative_pruning(model, source_loaders_list, target_loader, device,
             
             _, target_acc = evaluate(model, target_loader, device, mask=cumulative_mask)
             print(f"  Epoch {epoch+1} Target Accuracy: {target_acc:.2f}%")
+            
+            # Update best for this iteration
             if target_acc > best_iter_acc:
                 best_iter_acc = target_acc
                 torch.save(model.state_dict(), "best_pruned_model.pth")
+            
+            # Update overall best across all iterations
+            if keep_overall_best and target_acc > overall_best_acc:
+                overall_best_acc = target_acc
+                torch.save(model.state_dict(), overall_best_ckpt)
+        
         print(f"Iteration {it} | Best Accuracy in this round: {best_iter_acc:.2f}%")
-
-    model.load_state_dict(torch.load("best_pruned_model.pth"))
+        if keep_overall_best:
+            print(f"Overall Best Accuracy so far: {overall_best_acc:.2f}%")
+    
+    # Load final best model
+    if keep_overall_best:
+        model.load_state_dict(torch.load(overall_best_ckpt))
+    else:
+        model.load_state_dict(torch.load("best_pruned_model.pth"))
+    
     return model, cumulative_mask
