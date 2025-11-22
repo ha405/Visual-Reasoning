@@ -8,7 +8,7 @@ class VisualDecoder(nn.Module):
     def __init__(self, Hidden_dim, num_heads, dropout, num_tokens, ddropout, num_layers, temperature, random_k: Optional[int]=None):
         super().__init__()
         self.p = nn.Linear(Hidden_dim,1)
-        self.cross_attention = nn.ModuleList(MultiheadAttn(Hidden_dim, num_heads,num_tokens,ddropout) for _ in range(num_layers))
+        self.cross_attention = nn.ModuleList([MultiheadAttn(Hidden_dim, num_heads, num_tokens, ddropout) for _ in range(num_layers)])
         self.selector = nn.Parameter(torch.randn(num_tokens, Hidden_dim))
         self.temperature = temperature
         self.num_queries = num_tokens
@@ -26,7 +26,8 @@ class VisualDecoder(nn.Module):
             logits = torch.einsum('bnd,md->bmn', latent_tokens, self.selector)
             weights = F.softmax(logits / self.temperature, dim=-1)  # [B, M, N]
             pos_queries = torch.einsum('bmn,bnd->bmd', weights, latent_tokens)  # [B, M, D]
-        decoder_out,_ = self.cross_attention[0](pos_queries, latent_tokens)
+        
+        decoder_out, _ = self.cross_attention[0](pos_queries, latent_tokens)
         for layer in self.cross_attention[1:]:
             decoder_out, _ = layer(decoder_out, latent_tokens)
         return decoder_out
@@ -61,10 +62,11 @@ class MultiheadAttn(nn.Module):
         self.out_proj = nn.Linear(dim, dim)
         self.norm = nn.LayerNorm(dim)
         self.norm2 = nn.LayerNorm(dim)
+
     def forward(
         self,
-        pos_queries: torch.Tensor,  # [B, M, D] from encoder (pos embeddings for queries)
-        enc_tokens: torch.Tensor    # [B, N, D] encoder patch tokens (keys/values)
+        pos_queries: torch.Tensor,  # [B, M, D]
+        enc_tokens: torch.Tensor    # [B, N, D]
     ) -> Tuple[torch.Tensor, torch.Tensor]:
 
         B, M, D = pos_queries.shape
@@ -109,9 +111,9 @@ class DecoderAttn(nn.Module):
 
     def forward(
         self,
-        queries: torch.Tensor,  # [B, M, D]  decoder queries
-        keys: torch.Tensor,     # [B, N, D]  encoder patch tokens
-        values: torch.Tensor    # [B, N, D]  encoder patch tokens
+        queries: torch.Tensor,  # [B, M, D]
+        keys: torch.Tensor,     # [B, N, D]
+        values: torch.Tensor    # [B, N, D]
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         
         q = self.q_proj(queries)  # [B, M, head_dim]
@@ -125,4 +127,3 @@ class DecoderAttn(nn.Module):
         out = torch.bmm(attn, v)  # [B, M, head_dim]
         out = self.out_proj(out)
         return out, attn
-        
