@@ -1,0 +1,26 @@
+2025-11-30 09:04:44,808 | INFO | Initialized experiment directories for OfficeHome
+2025-11-30 09:04:44,809 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\logs
+2025-11-30 09:04:44,809 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\checkpoints
+2025-11-30 09:04:44,810 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\plots
+2025-11-30 09:04:46,100 | INFO | Initializing ResNet baseline: resnet18
+2025-11-30 09:04:46,292 | INFO | === Baseline LODO: Leaving out domain 'Art' ===
+2025-11-30 09:05:26,896 | INFO | [Art] Epoch 1/10 | Train - Loss: 2.2335, Acc: 0.5303 | Val Acc: 0.4841
+2025-11-30 09:06:00,472 | INFO | [Art] Epoch 2/10 | Train - Loss: 0.8469, Acc: 0.8311 | Val Acc: 0.5299
+2025-11-30 09:06:34,395 | INFO | [Art] Epoch 3/10 | Train - Loss: 0.4164, Acc: 0.9240 | Val Acc: 0.5632
+2025-11-30 09:07:08,227 | INFO | [Art] Epoch 4/10 | Train - Loss: 0.2018, Acc: 0.9735 | Val Acc: 0.5583
+2025-11-30 09:07:41,594 | INFO | [Art] Epoch 5/10 | Train - Loss: 0.1056, Acc: 0.9862 | Val Acc: 0.5785
+2025-11-30 09:08:15,466 | INFO | [Art] Epoch 6/10 | Train - Loss: 0.0702, Acc: 0.9877 | Val Acc: 0.5661
+2025-11-30 09:08:48,859 | INFO | [Art] Epoch 7/10 | Train - Loss: 0.0530, Acc: 0.9888 | Val Acc: 0.5690
+2025-11-30 09:09:22,808 | INFO | [Art] Epoch 8/10 | Train - Loss: 0.0429, Acc: 0.9894 | Val Acc: 0.5686
+2025-11-30 09:09:57,141 | INFO | [Art] Epoch 9/10 | Train - Loss: 0.0374, Acc: 0.9900 | Val Acc: 0.5719
+2025-11-30 09:10:31,357 | INFO | [Art] Epoch 10/10 | Train - Loss: 0.0332, Acc: 0.9905 | Val Acc: 0.5694
+2025-11-30 09:10:31,357 | INFO | [Art] Best Val Acc: 0.5785
+2025-11-30 09:10:31,357 | INFO | ------------------------------------------------------------
+2025-11-30 09:10:31,357 | INFO | Initializing ResNet baseline: resnet18
+2025-11-30 09:10:31,457 | INFO | === Baseline LODO: Leaving out domain 'Clipart' ===
+2025-11-30 09:11:06,272 | INFO | [Clipart] Epoch 1/10 | Train - Loss: 2.2674, Acc: 0.5339 | Val Acc: 0.4199
+2025-11-30 09:11:39,055 | INFO | [Clipart] Epoch 2/10 | Train - Loss: 0.8597, Acc: 0.8336 | Val Acc: 0.4460
+2025-11-30 09:12:12,039 | INFO | [Clipart] Epoch 3/10 | Train - Loss: 0.4280, Acc: 0.9271 | Val Acc: 0.4632
+2025-11-30 09:12:45,087 | INFO | [Clipart] Epoch 4/10 | Train - Loss: 0.1987, Acc: 0.9783 | Val Acc: 0.4561
+2025-11-30 09:13:18,347 | INFO | [Clipart] Epoch 5/10 | Train - Loss: 0.0957, Acc: 0.9923 | Val Acc: 0.4683
+2025-11-30 09:13:51,401 | INFO | [Clipart] Epoch 6/10 | Train - Loss: 0.0532, Acc: 0.9955 | Val Acc: 0.4658

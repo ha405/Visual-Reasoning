@@ -1,0 +1,17 @@
+2025-11-26 15:26:13,081 | INFO | Initialized experiment directories for PACS
+2025-11-26 15:26:13,081 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-26 15:26:13,082 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-26 15:26:13,082 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-26 15:26:13,312 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-11-26 15:26:30,161 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.6805, Cls: 0.6725, GRQO: 0.0100, Acc: 0.8020 | Val - Loss: 0.8339, Cls: 0.8322, GRQO: 0.0021, Acc: 0.7339
+2025-11-26 15:26:30,204 | INFO | [art_painting] New best val acc: 0.7339
+2025-11-26 15:26:46,669 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.1240, Cls: 0.1216, GRQO: 0.0030, Acc: 0.9627 | Val - Loss: 1.0548, Cls: 1.0538, GRQO: 0.0012, Acc: 0.7212
+2025-11-26 15:27:03,036 | INFO | [art_painting] Epoch 3/10 | Train - Loss: 0.0334, Cls: 0.0314, GRQO: 0.0025, Acc: 0.9933 | Val - Loss: 0.8464, Cls: 0.8456, GRQO: 0.0009, Acc: 0.7617
+2025-11-26 15:27:03,092 | INFO | [art_painting] New best val acc: 0.7617
+2025-11-26 15:27:19,454 | INFO | [art_painting] Epoch 4/10 | Train - Loss: 0.0225, Cls: 0.0206, GRQO: 0.0023, Acc: 0.9948 | Val - Loss: 1.0043, Cls: 1.0035, GRQO: 0.0011, Acc: 0.7358
+2025-11-26 15:27:35,802 | INFO | [art_painting] Epoch 5/10 | Train - Loss: 0.0072, Cls: 0.0056, GRQO: 0.0020, Acc: 0.9997 | Val - Loss: 0.8609, Cls: 0.8604, GRQO: 0.0006, Acc: 0.7710
+2025-11-26 15:27:35,862 | INFO | [art_painting] New best val acc: 0.7710
+2025-11-26 15:27:52,201 | INFO | [art_painting] Epoch 6/10 | Train - Loss: 0.0395, Cls: 0.0379, GRQO: 0.0019, Acc: 0.9899 | Val - Loss: 1.0636, Cls: 1.0633, GRQO: 0.0004, Acc: 0.7388
+2025-11-26 15:28:08,633 | INFO | [art_painting] Epoch 7/10 | Train - Loss: 0.0263, Cls: 0.0250, GRQO: 0.0017, Acc: 0.9922 | Val - Loss: 0.9619, Cls: 0.9617, GRQO: 0.0003, Acc: 0.7554
+2025-11-26 15:28:24,984 | INFO | [art_painting] Epoch 8/10 | Train - Loss: 0.0079, Cls: 0.0067, GRQO: 0.0015, Acc: 0.9992 | Val - Loss: 1.0821, Cls: 1.0818, GRQO: 0.0004, Acc: 0.7427
+2025-11-26 15:28:41,481 | INFO | [art_painting] Epoch 9/10 | Train - Loss: 0.0096, Cls: 0.0084, GRQO: 0.0014, Acc: 0.9979 | Val - Loss: 1.2885, Cls: 1.2882, GRQO: 0.0003, Acc: 0.7139

@@ -1,0 +1,127 @@
+2025-11-29 08:59:26,085 | INFO | Initialized experiment directories for PACS
+2025-11-29 08:59:26,085 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-29 08:59:26,085 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-29 08:59:26,085 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-29 08:59:26,312 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-11-29 08:59:42,796 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.6759, Cls: 0.6702, GRQO: 0.0081, Acc: 0.8026 | Val - Loss: 0.8895, Cls: 0.8878, GRQO: 0.0024, Acc: 0.7188
+2025-11-29 08:59:42,848 | INFO | [art_painting] New best val acc: 0.7188
+2025-11-29 08:59:58,878 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.1182, Cls: 0.1162, GRQO: 0.0028, Acc: 0.9637 | Val - Loss: 0.9832, Cls: 0.9820, GRQO: 0.0017, Acc: 0.7354
+2025-11-29 08:59:58,929 | INFO | [art_painting] New best val acc: 0.7354
+2025-11-29 09:00:14,994 | INFO | [art_painting] Epoch 3/10 | Train - Loss: 0.0372, Cls: 0.0356, GRQO: 0.0023, Acc: 0.9926 | Val - Loss: 0.8561, Cls: 0.8551, GRQO: 0.0015, Acc: 0.7593
+2025-11-29 09:00:15,047 | INFO | [art_painting] New best val acc: 0.7593
+2025-11-29 09:00:30,977 | INFO | [art_painting] Epoch 4/10 | Train - Loss: 0.0202, Cls: 0.0187, GRQO: 0.0022, Acc: 0.9969 | Val - Loss: 0.9562, Cls: 0.9551, GRQO: 0.0015, Acc: 0.7466
+2025-11-29 09:00:46,977 | INFO | [art_painting] Epoch 5/10 | Train - Loss: 0.0070, Cls: 0.0057, GRQO: 0.0019, Acc: 0.9999 | Val - Loss: 0.9122, Cls: 0.9114, GRQO: 0.0011, Acc: 0.7637
+2025-11-29 09:00:47,028 | INFO | [art_painting] New best val acc: 0.7637
+2025-11-29 09:01:03,062 | INFO | [art_painting] Epoch 6/10 | Train - Loss: 0.0058, Cls: 0.0046, GRQO: 0.0017, Acc: 0.9996 | Val - Loss: 1.0787, Cls: 1.0780, GRQO: 0.0011, Acc: 0.7354
+2025-11-29 09:01:18,960 | INFO | [art_painting] Epoch 7/10 | Train - Loss: 0.0805, Cls: 0.0792, GRQO: 0.0018, Acc: 0.9773 | Val - Loss: 0.8123, Cls: 0.8117, GRQO: 0.0008, Acc: 0.7744
+2025-11-29 09:01:19,010 | INFO | [art_painting] New best val acc: 0.7744
+2025-11-29 09:01:34,943 | INFO | [art_painting] Epoch 8/10 | Train - Loss: 0.0145, Cls: 0.0135, GRQO: 0.0015, Acc: 0.9969 | Val - Loss: 1.0136, Cls: 1.0130, GRQO: 0.0009, Acc: 0.7451
+2025-11-29 09:01:50,947 | INFO | [art_painting] Epoch 9/10 | Train - Loss: 0.0087, Cls: 0.0078, GRQO: 0.0014, Acc: 0.9980 | Val - Loss: 1.5018, Cls: 1.5011, GRQO: 0.0010, Acc: 0.6685
+2025-11-29 09:02:06,909 | INFO | [art_painting] Epoch 10/10 | Train - Loss: 0.0515, Cls: 0.0505, GRQO: 0.0015, Acc: 0.9862 | Val - Loss: 1.3848, Cls: 1.3843, GRQO: 0.0007, Acc: 0.6758
+2025-11-29 09:02:06,909 | INFO | [art_painting] Best Acc: 0.7744
+2025-11-29 09:02:06,909 | INFO | ------------------------------------------------------------
+2025-11-29 09:02:07,009 | INFO | === LODO: Leaving out domain 'cartoon' ===
+2025-11-29 09:02:23,059 | INFO | [cartoon] Epoch 1/10 | Train - Loss: 0.7744, Cls: 0.7689, GRQO: 0.0079, Acc: 0.7705 | Val - Loss: 0.9722, Cls: 0.9707, GRQO: 0.0021, Acc: 0.6702
+2025-11-29 09:02:23,112 | INFO | [cartoon] New best val acc: 0.6702
+2025-11-29 09:02:39,252 | INFO | [cartoon] Epoch 2/10 | Train - Loss: 0.1310, Cls: 0.1288, GRQO: 0.0032, Acc: 0.9597 | Val - Loss: 0.8149, Cls: 0.8140, GRQO: 0.0014, Acc: 0.7393
+2025-11-29 09:02:39,294 | INFO | [cartoon] New best val acc: 0.7393
+2025-11-29 09:02:55,423 | INFO | [cartoon] Epoch 3/10 | Train - Loss: 0.0340, Cls: 0.0321, GRQO: 0.0027, Acc: 0.9928 | Val - Loss: 0.9159, Cls: 0.9151, GRQO: 0.0012, Acc: 0.7423
+2025-11-29 09:02:55,476 | INFO | [cartoon] New best val acc: 0.7423
+2025-11-29 09:03:11,554 | INFO | [cartoon] Epoch 4/10 | Train - Loss: 0.0138, Cls: 0.0121, GRQO: 0.0025, Acc: 0.9982 | Val - Loss: 1.1026, Cls: 1.1018, GRQO: 0.0012, Acc: 0.7095
+2025-11-29 09:03:28,624 | INFO | [cartoon] Epoch 5/10 | Train - Loss: 0.0080, Cls: 0.0065, GRQO: 0.0022, Acc: 0.9992 | Val - Loss: 1.1560, Cls: 1.1554, GRQO: 0.0009, Acc: 0.7240
+2025-11-29 09:03:45,174 | INFO | [cartoon] Epoch 6/10 | Train - Loss: 0.0073, Cls: 0.0060, GRQO: 0.0020, Acc: 0.9990 | Val - Loss: 0.9509, Cls: 0.9503, GRQO: 0.0009, Acc: 0.7654
+2025-11-29 09:03:45,229 | INFO | [cartoon] New best val acc: 0.7654
+2025-11-29 09:04:01,757 | INFO | [cartoon] Epoch 7/10 | Train - Loss: 0.0125, Cls: 0.0112, GRQO: 0.0018, Acc: 0.9974 | Val - Loss: 1.0938, Cls: 1.0931, GRQO: 0.0010, Acc: 0.7248
+2025-11-29 09:04:18,034 | INFO | [cartoon] Epoch 8/10 | Train - Loss: 0.0117, Cls: 0.0106, GRQO: 0.0017, Acc: 0.9974 | Val - Loss: 1.0336, Cls: 1.0331, GRQO: 0.0007, Acc: 0.7513
+2025-11-29 09:04:34,372 | INFO | [cartoon] Epoch 9/10 | Train - Loss: 0.0122, Cls: 0.0111, GRQO: 0.0016, Acc: 0.9969 | Val - Loss: 1.3155, Cls: 1.3151, GRQO: 0.0006, Acc: 0.7172
+2025-11-29 09:04:50,638 | INFO | [cartoon] Epoch 10/10 | Train - Loss: 0.0095, Cls: 0.0085, GRQO: 0.0015, Acc: 0.9982 | Val - Loss: 1.3033, Cls: 1.3029, GRQO: 0.0005, Acc: 0.7039
+2025-11-29 09:04:50,638 | INFO | [cartoon] Best Acc: 0.7654
+2025-11-29 09:04:50,638 | INFO | ------------------------------------------------------------
+2025-11-29 09:04:50,739 | INFO | === LODO: Leaving out domain 'photo' ===
+2025-11-29 09:05:06,708 | INFO | [photo] Epoch 1/10 | Train - Loss: 0.7752, Cls: 0.7706, GRQO: 0.0065, Acc: 0.7601 | Val - Loss: 0.2308, Cls: 0.2299, GRQO: 0.0012, Acc: 0.9311
+2025-11-29 09:05:06,741 | INFO | [photo] New best val acc: 0.9311
+2025-11-29 09:05:22,569 | INFO | [photo] Epoch 2/10 | Train - Loss: 0.1472, Cls: 0.1450, GRQO: 0.0031, Acc: 0.9602 | Val - Loss: 0.2187, Cls: 0.2181, GRQO: 0.0007, Acc: 0.9293
+2025-11-29 09:05:38,360 | INFO | [photo] Epoch 3/10 | Train - Loss: 0.0539, Cls: 0.0516, GRQO: 0.0033, Acc: 0.9888 | Val - Loss: 0.1857, Cls: 0.1850, GRQO: 0.0009, Acc: 0.9419
+2025-11-29 09:05:38,409 | INFO | [photo] New best val acc: 0.9419
+2025-11-29 09:05:54,589 | INFO | [photo] Epoch 4/10 | Train - Loss: 0.0782, Cls: 0.0759, GRQO: 0.0033, Acc: 0.9779 | Val - Loss: 0.2969, Cls: 0.2963, GRQO: 0.0009, Acc: 0.9072
+2025-11-29 09:06:10,803 | INFO | [photo] Epoch 5/10 | Train - Loss: 0.1106, Cls: 0.1080, GRQO: 0.0038, Acc: 0.9639 | Val - Loss: 0.2518, Cls: 0.2513, GRQO: 0.0008, Acc: 0.9311
+2025-11-29 09:06:26,903 | INFO | [photo] Epoch 6/10 | Train - Loss: 0.0805, Cls: 0.0776, GRQO: 0.0042, Acc: 0.9769 | Val - Loss: 0.2617, Cls: 0.2605, GRQO: 0.0017, Acc: 0.9275
+2025-11-29 09:06:42,919 | INFO | [photo] Epoch 7/10 | Train - Loss: 0.0397, Cls: 0.0337, GRQO: 0.0087, Acc: 0.9913 | Val - Loss: 0.2859, Cls: 0.2828, GRQO: 0.0044, Acc: 0.9186
+2025-11-29 09:06:59,088 | INFO | [photo] Epoch 8/10 | Train - Loss: 0.0126, Cls: 0.0092, GRQO: 0.0048, Acc: 0.9996 | Val - Loss: 0.3169, Cls: 0.3145, GRQO: 0.0034, Acc: 0.9102
+2025-11-29 09:07:14,944 | INFO | [photo] Epoch 9/10 | Train - Loss: 0.0519, Cls: 0.0484, GRQO: 0.0050, Acc: 0.9840 | Val - Loss: 0.2868, Cls: 0.2850, GRQO: 0.0026, Acc: 0.9186
+2025-11-29 09:07:30,871 | INFO | [photo] Epoch 10/10 | Train - Loss: 0.0686, Cls: 0.0652, GRQO: 0.0048, Acc: 0.9820 | Val - Loss: 0.3584, Cls: 0.3566, GRQO: 0.0025, Acc: 0.9102
+2025-11-29 09:07:30,871 | INFO | [photo] Best Acc: 0.9419
+2025-11-29 09:07:30,871 | INFO | ------------------------------------------------------------
+2025-11-29 09:07:30,965 | INFO | === LODO: Leaving out domain 'sketch' ===
+2025-11-29 09:07:48,637 | INFO | [sketch] Epoch 1/10 | Train - Loss: 0.8247, Cls: 0.8156, GRQO: 0.0130, Acc: 0.7733 | Val - Loss: 0.9047, Cls: 0.9028, GRQO: 0.0027, Acc: 0.6691
+2025-11-29 09:07:48,688 | INFO | [sketch] New best val acc: 0.6691
+2025-11-29 09:08:06,527 | INFO | [sketch] Epoch 2/10 | Train - Loss: 0.1064, Cls: 0.1039, GRQO: 0.0035, Acc: 0.9715 | Val - Loss: 1.3435, Cls: 1.3422, GRQO: 0.0019, Acc: 0.6073
+2025-11-29 09:08:24,303 | INFO | [sketch] Epoch 3/10 | Train - Loss: 0.0263, Cls: 0.0244, GRQO: 0.0027, Acc: 0.9955 | Val - Loss: 1.0503, Cls: 1.0485, GRQO: 0.0026, Acc: 0.6824
+2025-11-29 09:08:24,354 | INFO | [sketch] New best val acc: 0.6824
+2025-11-29 09:08:42,119 | INFO | [sketch] Epoch 4/10 | Train - Loss: 0.0107, Cls: 0.0090, GRQO: 0.0023, Acc: 0.9993 | Val - Loss: 1.2613, Cls: 1.2595, GRQO: 0.0026, Acc: 0.6663
+2025-11-29 09:09:00,066 | INFO | [sketch] Epoch 5/10 | Train - Loss: 0.0061, Cls: 0.0047, GRQO: 0.0020, Acc: 1.0000 | Val - Loss: 1.3604, Cls: 1.3588, GRQO: 0.0023, Acc: 0.6490
+2025-11-29 09:09:17,852 | INFO | [sketch] Epoch 6/10 | Train - Loss: 0.0047, Cls: 0.0034, GRQO: 0.0018, Acc: 1.0000 | Val - Loss: 1.4240, Cls: 1.4223, GRQO: 0.0023, Acc: 0.6416
+2025-11-29 09:09:35,618 | INFO | [sketch] Epoch 7/10 | Train - Loss: 0.0038, Cls: 0.0027, GRQO: 0.0016, Acc: 1.0000 | Val - Loss: 1.3960, Cls: 1.3946, GRQO: 0.0020, Acc: 0.6523
+2025-11-29 09:09:53,434 | INFO | [sketch] Epoch 8/10 | Train - Loss: 0.0032, Cls: 0.0022, GRQO: 0.0015, Acc: 1.0000 | Val - Loss: 1.4439, Cls: 1.4425, GRQO: 0.0020, Acc: 0.6526
+2025-11-29 09:10:11,271 | INFO | [sketch] Epoch 9/10 | Train - Loss: 0.0029, Cls: 0.0020, GRQO: 0.0013, Acc: 1.0000 | Val - Loss: 1.4925, Cls: 1.4912, GRQO: 0.0018, Acc: 0.6470
+2025-11-29 09:10:29,103 | INFO | [sketch] Epoch 10/10 | Train - Loss: 0.0026, Cls: 0.0017, GRQO: 0.0012, Acc: 1.0000 | Val - Loss: 1.4418, Cls: 1.4405, GRQO: 0.0018, Acc: 0.6523
+2025-11-29 09:10:29,103 | INFO | [sketch] Best Acc: 0.6824
+2025-11-29 09:10:29,103 | INFO | ------------------------------------------------------------
+2025-11-29 09:10:29,115 | INFO | LODO finished | Mean Acc: 0.7910 | Summary saved to d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs\lodo_summary_20251129_091029.json
+2025-11-29 09:10:29,119 | INFO | Initializing ResNet baseline: resnet18
+2025-11-29 09:10:29,200 | INFO | === Baseline LODO: Leaving out domain 'art_painting' ===
+2025-11-29 09:10:44,750 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.5254, Acc: 0.8343 | Val Acc: 0.7139
+2025-11-29 09:10:59,989 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.1063, Acc: 0.9712 | Val Acc: 0.7500
+2025-11-29 09:11:15,168 | INFO | [art_painting] Epoch 3/10 | Train - Loss: 0.0341, Acc: 0.9961 | Val Acc: 0.7417
+2025-11-29 09:11:30,193 | INFO | [art_painting] Epoch 4/10 | Train - Loss: 0.0254, Acc: 0.9958 | Val Acc: 0.7812
+2025-11-29 09:11:45,228 | INFO | [art_painting] Epoch 5/10 | Train - Loss: 0.0189, Acc: 0.9961 | Val Acc: 0.7583
+2025-11-29 09:12:00,215 | INFO | [art_painting] Epoch 6/10 | Train - Loss: 0.0062, Acc: 0.9999 | Val Acc: 0.7720
+2025-11-29 09:12:15,223 | INFO | [art_painting] Epoch 7/10 | Train - Loss: 0.0032, Acc: 1.0000 | Val Acc: 0.7812
+2025-11-29 09:12:30,422 | INFO | [art_painting] Epoch 8/10 | Train - Loss: 0.0024, Acc: 1.0000 | Val Acc: 0.7881
+2025-11-29 09:12:45,345 | INFO | [art_painting] Epoch 9/10 | Train - Loss: 0.0019, Acc: 1.0000 | Val Acc: 0.7773
+2025-11-29 09:13:00,322 | INFO | [art_painting] Epoch 10/10 | Train - Loss: 0.0066, Acc: 0.9986 | Val Acc: 0.7505
+2025-11-29 09:13:00,323 | INFO | [art_painting] Best Val Acc: 0.7881
+2025-11-29 09:13:00,323 | INFO | ------------------------------------------------------------
+2025-11-29 09:13:00,324 | INFO | Initializing ResNet baseline: resnet18
+2025-11-29 09:13:00,397 | INFO | === Baseline LODO: Leaving out domain 'cartoon' ===
+2025-11-29 09:13:15,464 | INFO | [cartoon] Epoch 1/10 | Train - Loss: 0.5469, Acc: 0.8219 | Val Acc: 0.7133
+2025-11-29 09:13:30,452 | INFO | [cartoon] Epoch 2/10 | Train - Loss: 0.1005, Acc: 0.9736 | Val Acc: 0.7244
+2025-11-29 09:13:45,477 | INFO | [cartoon] Epoch 3/10 | Train - Loss: 0.0276, Acc: 0.9967 | Val Acc: 0.7351
+2025-11-29 09:14:00,630 | INFO | [cartoon] Epoch 4/10 | Train - Loss: 0.0091, Acc: 0.9997 | Val Acc: 0.7312
+2025-11-29 09:14:15,625 | INFO | [cartoon] Epoch 5/10 | Train - Loss: 0.0046, Acc: 1.0000 | Val Acc: 0.7419
+2025-11-29 09:14:30,829 | INFO | [cartoon] Epoch 6/10 | Train - Loss: 0.0030, Acc: 1.0000 | Val Acc: 0.7257
+2025-11-29 09:14:45,996 | INFO | [cartoon] Epoch 7/10 | Train - Loss: 0.0022, Acc: 1.0000 | Val Acc: 0.7368
+2025-11-29 09:15:01,011 | INFO | [cartoon] Epoch 8/10 | Train - Loss: 0.0017, Acc: 1.0000 | Val Acc: 0.7227
+2025-11-29 09:15:16,045 | INFO | [cartoon] Epoch 9/10 | Train - Loss: 0.0014, Acc: 1.0000 | Val Acc: 0.7363
+2025-11-29 09:15:31,245 | INFO | [cartoon] Epoch 10/10 | Train - Loss: 0.0012, Acc: 1.0000 | Val Acc: 0.7372
+2025-11-29 09:15:31,245 | INFO | [cartoon] Best Val Acc: 0.7419
+2025-11-29 09:15:31,245 | INFO | ------------------------------------------------------------
+2025-11-29 09:15:31,245 | INFO | Initializing ResNet baseline: resnet18
+2025-11-29 09:15:31,324 | INFO | === Baseline LODO: Leaving out domain 'photo' ===
+2025-11-29 09:15:45,995 | INFO | [photo] Epoch 1/10 | Train - Loss: 0.5688, Acc: 0.8104 | Val Acc: 0.9293
+2025-11-29 09:16:00,807 | INFO | [photo] Epoch 2/10 | Train - Loss: 0.1194, Acc: 0.9697 | Val Acc: 0.9497
+2025-11-29 09:16:15,844 | INFO | [photo] Epoch 3/10 | Train - Loss: 0.0328, Acc: 0.9970 | Val Acc: 0.9293
+2025-11-29 09:16:30,778 | INFO | [photo] Epoch 4/10 | Train - Loss: 0.0137, Acc: 0.9994 | Val Acc: 0.9467
+2025-11-29 09:16:45,594 | INFO | [photo] Epoch 5/10 | Train - Loss: 0.0070, Acc: 0.9999 | Val Acc: 0.9341
+2025-11-29 09:17:00,520 | INFO | [photo] Epoch 6/10 | Train - Loss: 0.0059, Acc: 0.9999 | Val Acc: 0.9425
+2025-11-29 09:17:15,393 | INFO | [photo] Epoch 7/10 | Train - Loss: 0.0048, Acc: 0.9999 | Val Acc: 0.9413
+2025-11-29 09:17:30,676 | INFO | [photo] Epoch 8/10 | Train - Loss: 0.0044, Acc: 0.9999 | Val Acc: 0.9389
+2025-11-29 09:17:45,760 | INFO | [photo] Epoch 9/10 | Train - Loss: 0.0033, Acc: 0.9999 | Val Acc: 0.9311
+2025-11-29 09:18:00,891 | INFO | [photo] Epoch 10/10 | Train - Loss: 0.0051, Acc: 0.9996 | Val Acc: 0.9347
+2025-11-29 09:18:00,891 | INFO | [photo] Best Val Acc: 0.9497
+2025-11-29 09:18:00,891 | INFO | ------------------------------------------------------------
+2025-11-29 09:18:00,891 | INFO | Initializing ResNet baseline: resnet18
+2025-11-29 09:18:00,975 | INFO | === Baseline LODO: Leaving out domain 'sketch' ===
+2025-11-29 09:18:19,147 | INFO | [sketch] Epoch 1/10 | Train - Loss: 0.5375, Acc: 0.8334 | Val Acc: 0.5678
+2025-11-29 09:18:36,886 | INFO | [sketch] Epoch 2/10 | Train - Loss: 0.0820, Acc: 0.9815 | Val Acc: 0.5271
+2025-11-29 09:18:54,373 | INFO | [sketch] Epoch 3/10 | Train - Loss: 0.0218, Acc: 0.9988 | Val Acc: 0.5101
+2025-11-29 09:19:11,958 | INFO | [sketch] Epoch 4/10 | Train - Loss: 0.0082, Acc: 1.0000 | Val Acc: 0.5582
+2025-11-29 09:19:28,691 | INFO | [sketch] Epoch 5/10 | Train - Loss: 0.0044, Acc: 1.0000 | Val Acc: 0.5775
+2025-11-29 09:19:45,456 | INFO | [sketch] Epoch 6/10 | Train - Loss: 0.0031, Acc: 1.0000 | Val Acc: 0.5974
+2025-11-29 09:20:02,073 | INFO | [sketch] Epoch 7/10 | Train - Loss: 0.0024, Acc: 1.0000 | Val Acc: 0.5844
+2025-11-29 09:20:18,808 | INFO | [sketch] Epoch 8/10 | Train - Loss: 0.0021, Acc: 1.0000 | Val Acc: 0.5841
+2025-11-29 09:20:35,589 | INFO | [sketch] Epoch 9/10 | Train - Loss: 0.0016, Acc: 1.0000 | Val Acc: 0.5834
+2025-11-29 09:20:52,182 | INFO | [sketch] Epoch 10/10 | Train - Loss: 0.0013, Acc: 1.0000 | Val Acc: 0.5879
+2025-11-29 09:20:52,182 | INFO | [sketch] Best Val Acc: 0.5974
+2025-11-29 09:20:52,183 | INFO | ------------------------------------------------------------
+2025-11-29 09:20:52,184 | INFO | Baseline LODO (resnet18) finished | Mean Acc: 0.7693

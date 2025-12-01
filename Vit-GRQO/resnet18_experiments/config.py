@@ -4,7 +4,7 @@ CFG = {
     "system": {
         "device": torch.device("cuda" if torch.cuda.is_available() else "cpu"),
         "seed": 42,
-        "num_workers": 0,
+        "num_workers": 4,
         "log_dir": "./logs",
         "ckpt_dir": "./checkpoints",
         "save_freq": 1,       # Save every N epochs
@@ -13,28 +13,26 @@ CFG = {
 
     "train": {
         "batch_size": 128,
-        "epochs": 5,
+        "epochs": 10,
         "lr": 1e-4,
     },
 
     "grqo": {
-        "topk": 24,
         "alpha": 2.0,
         "beta": 0.5,
         "tau": 1e-3,
-        "temperature": 0.1,
+        "temperature": 0.3,
         "hidden_dim": 192,
         "num_heads": 4,
         "num_tokens": 48,
         "num_layers":4,
         "dropout": 0.1,
         "ddropout": 0.1,
-        "lambda_grqo": 1.0,
-        "teacher_ema": 0.99,
+        "lambda_grqo": 0.8,
+        "teacher_ema": 0.95,
         "reward_proxy": "taylor",  # or "gradnorm"
-        "random_k":48,
+        "random_k":None
     },
-
 
     "datasets": {
         "PACS": {
@@ -45,7 +43,7 @@ CFG = {
         },
 
         "OfficeHome": {
-            "root": r"D:\Haseeb\Datasets\OfficeHomeDataset_10072016",
+            "root": r"D:\Haseeb\Datasets\\OfficeHomeDataset_10072016",
             "domains": ["Art", "Clipart", "Product", "Real World"],
             "num_classes": 65,
         },
@@ -58,18 +56,18 @@ CFG = {
         },
 
          "RMNIST": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\ROTMNIST\rmnist",
+            "root": r"D:\Haseeb\Datasets\Datasets\ROTMNIST\rmnist",
             "domains": ["0", "15", "30", "45", "60", "75"],  
             "num_classes": 10,  
         },
 
         "CMNIST": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\CMNIST",
+            "root": r"D:\Haseeb\Datasets\Datasets\CMNIST",
             "domains": ["red", "green", "blue"],  
             "num_classes": 10,  
         },
         "TerraIncognita": {
-            "root": r"C:\Users\Fatim_Sproj\Desktop\Fatim\Spring 2025\Datasets\terraincog\terra_incognita",
+            "root": r"D:\Haseeb\Datasets\terraincog\terra_incognita",
             "domains": ["location_38", "location_43", "location_46", "location_100"],
             "num_classes": 10,
         },

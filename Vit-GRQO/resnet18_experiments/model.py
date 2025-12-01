@@ -12,7 +12,7 @@ class resnetGRQO(nn.Module):
         super().__init__()
         self.backbone = backbone
         self.grqo = grqo_model
-        self.projection_head = nn.Linear(HD, 384)
+        self.projection_head = nn.Linear(HD, 192)
 
     def forward(self, x, labels=None, domains=None):
         outputs = self.backbone(x)
@@ -32,7 +32,7 @@ def get_model(cfg, dataset="VLCS"):
     HD = 512
 
     grqo_model = GRQO(
-        Hidden_dim=384,
+        Hidden_dim=192,
         num_heads=grqo_cfg["num_heads"],
         dropout=grqo_cfg["dropout"],
         num_tokens=grqo_cfg["num_tokens"],

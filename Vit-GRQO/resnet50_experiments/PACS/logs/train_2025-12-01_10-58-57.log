@@ -1,0 +1,61 @@
+2025-12-01 10:58:57,037 | INFO | Initialized experiment directories for PACS
+2025-12-01 10:58:57,038 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\logs
+2025-12-01 10:58:57,038 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\checkpoints
+2025-12-01 10:58:57,039 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\plots
+2025-12-01 10:58:58,142 | INFO | Initializing ResNet baseline: resnet50
+2025-12-01 10:58:58,422 | INFO | === Baseline LODO: Leaving out domain 'art_painting' ===
+2025-12-01 10:59:22,144 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.4189, Acc: 0.8740 | Val Acc: 0.8022
+2025-12-01 10:59:45,301 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.0661, Acc: 0.9799 | Val Acc: 0.8047
+2025-12-01 11:00:08,717 | INFO | [art_painting] Epoch 3/10 | Train - Loss: 0.0283, Acc: 0.9926 | Val Acc: 0.8394
+2025-12-01 11:00:31,950 | INFO | [art_painting] Epoch 4/10 | Train - Loss: 0.0331, Acc: 0.9912 | Val Acc: 0.7881
+2025-12-01 11:00:55,350 | INFO | [art_painting] Epoch 5/10 | Train - Loss: 0.0116, Acc: 0.9972 | Val Acc: 0.8228
+2025-12-01 11:01:18,721 | INFO | [art_painting] Epoch 6/10 | Train - Loss: 0.0148, Acc: 0.9957 | Val Acc: 0.8042
+2025-12-01 11:01:42,017 | INFO | [art_painting] Epoch 7/10 | Train - Loss: 0.0170, Acc: 0.9947 | Val Acc: 0.7998
+2025-12-01 11:02:05,300 | INFO | [art_painting] Epoch 8/10 | Train - Loss: 0.0105, Acc: 0.9966 | Val Acc: 0.8057
+2025-12-01 11:02:28,449 | INFO | [art_painting] Epoch 9/10 | Train - Loss: 0.0335, Acc: 0.9907 | Val Acc: 0.7661
+2025-12-01 11:02:51,681 | INFO | [art_painting] Epoch 10/10 | Train - Loss: 0.0256, Acc: 0.9923 | Val Acc: 0.7402
+2025-12-01 11:02:51,681 | INFO | [art_painting] Best Val Acc: 0.8394
+2025-12-01 11:02:51,681 | INFO | ------------------------------------------------------------
+2025-12-01 11:02:51,681 | INFO | Initializing ResNet baseline: resnet50
+2025-12-01 11:02:51,865 | INFO | === Baseline LODO: Leaving out domain 'cartoon' ===
+2025-12-01 11:03:15,066 | INFO | [cartoon] Epoch 1/10 | Train - Loss: 0.4342, Acc: 0.8671 | Val Acc: 0.7487
+2025-12-01 11:03:38,280 | INFO | [cartoon] Epoch 2/10 | Train - Loss: 0.0678, Acc: 0.9793 | Val Acc: 0.7116
+2025-12-01 11:04:01,465 | INFO | [cartoon] Epoch 3/10 | Train - Loss: 0.0250, Acc: 0.9945 | Val Acc: 0.8046
+2025-12-01 11:04:24,679 | INFO | [cartoon] Epoch 4/10 | Train - Loss: 0.0067, Acc: 0.9991 | Val Acc: 0.7884
+2025-12-01 11:04:47,846 | INFO | [cartoon] Epoch 5/10 | Train - Loss: 0.0054, Acc: 0.9991 | Val Acc: 0.8225
+2025-12-01 11:05:11,045 | INFO | [cartoon] Epoch 6/10 | Train - Loss: 0.0104, Acc: 0.9971 | Val Acc: 0.7619
+2025-12-01 11:05:34,245 | INFO | [cartoon] Epoch 7/10 | Train - Loss: 0.0087, Acc: 0.9976 | Val Acc: 0.7927
+2025-12-01 11:05:57,444 | INFO | [cartoon] Epoch 8/10 | Train - Loss: 0.0041, Acc: 0.9991 | Val Acc: 0.7679
+2025-12-01 11:06:20,629 | INFO | [cartoon] Epoch 9/10 | Train - Loss: 0.0060, Acc: 0.9986 | Val Acc: 0.7611
+2025-12-01 11:06:43,793 | INFO | [cartoon] Epoch 10/10 | Train - Loss: 0.0133, Acc: 0.9961 | Val Acc: 0.6758
+2025-12-01 11:06:43,809 | INFO | [cartoon] Best Val Acc: 0.8225
+2025-12-01 11:06:43,809 | INFO | ------------------------------------------------------------
+2025-12-01 11:06:43,809 | INFO | Initializing ResNet baseline: resnet50
+2025-12-01 11:06:43,985 | INFO | === Baseline LODO: Leaving out domain 'photo' ===
+2025-12-01 11:07:07,226 | INFO | [photo] Epoch 1/10 | Train - Loss: 0.4573, Acc: 0.8606 | Val Acc: 0.9629
+2025-12-01 11:07:30,593 | INFO | [photo] Epoch 2/10 | Train - Loss: 0.0697, Acc: 0.9810 | Val Acc: 0.9623
+2025-12-01 11:07:53,759 | INFO | [photo] Epoch 3/10 | Train - Loss: 0.0210, Acc: 0.9958 | Val Acc: 0.9611
+2025-12-01 11:08:17,192 | INFO | [photo] Epoch 4/10 | Train - Loss: 0.0110, Acc: 0.9976 | Val Acc: 0.9629
+2025-12-01 11:08:40,326 | INFO | [photo] Epoch 5/10 | Train - Loss: 0.0264, Acc: 0.9924 | Val Acc: 0.9509
+2025-12-01 11:09:03,541 | INFO | [photo] Epoch 6/10 | Train - Loss: 0.0150, Acc: 0.9958 | Val Acc: 0.9509
+2025-12-01 11:09:26,724 | INFO | [photo] Epoch 7/10 | Train - Loss: 0.0200, Acc: 0.9951 | Val Acc: 0.9353
+2025-12-01 11:09:49,901 | INFO | [photo] Epoch 8/10 | Train - Loss: 0.0166, Acc: 0.9960 | Val Acc: 0.9551
+2025-12-01 11:10:13,723 | INFO | [photo] Epoch 9/10 | Train - Loss: 0.0127, Acc: 0.9970 | Val Acc: 0.9695
+2025-12-01 11:10:37,670 | INFO | [photo] Epoch 10/10 | Train - Loss: 0.0115, Acc: 0.9974 | Val Acc: 0.9485
+2025-12-01 11:10:37,670 | INFO | [photo] Best Val Acc: 0.9695
+2025-12-01 11:10:37,670 | INFO | ------------------------------------------------------------
+2025-12-01 11:10:37,672 | INFO | Initializing ResNet baseline: resnet50
+2025-12-01 11:10:37,847 | INFO | === Baseline LODO: Leaving out domain 'sketch' ===
+2025-12-01 11:11:01,555 | INFO | [sketch] Epoch 1/10 | Train - Loss: 0.4489, Acc: 0.8753 | Val Acc: 0.6360
+2025-12-01 11:11:25,194 | INFO | [sketch] Epoch 2/10 | Train - Loss: 0.0565, Acc: 0.9828 | Val Acc: 0.6783
+2025-12-01 11:11:49,118 | INFO | [sketch] Epoch 3/10 | Train - Loss: 0.0142, Acc: 0.9974 | Val Acc: 0.7009
+2025-12-01 11:12:12,804 | INFO | [sketch] Epoch 4/10 | Train - Loss: 0.0052, Acc: 0.9995 | Val Acc: 0.7223
+2025-12-01 11:12:36,123 | INFO | [sketch] Epoch 5/10 | Train - Loss: 0.0023, Acc: 0.9998 | Val Acc: 0.7137
+2025-12-01 11:12:59,386 | INFO | [sketch] Epoch 6/10 | Train - Loss: 0.0012, Acc: 1.0000 | Val Acc: 0.7208
+2025-12-01 11:13:22,786 | INFO | [sketch] Epoch 7/10 | Train - Loss: 0.0008, Acc: 1.0000 | Val Acc: 0.7190
+2025-12-01 11:13:45,986 | INFO | [sketch] Epoch 8/10 | Train - Loss: 0.0007, Acc: 1.0000 | Val Acc: 0.7160
+2025-12-01 11:14:09,152 | INFO | [sketch] Epoch 9/10 | Train - Loss: 0.0007, Acc: 0.9998 | Val Acc: 0.7213
+2025-12-01 11:14:32,485 | INFO | [sketch] Epoch 10/10 | Train - Loss: 0.0018, Acc: 0.9995 | Val Acc: 0.6396
+2025-12-01 11:14:32,485 | INFO | [sketch] Best Val Acc: 0.7223
+2025-12-01 11:14:32,485 | INFO | ------------------------------------------------------------
+2025-12-01 11:14:32,485 | INFO | Baseline LODO (resnet50) finished | Mean Acc: 0.8384

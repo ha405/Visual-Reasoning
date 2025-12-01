@@ -1,0 +1,14 @@
+2025-11-26 15:04:55,984 | INFO | Initialized experiment directories for PACS
+2025-11-26 15:04:55,985 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\logs
+2025-11-26 15:04:55,986 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\checkpoints
+2025-11-26 15:04:55,987 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\PACS\plots
+2025-11-26 15:04:56,241 | INFO | === LODO: Leaving out domain 'art_painting' ===
+2025-11-26 15:05:13,512 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.6793, Cls: 0.6713, GRQO: 0.0101, Acc: 0.8032 | Val - Loss: 0.8077, Cls: 0.8060, GRQO: 0.0022, Acc: 0.7383
+2025-11-26 15:05:13,563 | INFO | [art_painting] New best val acc: 0.7383
+2025-11-26 15:05:30,361 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.1205, Cls: 0.1181, GRQO: 0.0030, Acc: 0.9629 | Val - Loss: 0.9340, Cls: 0.9330, GRQO: 0.0013, Acc: 0.7358
+2025-11-26 15:05:46,990 | INFO | [art_painting] Epoch 3/10 | Train - Loss: 0.0382, Cls: 0.0362, GRQO: 0.0025, Acc: 0.9921 | Val - Loss: 0.8104, Cls: 0.8097, GRQO: 0.0008, Acc: 0.7603
+2025-11-26 15:05:47,045 | INFO | [art_painting] New best val acc: 0.7603
+2025-11-26 15:06:03,373 | INFO | [art_painting] Epoch 4/10 | Train - Loss: 0.0216, Cls: 0.0197, GRQO: 0.0023, Acc: 0.9965 | Val - Loss: 0.9453, Cls: 0.9445, GRQO: 0.0010, Acc: 0.7397
+2025-11-26 15:06:19,593 | INFO | [art_painting] Epoch 5/10 | Train - Loss: 0.0088, Cls: 0.0072, GRQO: 0.0020, Acc: 0.9995 | Val - Loss: 0.8698, Cls: 0.8693, GRQO: 0.0006, Acc: 0.7617
+2025-11-26 15:06:19,644 | INFO | [art_painting] New best val acc: 0.7617
+2025-11-26 15:06:35,957 | INFO | [art_painting] Epoch 6/10 | Train - Loss: 0.0514, Cls: 0.0499, GRQO: 0.0019, Acc: 0.9846 | Val - Loss: 1.1902, Cls: 1.1900, GRQO: 0.0003, Acc: 0.7095

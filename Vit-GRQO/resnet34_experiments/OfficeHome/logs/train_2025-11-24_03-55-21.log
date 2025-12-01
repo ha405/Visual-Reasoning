@@ -1,0 +1,112 @@
+2025-11-24 03:55:21,358 | INFO | Initialized experiment directories for OfficeHome
+2025-11-24 03:55:21,359 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\logs
+2025-11-24 03:55:21,360 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\checkpoints
+2025-11-24 03:55:21,360 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\OfficeHome\plots
+2025-11-24 03:55:21,643 | INFO | === LODO: Leaving out domain 'Art' ===
+2025-11-24 03:56:47,001 | INFO | [Art] Epoch 1/20 | Train - Loss: 2.2424, Cls: 2.2291, GRQO: 0.1324, Acc: 0.5142 | Val - Loss: 1.9446, Cls: 1.9209, GRQO: 0.2374, Acc: 0.5253
+2025-11-24 03:56:47,083 | INFO | [Art] New best val acc: 0.5253
+2025-11-24 03:58:12,117 | INFO | [Art] Epoch 2/20 | Train - Loss: 0.6412, Cls: 0.6484, GRQO: -0.0719, Acc: 0.8423 | Val - Loss: 1.7908, Cls: 1.8203, GRQO: -0.2950, Acc: 0.5488
+2025-11-24 03:58:12,192 | INFO | [Art] New best val acc: 0.5488
+2025-11-24 03:59:38,047 | INFO | [Art] Epoch 3/20 | Train - Loss: -0.2781, Cls: 0.2658, GRQO: -5.4387, Acc: 0.9402 | Val - Loss: -0.4328, Cls: 1.9937, GRQO: -24.2649, Acc: 0.5315
+2025-11-24 04:01:06,579 | INFO | [Art] Epoch 4/20 | Train - Loss: -2.2894, Cls: 0.1416, GRQO: -24.3098, Acc: 0.9721 | Val - Loss: -0.4130, Cls: 2.0608, GRQO: -24.7376, Acc: 0.5402
+2025-11-24 04:02:34,938 | INFO | [Art] Epoch 5/20 | Train - Loss: -2.3816, Cls: 0.0886, GRQO: -24.7021, Acc: 0.9824 | Val - Loss: -0.4472, Cls: 2.0191, GRQO: -24.6628, Acc: 0.5418
+2025-11-24 04:04:03,008 | INFO | [Art] Epoch 6/20 | Train - Loss: -2.3845, Cls: 0.0566, GRQO: -24.4109, Acc: 0.9873 | Val - Loss: -0.4163, Cls: 2.0079, GRQO: -24.2416, Acc: 0.5628
+2025-11-24 04:04:03,072 | INFO | [Art] New best val acc: 0.5628
+2025-11-24 04:05:29,890 | INFO | [Art] Epoch 7/20 | Train - Loss: -2.3557, Cls: 0.0461, GRQO: -24.0177, Acc: 0.9883 | Val - Loss: -0.3866, Cls: 2.0235, GRQO: -24.1012, Acc: 0.5616
+2025-11-24 04:06:57,072 | INFO | [Art] Epoch 8/20 | Train - Loss: -2.3173, Cls: 0.0400, GRQO: -23.5725, Acc: 0.9889 | Val - Loss: -0.3091, Cls: 2.0895, GRQO: -23.9855, Acc: 0.5575
+2025-11-24 04:08:23,954 | INFO | [Art] Epoch 9/20 | Train - Loss: -2.2853, Cls: 0.0392, GRQO: -23.2450, Acc: 0.9886 | Val - Loss: -0.2549, Cls: 2.1194, GRQO: -23.7423, Acc: 0.5612
+2025-11-24 04:09:51,048 | INFO | [Art] Epoch 10/20 | Train - Loss: -2.2378, Cls: 0.0371, GRQO: -22.7497, Acc: 0.9889 | Val - Loss: -0.2035, Cls: 2.1663, GRQO: -23.6976, Acc: 0.5542
+2025-11-24 04:11:18,234 | INFO | [Art] Epoch 11/20 | Train - Loss: -2.1876, Cls: 0.0305, GRQO: -22.1809, Acc: 0.9907 | Val - Loss: -0.1973, Cls: 2.1599, GRQO: -23.5725, Acc: 0.5538
+2025-11-24 04:12:45,548 | INFO | [Art] Epoch 12/20 | Train - Loss: -2.1412, Cls: 0.0286, GRQO: -21.6984, Acc: 0.9908 | Val - Loss: -0.2260, Cls: 2.1125, GRQO: -23.3847, Acc: 0.5735
+2025-11-24 04:12:45,619 | INFO | [Art] New best val acc: 0.5735
+2025-11-24 04:14:14,330 | INFO | [Art] Epoch 13/20 | Train - Loss: -2.0874, Cls: 0.0266, GRQO: -21.1402, Acc: 0.9900 | Val - Loss: -0.1264, Cls: 2.1949, GRQO: -23.2133, Acc: 0.5509
+2025-11-24 04:15:42,925 | INFO | [Art] Epoch 14/20 | Train - Loss: -2.0600, Cls: 0.0264, GRQO: -20.8646, Acc: 0.9904 | Val - Loss: -0.1246, Cls: 2.1975, GRQO: -23.2214, Acc: 0.5604
+2025-11-24 04:17:10,460 | INFO | [Art] Epoch 15/20 | Train - Loss: -2.0037, Cls: 0.0240, GRQO: -20.2774, Acc: 0.9904 | Val - Loss: -0.0781, Cls: 2.2204, GRQO: -22.9849, Acc: 0.5608
+2025-11-24 04:18:38,932 | INFO | [Art] Epoch 16/20 | Train - Loss: -1.9597, Cls: 0.0242, GRQO: -19.8396, Acc: 0.9905 | Val - Loss: -0.0533, Cls: 2.2502, GRQO: -23.0352, Acc: 0.5575
+2025-11-24 04:20:07,657 | INFO | [Art] Epoch 17/20 | Train - Loss: -1.9049, Cls: 0.0222, GRQO: -19.2714, Acc: 0.9916 | Val - Loss: -0.0233, Cls: 2.2641, GRQO: -22.8744, Acc: 0.5558
+2025-11-24 04:21:35,869 | INFO | [Art] Epoch 18/20 | Train - Loss: -1.9891, Cls: 0.0364, GRQO: -20.2553, Acc: 0.9882 | Val - Loss: 0.2456, Cls: 2.6264, GRQO: -23.8077, Acc: 0.5006
+2025-11-24 04:23:01,339 | INFO | [Art] Epoch 19/20 | Train - Loss: -2.1040, Cls: 0.1811, GRQO: -22.8519, Acc: 0.9473 | Val - Loss: 0.2053, Cls: 2.6545, GRQO: -24.4920, Acc: 0.4660
+2025-11-24 04:24:27,201 | INFO | [Art] Epoch 20/20 | Train - Loss: -2.1292, Cls: 0.1779, GRQO: -23.0701, Acc: 0.9492 | Val - Loss: 0.2663, Cls: 2.6819, GRQO: -24.1559, Acc: 0.4911
+2025-11-24 04:24:27,202 | INFO | [Art] Best Acc: 0.5735
+2025-11-24 04:24:27,202 | INFO | ------------------------------------------------------------
+2025-11-24 04:24:27,324 | INFO | === LODO: Leaving out domain 'Clipart' ===
+2025-11-24 04:25:51,392 | INFO | [Clipart] Epoch 1/20 | Train - Loss: 2.3348, Cls: 2.3254, GRQO: 0.0945, Acc: 0.4978 | Val - Loss: 2.2948, Cls: 2.2735, GRQO: 0.2132, Acc: 0.4465
+2025-11-24 04:25:51,458 | INFO | [Clipart] New best val acc: 0.4465
+2025-11-24 04:27:17,015 | INFO | [Clipart] Epoch 2/20 | Train - Loss: 0.6721, Cls: 0.6705, GRQO: 0.0162, Acc: 0.8385 | Val - Loss: 2.3048, Cls: 2.3113, GRQO: -0.0653, Acc: 0.4575
+2025-11-24 04:27:17,093 | INFO | [Clipart] New best val acc: 0.4575
+2025-11-24 04:28:40,548 | INFO | [Clipart] Epoch 3/20 | Train - Loss: 0.2301, Cls: 0.2551, GRQO: -0.2501, Acc: 0.9465 | Val - Loss: 2.2603, Cls: 2.3965, GRQO: -1.3619, Acc: 0.4696
+2025-11-24 04:28:40,618 | INFO | [Clipart] New best val acc: 0.4696
+2025-11-24 04:30:06,763 | INFO | [Clipart] Epoch 4/20 | Train - Loss: -0.3181, Cls: 0.1056, GRQO: -4.2361, Acc: 0.9821 | Val - Loss: 0.0957, Cls: 2.5301, GRQO: -24.3440, Acc: 0.4644
+2025-11-24 04:31:30,746 | INFO | [Clipart] Epoch 5/20 | Train - Loss: -2.3785, Cls: 0.0522, GRQO: -24.3067, Acc: 0.9930 | Val - Loss: 0.0794, Cls: 2.5514, GRQO: -24.7200, Acc: 0.4795
+2025-11-24 04:31:30,811 | INFO | [Clipart] New best val acc: 0.4795
+2025-11-24 04:32:54,737 | INFO | [Clipart] Epoch 6/20 | Train - Loss: -2.4117, Cls: 0.0339, GRQO: -24.4557, Acc: 0.9947 | Val - Loss: 0.0884, Cls: 2.5497, GRQO: -24.6133, Acc: 0.4859
+2025-11-24 04:32:54,801 | INFO | [Clipart] New best val acc: 0.4859
+2025-11-24 04:34:16,840 | INFO | [Clipart] Epoch 7/20 | Train - Loss: -2.3856, Cls: 0.0294, GRQO: -24.1503, Acc: 0.9944 | Val - Loss: 0.3434, Cls: 2.8053, GRQO: -24.6183, Acc: 0.4559
+2025-11-24 04:35:38,676 | INFO | [Clipart] Epoch 8/20 | Train - Loss: -2.3598, Cls: 0.0307, GRQO: -23.9048, Acc: 0.9939 | Val - Loss: 0.2583, Cls: 2.6995, GRQO: -24.4125, Acc: 0.4754
+2025-11-24 04:37:01,009 | INFO | [Clipart] Epoch 9/20 | Train - Loss: -2.3063, Cls: 0.0202, GRQO: -23.2645, Acc: 0.9952 | Val - Loss: 0.2997, Cls: 2.7269, GRQO: -24.2719, Acc: 0.4696
+2025-11-24 04:38:26,352 | INFO | [Clipart] Epoch 10/20 | Train - Loss: -2.2459, Cls: 0.0193, GRQO: -22.6520, Acc: 0.9952 | Val - Loss: 0.3386, Cls: 2.7588, GRQO: -24.2022, Acc: 0.4731
+2025-11-24 04:39:51,185 | INFO | [Clipart] Epoch 11/20 | Train - Loss: -2.1904, Cls: 0.0164, GRQO: -22.0682, Acc: 0.9956 | Val - Loss: 0.3481, Cls: 2.7553, GRQO: -24.0719, Acc: 0.4793
+2025-11-24 04:41:14,138 | INFO | [Clipart] Epoch 12/20 | Train - Loss: -2.1433, Cls: 0.0140, GRQO: -21.5726, Acc: 0.9958 | Val - Loss: 0.4394, Cls: 2.8232, GRQO: -23.8375, Acc: 0.4797
+2025-11-24 04:42:38,947 | INFO | [Clipart] Epoch 13/20 | Train - Loss: -2.0856, Cls: 0.0129, GRQO: -20.9850, Acc: 0.9959 | Val - Loss: 0.4483, Cls: 2.8219, GRQO: -23.7366, Acc: 0.4797
+2025-11-24 04:44:03,862 | INFO | [Clipart] Epoch 14/20 | Train - Loss: -2.0273, Cls: 0.0141, GRQO: -20.4145, Acc: 0.9955 | Val - Loss: 0.3842, Cls: 2.7501, GRQO: -23.6592, Acc: 0.4893
+2025-11-24 04:44:03,914 | INFO | [Clipart] New best val acc: 0.4893
+2025-11-24 04:45:27,528 | INFO | [Clipart] Epoch 15/20 | Train - Loss: -1.9870, Cls: 0.0134, GRQO: -20.0041, Acc: 0.9957 | Val - Loss: 0.4944, Cls: 2.8539, GRQO: -23.5957, Acc: 0.4779
+2025-11-24 04:46:49,976 | INFO | [Clipart] Epoch 16/20 | Train - Loss: -1.9371, Cls: 0.0127, GRQO: -19.4982, Acc: 0.9955 | Val - Loss: 0.4920, Cls: 2.8520, GRQO: -23.6008, Acc: 0.4795
+2025-11-24 04:48:14,107 | INFO | [Clipart] Epoch 17/20 | Train - Loss: -1.9866, Cls: 0.1618, GRQO: -21.4838, Acc: 0.9554 | Val - Loss: 0.7182, Cls: 3.1977, GRQO: -24.7958, Acc: 0.3945
+2025-11-24 04:49:38,673 | INFO | [Clipart] Epoch 18/20 | Train - Loss: -2.1540, Cls: 0.2126, GRQO: -23.6664, Acc: 0.9389 | Val - Loss: 0.6608, Cls: 3.0931, GRQO: -24.3235, Acc: 0.4234
+2025-11-24 04:51:02,771 | INFO | [Clipart] Epoch 19/20 | Train - Loss: -2.1231, Cls: 0.0496, GRQO: -21.7276, Acc: 0.9879 | Val - Loss: 0.7231, Cls: 3.1132, GRQO: -23.9013, Acc: 0.4506
+2025-11-24 04:52:26,419 | INFO | [Clipart] Epoch 20/20 | Train - Loss: -1.9730, Cls: 0.0222, GRQO: -19.9521, Acc: 0.9941 | Val - Loss: 0.8171, Cls: 3.1534, GRQO: -23.3637, Acc: 0.4527
+2025-11-24 04:52:26,435 | INFO | [Clipart] Best Acc: 0.4893
+2025-11-24 04:52:26,436 | INFO | ------------------------------------------------------------
+2025-11-24 04:52:26,538 | INFO | === LODO: Leaving out domain 'Product' ===
+2025-11-24 04:53:51,351 | INFO | [Product] Epoch 1/20 | Train - Loss: 2.5910, Cls: 2.5865, GRQO: 0.0452, Acc: 0.4093 | Val - Loss: 1.5503, Cls: 1.5418, GRQO: 0.0848, Acc: 0.6094
+2025-11-24 04:53:51,433 | INFO | [Product] New best val acc: 0.6094
+2025-11-24 04:55:16,666 | INFO | [Product] Epoch 2/20 | Train - Loss: 0.8663, Cls: 0.8621, GRQO: 0.0414, Acc: 0.7928 | Val - Loss: 1.2005, Cls: 1.2027, GRQO: -0.0220, Acc: 0.6821
+2025-11-24 04:55:16,734 | INFO | [Product] New best val acc: 0.6821
+2025-11-24 04:56:41,203 | INFO | [Product] Epoch 3/20 | Train - Loss: 0.3440, Cls: 0.3520, GRQO: -0.0797, Acc: 0.9202 | Val - Loss: 1.1731, Cls: 1.1889, GRQO: -0.1577, Acc: 0.6952
+2025-11-24 04:56:41,271 | INFO | [Product] New best val acc: 0.6952
+2025-11-24 04:58:05,396 | INFO | [Product] Epoch 4/20 | Train - Loss: 0.1359, Cls: 0.1575, GRQO: -0.2155, Acc: 0.9696 | Val - Loss: 1.1525, Cls: 1.1882, GRQO: -0.3568, Acc: 0.7069
+2025-11-24 04:58:05,464 | INFO | [Product] New best val acc: 0.7069
+2025-11-24 04:59:30,251 | INFO | [Product] Epoch 5/20 | Train - Loss: 0.0542, Cls: 0.1007, GRQO: -0.4654, Acc: 0.9795 | Val - Loss: 1.0833, Cls: 1.1995, GRQO: -1.1621, Acc: 0.7116
+2025-11-24 04:59:30,315 | INFO | [Product] New best val acc: 0.7116
+2025-11-24 05:00:55,994 | INFO | [Product] Epoch 6/20 | Train - Loss: -0.4660, Cls: 0.1101, GRQO: -5.7611, Acc: 0.9760 | Val - Loss: -1.0097, Cls: 1.2860, GRQO: -22.9570, Acc: 0.6923
+2025-11-24 05:02:19,540 | INFO | [Product] Epoch 7/20 | Train - Loss: -2.3119, Cls: 0.0841, GRQO: -23.9601, Acc: 0.9818 | Val - Loss: -1.0687, Cls: 1.3198, GRQO: -23.8846, Acc: 0.6975
+2025-11-24 05:03:42,495 | INFO | [Product] Epoch 8/20 | Train - Loss: -2.3481, Cls: 0.0745, GRQO: -24.2259, Acc: 0.9817 | Val - Loss: -1.0773, Cls: 1.2957, GRQO: -23.7302, Acc: 0.7011
+2025-11-24 05:05:05,938 | INFO | [Product] Epoch 9/20 | Train - Loss: -2.3362, Cls: 0.0492, GRQO: -23.8535, Acc: 0.9873 | Val - Loss: -1.0133, Cls: 1.3227, GRQO: -23.3603, Acc: 0.7069
+2025-11-24 05:06:30,717 | INFO | [Product] Epoch 10/20 | Train - Loss: -2.2901, Cls: 0.0415, GRQO: -23.3165, Acc: 0.9878 | Val - Loss: -1.0170, Cls: 1.2806, GRQO: -22.9767, Acc: 0.7177
+2025-11-24 05:06:30,771 | INFO | [Product] New best val acc: 0.7177
+2025-11-24 05:07:55,968 | INFO | [Product] Epoch 11/20 | Train - Loss: -2.2523, Cls: 0.0351, GRQO: -22.8748, Acc: 0.9879 | Val - Loss: -0.9734, Cls: 1.2979, GRQO: -22.7131, Acc: 0.7157
+2025-11-24 05:09:20,066 | INFO | [Product] Epoch 12/20 | Train - Loss: -2.2181, Cls: 0.0326, GRQO: -22.5076, Acc: 0.9881 | Val - Loss: -0.9499, Cls: 1.3041, GRQO: -22.5396, Acc: 0.7177
+2025-11-24 05:10:44,031 | INFO | [Product] Epoch 13/20 | Train - Loss: -2.2250, Cls: 0.0474, GRQO: -22.7248, Acc: 0.9851 | Val - Loss: -0.9080, Cls: 1.3371, GRQO: -22.4511, Acc: 0.7123
+2025-11-24 05:12:09,065 | INFO | [Product] Epoch 14/20 | Train - Loss: -2.1624, Cls: 0.0329, GRQO: -21.9528, Acc: 0.9888 | Val - Loss: -0.8488, Cls: 1.3628, GRQO: -22.1156, Acc: 0.7103
+2025-11-24 05:13:32,628 | INFO | [Product] Epoch 15/20 | Train - Loss: -2.0933, Cls: 0.0303, GRQO: -21.2355, Acc: 0.9896 | Val - Loss: -0.8270, Cls: 1.3685, GRQO: -21.9541, Acc: 0.7103
+2025-11-24 05:14:56,593 | INFO | [Product] Epoch 16/20 | Train - Loss: -2.0971, Cls: 0.0309, GRQO: -21.2803, Acc: 0.9891 | Val - Loss: -0.7632, Cls: 1.4229, GRQO: -21.8603, Acc: 0.7080
+2025-11-24 05:16:19,725 | INFO | [Product] Epoch 17/20 | Train - Loss: -2.0417, Cls: 0.0285, GRQO: -20.7025, Acc: 0.9883 | Val - Loss: -0.7556, Cls: 1.4033, GRQO: -21.5891, Acc: 0.7094
+2025-11-24 05:17:43,140 | INFO | [Product] Epoch 18/20 | Train - Loss: -1.9866, Cls: 0.0256, GRQO: -20.1224, Acc: 0.9894 | Val - Loss: -0.7585, Cls: 1.3728, GRQO: -21.3124, Acc: 0.7171
+2025-11-24 05:19:07,622 | INFO | [Product] Epoch 19/20 | Train - Loss: -1.9436, Cls: 0.0260, GRQO: -19.6961, Acc: 0.9891 | Val - Loss: -0.6876, Cls: 1.4491, GRQO: -21.3672, Acc: 0.7062
+2025-11-24 05:20:31,386 | INFO | [Product] Epoch 20/20 | Train - Loss: -2.1019, Cls: 0.1053, GRQO: -22.0725, Acc: 0.9682 | Val - Loss: -0.5389, Cls: 1.7988, GRQO: -23.3768, Acc: 0.6328
+2025-11-24 05:20:31,386 | INFO | [Product] Best Acc: 0.7177
+2025-11-24 05:20:31,386 | INFO | ------------------------------------------------------------
+2025-11-24 05:20:31,487 | INFO | === LODO: Leaving out domain 'Real World' ===
+2025-11-24 05:21:55,386 | INFO | [Real World] Epoch 1/20 | Train - Loss: 2.5379, Cls: 2.5255, GRQO: 0.1232, Acc: 0.4370 | Val - Loss: 1.3509, Cls: 1.3377, GRQO: 0.1324, Acc: 0.6612
+2025-11-24 05:21:55,436 | INFO | [Real World] New best val acc: 0.6612
+2025-11-24 05:23:19,335 | INFO | [Real World] Epoch 2/20 | Train - Loss: 0.8181, Cls: 0.8216, GRQO: -0.0350, Acc: 0.8062 | Val - Loss: 1.0657, Cls: 1.0928, GRQO: -0.2716, Acc: 0.7081
+2025-11-24 05:23:19,405 | INFO | [Real World] New best val acc: 0.7081
+2025-11-24 05:24:42,919 | INFO | [Real World] Epoch 3/20 | Train - Loss: -0.7234, Cls: 0.3438, GRQO: -10.6722, Acc: 0.9237 | Val - Loss: -1.3539, Cls: 1.1021, GRQO: -24.5597, Acc: 0.7067
+2025-11-24 05:26:07,132 | INFO | [Real World] Epoch 4/20 | Train - Loss: -2.3097, Cls: 0.1635, GRQO: -24.7312, Acc: 0.9679 | Val - Loss: -1.3634, Cls: 1.0951, GRQO: -24.5857, Acc: 0.7204
+2025-11-24 05:26:07,199 | INFO | [Real World] New best val acc: 0.7204
+2025-11-24 05:27:32,744 | INFO | [Real World] Epoch 5/20 | Train - Loss: -2.3893, Cls: 0.0917, GRQO: -24.8097, Acc: 0.9827 | Val - Loss: -1.3230, Cls: 1.1092, GRQO: -24.3215, Acc: 0.7214
+2025-11-24 05:27:32,828 | INFO | [Real World] New best val acc: 0.7214
+2025-11-24 05:28:57,233 | INFO | [Real World] Epoch 6/20 | Train - Loss: -2.4103, Cls: 0.0607, GRQO: -24.7100, Acc: 0.9868 | Val - Loss: -1.2553, Cls: 1.1433, GRQO: -23.9863, Acc: 0.7285
+2025-11-24 05:28:57,303 | INFO | [Real World] New best val acc: 0.7285
+2025-11-24 05:30:20,560 | INFO | [Real World] Epoch 7/20 | Train - Loss: -2.3971, Cls: 0.0562, GRQO: -24.5331, Acc: 0.9872 | Val - Loss: -1.2256, Cls: 1.1473, GRQO: -23.7291, Acc: 0.7276
+2025-11-24 05:31:45,009 | INFO | [Real World] Epoch 8/20 | Train - Loss: -2.3739, Cls: 0.0474, GRQO: -24.2125, Acc: 0.9875 | Val - Loss: -1.1999, Cls: 1.1379, GRQO: -23.3780, Acc: 0.7312
+2025-11-24 05:31:45,076 | INFO | [Real World] New best val acc: 0.7312
+2025-11-24 05:33:08,258 | INFO | [Real World] Epoch 9/20 | Train - Loss: -2.3455, Cls: 0.0373, GRQO: -23.8274, Acc: 0.9897 | Val - Loss: -1.1409, Cls: 1.1648, GRQO: -23.0569, Acc: 0.7285
+2025-11-24 05:34:31,587 | INFO | [Real World] Epoch 10/20 | Train - Loss: -2.3091, Cls: 0.0372, GRQO: -23.4626, Acc: 0.9889 | Val - Loss: -1.1200, Cls: 1.1661, GRQO: -22.8611, Acc: 0.7338
+2025-11-24 05:34:31,670 | INFO | [Real World] New best val acc: 0.7338
+2025-11-24 05:35:55,829 | INFO | [Real World] Epoch 11/20 | Train - Loss: -2.2752, Cls: 0.0347, GRQO: -23.0988, Acc: 0.9898 | Val - Loss: -1.0287, Cls: 1.2289, GRQO: -22.5757, Acc: 0.7264
+2025-11-24 05:37:21,111 | INFO | [Real World] Epoch 12/20 | Train - Loss: -2.2403, Cls: 0.0310, GRQO: -22.7123, Acc: 0.9909 | Val - Loss: -1.0250, Cls: 1.2074, GRQO: -22.3244, Acc: 0.7294
+2025-11-24 05:38:46,783 | INFO | [Real World] Epoch 13/20 | Train - Loss: -2.2160, Cls: 0.0328, GRQO: -22.4876, Acc: 0.9890 | Val - Loss: -1.0376, Cls: 1.1992, GRQO: -22.3684, Acc: 0.7299
+2025-11-24 05:40:10,737 | INFO | [Real World] Epoch 14/20 | Train - Loss: -2.1637, Cls: 0.0265, GRQO: -21.9024, Acc: 0.9901 | Val - Loss: -0.9551, Cls: 1.2467, GRQO: -22.0179, Acc: 0.7338
+2025-11-24 05:41:34,784 | INFO | [Real World] Epoch 15/20 | Train - Loss: -2.1406, Cls: 0.0282, GRQO: -21.6887, Acc: 0.9894 | Val - Loss: -0.9688, Cls: 1.2218, GRQO: -21.9055, Acc: 0.7303

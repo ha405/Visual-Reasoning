@@ -1,0 +1,84 @@
+2025-11-24 12:17:55,710 | INFO | Initialized experiment directories for VLCS
+2025-11-24 12:17:55,712 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\VLCS\logs
+2025-11-24 12:17:55,713 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\VLCS\checkpoints
+2025-11-24 12:17:55,713 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\VLCS\plots
+2025-11-24 12:17:56,338 | INFO | === LODO: Leaving out domain 'VOC2007' ===
+2025-11-24 12:20:06,507 | INFO | [VOC2007] Epoch 1/5 | Train - Loss: 0.6621, Cls: 0.6528, GRQO: 0.0093, Acc: 0.7421 | Val - Loss: 0.8037, Cls: 0.8025, GRQO: 0.0012, Acc: 0.6919
+2025-11-24 12:20:06,573 | INFO | [VOC2007] New best val acc: 0.6919
+2025-11-24 12:20:42,307 | INFO | [VOC2007] Epoch 2/5 | Train - Loss: 0.3076, Cls: 0.3055, GRQO: 0.0021, Acc: 0.8893 | Val - Loss: 0.8124, Cls: 0.8118, GRQO: 0.0006, Acc: 0.7100
+2025-11-24 12:20:42,371 | INFO | [VOC2007] New best val acc: 0.7100
+2025-11-24 12:21:18,222 | INFO | [VOC2007] Epoch 3/5 | Train - Loss: 0.1035, Cls: 0.1017, GRQO: 0.0018, Acc: 0.9676 | Val - Loss: 1.0203, Cls: 1.0194, GRQO: 0.0010, Acc: 0.7287
+2025-11-24 12:21:18,275 | INFO | [VOC2007] New best val acc: 0.7287
+2025-11-24 12:21:53,506 | INFO | [VOC2007] Epoch 4/5 | Train - Loss: 0.0380, Cls: 0.0364, GRQO: 0.0015, Acc: 0.9886 | Val - Loss: 1.1581, Cls: 1.1572, GRQO: 0.0009, Acc: 0.7358
+2025-11-24 12:21:53,574 | INFO | [VOC2007] New best val acc: 0.7358
+2025-11-24 12:22:31,511 | INFO | [VOC2007] Epoch 5/5 | Train - Loss: 0.0182, Cls: 0.0170, GRQO: 0.0012, Acc: 0.9946 | Val - Loss: 1.2928, Cls: 1.2918, GRQO: 0.0011, Acc: 0.7207
+2025-11-24 12:22:31,511 | INFO | [VOC2007] Best Acc: 0.7358
+2025-11-24 12:22:31,511 | INFO | ------------------------------------------------------------
+2025-11-24 12:22:31,622 | INFO | === LODO: Leaving out domain 'LabelMe' ===
+2025-11-24 12:23:55,689 | INFO | [LabelMe] Epoch 1/5 | Train - Loss: 0.5918, Cls: 0.5847, GRQO: 0.0071, Acc: 0.7824 | Val - Loss: 1.4841, Cls: 1.4830, GRQO: 0.0010, Acc: 0.6043
+2025-11-24 12:23:55,747 | INFO | [LabelMe] New best val acc: 0.6043
+2025-11-24 12:25:18,868 | INFO | [LabelMe] Epoch 2/5 | Train - Loss: 0.2201, Cls: 0.2183, GRQO: 0.0018, Acc: 0.9238 | Val - Loss: 1.8322, Cls: 1.8317, GRQO: 0.0005, Acc: 0.6570
+2025-11-24 12:25:18,936 | INFO | [LabelMe] New best val acc: 0.6570
+2025-11-24 12:26:41,866 | INFO | [LabelMe] Epoch 3/5 | Train - Loss: 0.0744, Cls: 0.0728, GRQO: 0.0016, Acc: 0.9755 | Val - Loss: 2.7794, Cls: 2.7789, GRQO: 0.0005, Acc: 0.6148
+2025-11-24 12:28:05,249 | INFO | [LabelMe] Epoch 4/5 | Train - Loss: 0.0371, Cls: 0.0359, GRQO: 0.0012, Acc: 0.9877 | Val - Loss: 3.1921, Cls: 3.1910, GRQO: 0.0011, Acc: 0.5975
+2025-11-24 12:29:28,364 | INFO | [LabelMe] Epoch 5/5 | Train - Loss: 0.0642, Cls: 0.0623, GRQO: 0.0019, Acc: 0.9812 | Val - Loss: 2.3461, Cls: 2.3458, GRQO: 0.0003, Acc: 0.6717
+2025-11-24 12:29:28,431 | INFO | [LabelMe] New best val acc: 0.6717
+2025-11-24 12:29:28,447 | INFO | [LabelMe] Best Acc: 0.6717
+2025-11-24 12:29:28,448 | INFO | ------------------------------------------------------------
+2025-11-24 12:29:28,546 | INFO | === LODO: Leaving out domain 'Caltech101' ===
+2025-11-24 12:30:00,833 | INFO | [Caltech101] Epoch 1/5 | Train - Loss: 0.6987, Cls: 0.6920, GRQO: 0.0067, Acc: 0.7393 | Val - Loss: 0.1397, Cls: 0.1393, GRQO: 0.0004, Acc: 0.9774
+2025-11-24 12:30:00,896 | INFO | [Caltech101] New best val acc: 0.9774
+2025-11-24 12:30:33,120 | INFO | [Caltech101] Epoch 2/5 | Train - Loss: 0.3337, Cls: 0.3319, GRQO: 0.0018, Acc: 0.8822 | Val - Loss: 0.1794, Cls: 0.1794, GRQO: -0.0000, Acc: 0.9519
+2025-11-24 12:31:05,233 | INFO | [Caltech101] Epoch 3/5 | Train - Loss: 0.1090, Cls: 0.1076, GRQO: 0.0014, Acc: 0.9677 | Val - Loss: 0.1653, Cls: 0.1653, GRQO: 0.0000, Acc: 0.9519
+2025-11-24 12:31:37,478 | INFO | [Caltech101] Epoch 4/5 | Train - Loss: 0.0415, Cls: 0.0405, GRQO: 0.0011, Acc: 0.9885 | Val - Loss: 0.1811, Cls: 0.1810, GRQO: 0.0001, Acc: 0.9527
+2025-11-24 12:32:09,793 | INFO | [Caltech101] Epoch 5/5 | Train - Loss: 0.0255, Cls: 0.0246, GRQO: 0.0009, Acc: 0.9916 | Val - Loss: 0.1556, Cls: 0.1564, GRQO: -0.0008, Acc: 0.9625
+2025-11-24 12:32:09,794 | INFO | [Caltech101] Best Acc: 0.9774
+2025-11-24 12:32:09,794 | INFO | ------------------------------------------------------------
+2025-11-24 12:32:09,894 | INFO | === LODO: Leaving out domain 'SUN09' ===
+2025-11-24 12:32:50,843 | INFO | [SUN09] Epoch 1/5 | Train - Loss: 0.6271, Cls: 0.6189, GRQO: 0.0081, Acc: 0.7654 | Val - Loss: 0.7655, Cls: 0.7645, GRQO: 0.0010, Acc: 0.6831
+2025-11-24 12:32:50,897 | INFO | [SUN09] New best val acc: 0.6831
+2025-11-24 12:33:31,383 | INFO | [SUN09] Epoch 2/5 | Train - Loss: 0.2734, Cls: 0.2715, GRQO: 0.0019, Acc: 0.9033 | Val - Loss: 0.9428, Cls: 0.9417, GRQO: 0.0011, Acc: 0.6499
+2025-11-24 12:34:11,893 | INFO | [SUN09] Epoch 3/5 | Train - Loss: 0.1063, Cls: 0.1047, GRQO: 0.0016, Acc: 0.9639 | Val - Loss: 1.2193, Cls: 1.2182, GRQO: 0.0011, Acc: 0.6734
+2025-11-24 12:34:52,866 | INFO | [SUN09] Epoch 4/5 | Train - Loss: 0.0282, Cls: 0.0271, GRQO: 0.0011, Acc: 0.9914 | Val - Loss: 1.4336, Cls: 1.4331, GRQO: 0.0006, Acc: 0.7020
+2025-11-24 12:34:52,926 | INFO | [SUN09] New best val acc: 0.7020
+2025-11-24 12:35:33,864 | INFO | [SUN09] Epoch 5/5 | Train - Loss: 0.0155, Cls: 0.0147, GRQO: 0.0008, Acc: 0.9957 | Val - Loss: 1.5677, Cls: 1.5670, GRQO: 0.0007, Acc: 0.6962
+2025-11-24 12:35:33,864 | INFO | [SUN09] Best Acc: 0.7020
+2025-11-24 12:35:33,864 | INFO | ------------------------------------------------------------
+2025-11-24 12:35:33,864 | INFO | LODO finished | Mean Acc: 0.7717 | Summary saved to d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet18_experiments\VLCS\logs\lodo_summary_20251124_123533.json
+2025-11-24 12:35:33,873 | INFO | Initializing ResNet baseline: resnet18
+2025-11-24 12:35:33,968 | INFO | === Baseline LODO: Leaving out domain 'VOC2007' ===
+2025-11-24 12:36:09,981 | INFO | [VOC2007] Epoch 1/5 | Train - Loss: 0.6754, Acc: 0.7496 | Val Acc: 0.7464
+2025-11-24 12:36:46,222 | INFO | [VOC2007] Epoch 2/5 | Train - Loss: 0.2812, Acc: 0.9049 | Val Acc: 0.7607
+2025-11-24 12:37:22,438 | INFO | [VOC2007] Epoch 3/5 | Train - Loss: 0.1010, Acc: 0.9755 | Val Acc: 0.7302
+2025-11-24 12:37:58,811 | INFO | [VOC2007] Epoch 4/5 | Train - Loss: 0.0302, Acc: 0.9954 | Val Acc: 0.7331
+2025-11-24 12:38:35,587 | INFO | [VOC2007] Epoch 5/5 | Train - Loss: 0.0108, Acc: 0.9996 | Val Acc: 0.7331
+2025-11-24 12:38:35,587 | INFO | [VOC2007] Best Val Acc: 0.7607
+2025-11-24 12:38:35,587 | INFO | ------------------------------------------------------------
+2025-11-24 12:38:35,587 | INFO | Initializing ResNet baseline: resnet18
+2025-11-24 12:38:35,670 | INFO | === Baseline LODO: Leaving out domain 'LabelMe' ===
+2025-11-24 12:39:57,069 | INFO | [LabelMe] Epoch 1/5 | Train - Loss: 0.5855, Acc: 0.7868 | Val Acc: 0.6344
+2025-11-24 12:41:19,917 | INFO | [LabelMe] Epoch 2/5 | Train - Loss: 0.2133, Acc: 0.9295 | Val Acc: 0.6306
+2025-11-24 12:42:42,366 | INFO | [LabelMe] Epoch 3/5 | Train - Loss: 0.0920, Acc: 0.9772 | Val Acc: 0.6649
+2025-11-24 12:44:04,597 | INFO | [LabelMe] Epoch 4/5 | Train - Loss: 0.0413, Acc: 0.9927 | Val Acc: 0.6404
+2025-11-24 12:45:27,061 | INFO | [LabelMe] Epoch 5/5 | Train - Loss: 0.0174, Acc: 0.9984 | Val Acc: 0.6367
+2025-11-24 12:45:27,062 | INFO | [LabelMe] Best Val Acc: 0.6649
+2025-11-24 12:45:27,062 | INFO | ------------------------------------------------------------
+2025-11-24 12:45:27,062 | INFO | Initializing ResNet baseline: resnet18
+2025-11-24 12:45:27,143 | INFO | === Baseline LODO: Leaving out domain 'Caltech101' ===
+2025-11-24 12:45:58,646 | INFO | [Caltech101] Epoch 1/5 | Train - Loss: 0.6884, Acc: 0.7487 | Val Acc: 0.9675
+2025-11-24 12:46:31,261 | INFO | [Caltech101] Epoch 2/5 | Train - Loss: 0.2991, Acc: 0.8975 | Val Acc: 0.9760
+2025-11-24 12:47:02,927 | INFO | [Caltech101] Epoch 3/5 | Train - Loss: 0.1009, Acc: 0.9769 | Val Acc: 0.9449
+2025-11-24 12:47:34,956 | INFO | [Caltech101] Epoch 4/5 | Train - Loss: 0.0250, Acc: 0.9972 | Val Acc: 0.9470
+2025-11-24 12:48:06,842 | INFO | [Caltech101] Epoch 5/5 | Train - Loss: 0.0088, Acc: 0.9997 | Val Acc: 0.9569
+2025-11-24 12:48:06,842 | INFO | [Caltech101] Best Val Acc: 0.9760
+2025-11-24 12:48:06,842 | INFO | ------------------------------------------------------------
+2025-11-24 12:48:06,842 | INFO | Initializing ResNet baseline: resnet18
+2025-11-24 12:48:06,926 | INFO | === Baseline LODO: Leaving out domain 'SUN09' ===
+2025-11-24 12:48:47,025 | INFO | [SUN09] Epoch 1/5 | Train - Loss: 0.6227, Acc: 0.7743 | Val Acc: 0.7020
+2025-11-24 12:49:27,641 | INFO | [SUN09] Epoch 2/5 | Train - Loss: 0.2735, Acc: 0.9021 | Val Acc: 0.7099
+2025-11-24 12:50:08,435 | INFO | [SUN09] Epoch 3/5 | Train - Loss: 0.1172, Acc: 0.9687 | Val Acc: 0.6868
+2025-11-24 12:50:48,380 | INFO | [SUN09] Epoch 4/5 | Train - Loss: 0.0355, Acc: 0.9948 | Val Acc: 0.7276
+2025-11-24 12:51:28,153 | INFO | [SUN09] Epoch 5/5 | Train - Loss: 0.0117, Acc: 0.9996 | Val Acc: 0.7157
+2025-11-24 12:51:28,154 | INFO | [SUN09] Best Val Acc: 0.7276
+2025-11-24 12:51:28,154 | INFO | ------------------------------------------------------------
+2025-11-24 12:51:28,155 | INFO | Baseline LODO (resnet18) finished | Mean Acc: 0.7823

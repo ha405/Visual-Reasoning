@@ -40,6 +40,8 @@ def run_lodo(model_fn, CFG, logger, dataset_key, domains, loaders, optimizer_fn,
 
         for epoch in range(1, epochs + 1):
             train_loss, train_cls, train_grqo, train_acc = train_epoch(model, combined_train_loader, optimizer, device)
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
             val_loss, val_cls, val_grqo, val_acc = evaluate(model, val_loader, device)
 
             print(
@@ -103,6 +105,10 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
                 backbone = getattr(models, model_name)(
                     weights=models.ResNet34_Weights.IMAGENET1K_V1 if "34" in model_name else None
                 )
+            elif "resnet50" in model_name.lower():
+                backbone = getattr(models, model_name)(
+                    weights=models.ResNet50_Weights.IMAGENET1K_V1 if "50" in model_name else None
+                )
             num_features = backbone.fc.in_features
             backbone.fc = nn.Linear(num_features, CFG["datasets"][dataset_key]["num_classes"])
             model = backbone.to(device)
@@ -150,6 +156,9 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
 
             train_loss = running_loss / running_samples
             train_acc = running_corrects / running_samples
+
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
 
             model.eval()
             correct, total = 0, 0

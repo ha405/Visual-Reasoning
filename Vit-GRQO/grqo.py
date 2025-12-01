@@ -27,10 +27,9 @@ class GRQO(nn.Module):
     def __init__(self, Hidden_dim, num_heads, dropout,
                  num_tokens, ddropout, num_layers, num_classes,
                  temperature,
-                 # GRQO hyperparams:
                  alpha=1.0, beta=1.0, tau=1e-3,
                  lambda_grqo=1.0, teacher_ema=0.99,
-                 reward_proxy="taylor",  # either "taylor" or "gradnorm"
+                 reward_proxy="taylor",  
                  resnet = False,
                  random_k: Optional[int]=None,
                  alpha_invar=0.5, 
@@ -71,6 +70,13 @@ class GRQO(nn.Module):
         self._init_teacher(M, device)
 
         # --- 2) Reward proxy computation ---
+        
+        # [FIX 1] Compute Global Gradients ONCE here.
+        # This fixes the "Tensor not used in graph" error.
+        # retain_graph=True is REQUIRED because we need the graph for total_loss.backward() later.
+        # create_graph=False ensures these gradients are treated as constants (targets).
+        grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0] # [B, M, D]
+
         raw_rewards = torch.zeros(B, M, device=device)
         
         if domains is not None:
@@ -83,21 +89,15 @@ class GRQO(nn.Module):
                 if mask.sum() == 0:
                     continue
                 
-                logits_d = img_logits[mask]
-                labels_d = y[mask]
-                decoder_out_d = decoder_out[mask]
-
-                cls_loss_d = F.cross_entropy(logits_d, labels_d)
-
-                # Gradients must be computed from the loss, but we do not want to graph-connect
-                # the reward calculation itself to the main loss, only the values.
-                grads_d = torch.autograd.grad(cls_loss_d, decoder_out_d, retain_graph=True, create_graph=False)[0]
+                # [FIX 2] Instead of recalculating loss/autograd, SLICE the pre-computed global grads.
+                grads_d = grads[mask]              # [N_d, M, D]
+                decoder_out_d = decoder_out[mask]  # [N_d, M, D]
 
                 if self.reward_proxy == "taylor":
-                    # Normalize to stabilize training on harder datasets
-                    grads_d = F.normalize(grads_d, dim=-1)
+                    # Normalize gradients and features to make dot product stable
+                    grads_d_norm = F.normalize(grads_d, dim=-1)
                     decoder_out_d_norm = F.normalize(decoder_out_d, dim=-1)
-                    raw_r_d = - (grads_d * decoder_out_d_norm).sum(dim=-1)
+                    raw_r_d = - (grads_d_norm * decoder_out_d_norm).sum(dim=-1)
                 else:
                     raw_r_d = torch.norm(grads_d, p=2, dim=-1)
                 
@@ -118,14 +118,13 @@ class GRQO(nn.Module):
                 # Reward blending
                 raw_rewards = raw_rewards - invariance_penalty
         else:
-            # Fallback: standard calculation
-            grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0]
+            # Fallback
             if self.reward_proxy == "taylor":
                 raw_rewards = - (grads * decoder_out).sum(dim=-1)
             else:
                 raw_rewards = torch.norm(grads, p=2, dim=-1)
 
-        # Detach rewards: They are the TARGET for the RL mechanism
+        # Detach rewards
         rewards = raw_rewards.detach()
 
         # --- 3) Advantage Normalization ---
@@ -133,33 +132,20 @@ class GRQO(nn.Module):
         mu = rewards.mean(dim=1, keepdim=True)
         sigma = rewards.std(dim=1, keepdim=True) + eps
         
-        # Standardize and Clamp (Crucial for stability on OfficeHome)
         adv = (rewards - mu) / sigma
+        # Clamp advantage to stabilize training
         adv = torch.clamp(adv, -5.0, 5.0)
-        
-        # Detach advantage: We don't want to backprop into the reward generation,
-        # we only want to backprop into the selection probabilities.
         adv = adv.detach()
 
         # --- 4) Mask and RL-like Gradient Injection ---
-        # Hard mask for thresholding (detached)
         mask = (prob_scores > self.tau).float().detach()
 
-        # --- KEY CHANGE FOR RL BEHAVIOR ---
-        # Instead of multiplying by the hard mask (which kills gradients),
-        # we multiply by prob_scores. 
-        # This acts as a Policy Gradient: maximize (prob * advantage).
-        # We still multiply by 'mask' so we only train on queries that passed the threshold (as per original design).
-        
-        # shape: [B, M]
+        # Policy Gradient injection: prob_scores * advantage
         masked_adv_rl = prob_scores * adv * mask 
 
-        # Normalize by count of active queries
         counts = mask.sum(dim=1, keepdim=True)
         denom = torch.where(counts > 0, counts, torch.ones_like(counts))
         
-        # This is the quantity we want to MAXIMIZE (because it contains advantage).
-        # In the loss below, we negate it.
         mean_masked_adv = (masked_adv_rl.sum(dim=1, keepdim=True) / denom).squeeze(1)
 
         # --- 5) Teacher KL anchor term ---
@@ -167,12 +153,7 @@ class GRQO(nn.Module):
         kl_per_image = (prob_scores * (torch.log(prob_scores + 1e-12) - torch.log(teacher + 1e-12))).sum(dim=1)
 
         # --- 6) GRQO Loss ---
-        # Minimize: - (Alpha * Advantage - Beta * KL)
-        # Since mean_masked_adv contains 'prob_scores', gradients now flow:
-        # - If adv is positive, we want prob_scores to go UP -> Loss goes down.
-        # - If adv is negative, we want prob_scores to go DOWN -> Loss goes down (less negative * negative).
         grqo_per_image = - (self.alpha * mean_masked_adv - self.beta * kl_per_image)
-
         grqo_loss = grqo_per_image.mean()
 
         # --- 7) Total loss ---
@@ -184,7 +165,6 @@ class GRQO(nn.Module):
                 batch_mean_w = prob_scores.mean(dim=0)
                 self.teacher_ref = self.teacher_ema * self.teacher_ref + (1.0 - self.teacher_ema) * batch_mean_w.detach()
 
-        # --- 9) Output ---
         out = {
             "loss": total_loss,
             "cls_loss": cls_loss.detach(),

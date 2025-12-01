@@ -63,7 +63,7 @@ class BaseDomainDataset:
             batch_size=self.batch_size,
             shuffle=train,
             num_workers=0,
-            # pin_memory=True,
+            pin_memory=False,
             worker_init_fn=seed_worker,
             generator=g,
         )
