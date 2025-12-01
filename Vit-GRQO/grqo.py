@@ -71,90 +71,101 @@ class GRQO(nn.Module):
 
         # --- 2) Reward proxy computation ---
         
-        # [FIX 1] Compute Global Gradients ONCE here.
-        # This fixes the "Tensor not used in graph" error.
-        # retain_graph=True is REQUIRED because we need the graph for total_loss.backward() later.
-        # create_graph=False ensures these gradients are treated as constants (targets).
-        grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0] # [B, M, D]
+        if self.training and torch.is_grad_enabled():
+            # [FIX 1] Compute Global Gradients ONCE here.
+            # This fixes the "Tensor not used in graph" error.
+            # retain_graph=True is REQUIRED because we need the graph for total_loss.backward() later.
+            # create_graph=False ensures these gradients are treated as constants (targets).
+            grads = torch.autograd.grad(cls_loss, decoder_out, retain_graph=True, create_graph=False)[0] # [B, M, D]
 
-        raw_rewards = torch.zeros(B, M, device=device)
-        
-        if domains is not None:
-            unique_domains = torch.unique(domains)
-            domain_means_list = []
-            valid_domains_found = False
+            raw_rewards = torch.zeros(B, M, device=device)
+            
+            if domains is not None:
+                unique_domains = torch.unique(domains)
+                domain_means_list = []
+                valid_domains_found = False
 
-            for d in unique_domains:
-                mask = (domains == d)
-                if mask.sum() == 0:
-                    continue
-                
-                # [FIX 2] Instead of recalculating loss/autograd, SLICE the pre-computed global grads.
-                grads_d = grads[mask]              # [N_d, M, D]
-                decoder_out_d = decoder_out[mask]  # [N_d, M, D]
+                for d in unique_domains:
+                    mask = (domains == d)
+                    if mask.sum() == 0:
+                        continue
+                    
+                    # [FIX 2] Instead of recalculating loss/autograd, SLICE the pre-computed global grads.
+                    grads_d = grads[mask]              # [N_d, M, D]
+                    decoder_out_d = decoder_out[mask]  # [N_d, M, D]
 
-                if self.reward_proxy == "taylor":
-                    # Normalize gradients and features to make dot product stable
-                    grads_d_norm = F.normalize(grads_d, dim=-1)
-                    decoder_out_d_norm = F.normalize(decoder_out_d, dim=-1)
-                    raw_r_d = - (grads_d_norm * decoder_out_d_norm).sum(dim=-1)
-                else:
-                    raw_r_d = torch.norm(grads_d, p=2, dim=-1)
-                
-                # Store values
-                raw_rewards[mask] = raw_r_d.detach()
-                
-                domain_means_list.append(raw_r_d.detach().mean(dim=0))
-                valid_domains_found = True
+                    if self.reward_proxy == "taylor":
+                        # Normalize gradients and features to make dot product stable
+                        grads_d_norm = F.normalize(grads_d, dim=-1)
+                        decoder_out_d_norm = F.normalize(decoder_out_d, dim=-1)
+                        raw_r_d = - (grads_d_norm * decoder_out_d_norm).sum(dim=-1)
+                    else:
+                        raw_r_d = torch.norm(grads_d, p=2, dim=-1)
+                    
+                    # Store values
+                    raw_rewards[mask] = raw_r_d.detach()
+                    
+                    domain_means_list.append(raw_r_d.detach().mean(dim=0))
+                    valid_domains_found = True
 
-            if valid_domains_found and len(domain_means_list) > 1:
-                # Invariance Calculation
-                stacked_means = torch.stack(domain_means_list, dim=0) # [Num_Domains, M]
-                var_across_domains = stacked_means.var(dim=0, unbiased=False) # [M]
-                
-                # Penalty on high variance
-                invariance_penalty = (self.gamma_var * var_across_domains).unsqueeze(0)
-                
-                # Reward blending
-                raw_rewards = raw_rewards - invariance_penalty
-        else:
-            # Fallback
-            if self.reward_proxy == "taylor":
-                raw_rewards = - (grads * decoder_out).sum(dim=-1)
+                if valid_domains_found and len(domain_means_list) > 1:
+                    # Invariance Calculation
+                    stacked_means = torch.stack(domain_means_list, dim=0) # [Num_Domains, M]
+                    var_across_domains = stacked_means.var(dim=0, unbiased=False) # [M]
+                    
+                    # Penalty on high variance
+                    invariance_penalty = (self.gamma_var * var_across_domains).unsqueeze(0)
+                    
+                    # Reward blending
+                    raw_rewards = raw_rewards - invariance_penalty
             else:
-                raw_rewards = torch.norm(grads, p=2, dim=-1)
+                # Fallback
+                if self.reward_proxy == "taylor":
+                    raw_rewards = - (grads * decoder_out).sum(dim=-1)
+                else:
+                    raw_rewards = torch.norm(grads, p=2, dim=-1)
 
-        # Detach rewards
-        rewards = raw_rewards.detach()
+            # Detach rewards
+            rewards = raw_rewards.detach()
 
-        # --- 3) Advantage Normalization ---
-        eps = 1e-6
-        mu = rewards.mean(dim=1, keepdim=True)
-        sigma = rewards.std(dim=1, keepdim=True) + eps
-        
-        adv = (rewards - mu) / sigma
-        # Clamp advantage to stabilize training
-        adv = torch.clamp(adv, -5.0, 5.0)
-        adv = adv.detach()
+            # --- 3) Advantage Normalization ---
+            eps = 1e-6
+            mu = rewards.mean(dim=1, keepdim=True)
+            sigma = rewards.std(dim=1, keepdim=True) + eps
+            
+            adv = (rewards - mu) / sigma
+            # Clamp advantage to stabilize training
+            adv = torch.clamp(adv, -5.0, 5.0)
+            adv = adv.detach()
 
-        # --- 4) Mask and RL-like Gradient Injection ---
-        mask = (prob_scores > self.tau).float().detach()
+            # --- 4) Mask and RL-like Gradient Injection ---
+            mask = (prob_scores > self.tau).float().detach()
 
-        # Policy Gradient injection: prob_scores * advantage
-        masked_adv_rl = prob_scores * adv * mask 
+            # Policy Gradient injection: prob_scores * advantage
+            masked_adv_rl = prob_scores * adv * mask 
 
-        counts = mask.sum(dim=1, keepdim=True)
-        denom = torch.where(counts > 0, counts, torch.ones_like(counts))
-        
-        mean_masked_adv = (masked_adv_rl.sum(dim=1, keepdim=True) / denom).squeeze(1)
+            counts = mask.sum(dim=1, keepdim=True)
+            denom = torch.where(counts > 0, counts, torch.ones_like(counts))
+            
+            mean_masked_adv = (masked_adv_rl.sum(dim=1, keepdim=True) / denom).squeeze(1)
 
-        # --- 5) Teacher KL anchor term ---
-        teacher = self.teacher_ref.unsqueeze(0).expand(B, M)
-        kl_per_image = (prob_scores * (torch.log(prob_scores + 1e-12) - torch.log(teacher + 1e-12))).sum(dim=1)
+            # --- 5) Teacher KL anchor term ---
+            teacher = self.teacher_ref.unsqueeze(0).expand(B, M)
+            kl_per_image = (prob_scores * (torch.log(prob_scores + 1e-12) - torch.log(teacher + 1e-12))).sum(dim=1)
 
-        # --- 6) GRQO Loss ---
-        grqo_per_image = - (self.alpha * mean_masked_adv - self.beta * kl_per_image)
-        grqo_loss = grqo_per_image.mean()
+            # --- 6) GRQO Loss ---
+            grqo_per_image = - (self.alpha * mean_masked_adv - self.beta * kl_per_image)
+            grqo_loss = grqo_per_image.mean()
+            
+        else:
+            # Skip GRQO computation during evaluation
+            grqo_loss = torch.tensor(0.0, device=device)
+            grqo_per_image = torch.zeros(B, device=device)
+            mean_masked_adv = torch.zeros(B, device=device)
+            rewards = torch.zeros(B, M, device=device)
+            adv = torch.zeros(B, M, device=device)
+            mask = torch.zeros(B, M, device=device)
+            kl_per_image = torch.zeros(B, device=device)
 
         # --- 7) Total loss ---
         total_loss = cls_loss + self.lambda_grqo * grqo_loss
