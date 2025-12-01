@@ -42,22 +42,22 @@ def _get_vit_grqo_model(model_name, dataset, cfg):
 
     grqo_model = GRQO(
         Hidden_dim=hidden_dim,
-        num_heads=grqo_cfg["num_heads"],
-        dropout=grqo_cfg["dropout"],
-        num_tokens=grqo_cfg["num_tokens"],
-        ddropout=grqo_cfg["ddropout"],
-        num_layers=grqo_cfg["num_layers"],
+        num_heads=int(grqo_cfg["num_heads"]),
+        dropout=float(grqo_cfg["dropout"]),
+        num_tokens=int(grqo_cfg["num_tokens"]),
+        ddropout=float(grqo_cfg["ddropout"]),
+        num_layers=int(grqo_cfg["num_layers"]),
         num_classes=data_cfg["num_classes"],
-        temperature=grqo_cfg["temperature"],
-        alpha=grqo_cfg["alpha"],
-        beta=grqo_cfg["beta"],
-        tau=grqo_cfg["tau"],
-        lambda_grqo=grqo_cfg["lambda_grqo"],
-        teacher_ema=grqo_cfg["teacher_ema"],
+        temperature=float(grqo_cfg["temperature"]),
+        alpha=float(grqo_cfg["alpha"]),
+        beta=float(grqo_cfg["beta"]),
+        tau=float(grqo_cfg["tau"]),
+        lambda_grqo=float(grqo_cfg["lambda_grqo"]),
+        teacher_ema=float(grqo_cfg["teacher_ema"]),
         reward_proxy=grqo_cfg["reward_proxy"],
         random_k=grqo_cfg.get("random_k"),
-        alpha_invar=grqo_cfg["alpha_invar"],
-        gamma_var=grqo_cfg["gamma_var"]
+        alpha_invar=float(grqo_cfg["alpha_invar"]),
+        gamma_var=float(grqo_cfg["gamma_var"])
     )
 
     model = ViTGRQO(vit_encoder, grqo_model)
@@ -84,23 +84,22 @@ def _get_resnet_grqo_model(model_name, dataset, cfg):
 
     grqo_model = GRQO(
         Hidden_dim=grqo_dim,
-        num_heads=grqo_cfg["num_heads"],
-        dropout=grqo_cfg["dropout"],
-        num_tokens=grqo_cfg["num_tokens"],
-        ddropout=grqo_cfg["ddropout"],
-        num_layers=grqo_cfg["num_layers"],
+        num_heads=int(grqo_cfg["num_heads"]),
+        dropout=float(grqo_cfg["dropout"]),
+        num_tokens=int(grqo_cfg["num_tokens"]),
+        ddropout=float(grqo_cfg["ddropout"]),
+        num_layers=int(grqo_cfg["num_layers"]),
         num_classes=data_cfg["num_classes"],
-        temperature=grqo_cfg["temperature"],
-        alpha=grqo_cfg["alpha"],
-        beta=grqo_cfg["beta"],
-        tau=grqo_cfg["tau"],
-        lambda_grqo=grqo_cfg["lambda_grqo"],
-        teacher_ema=grqo_cfg["teacher_ema"],
+        temperature=float(grqo_cfg["temperature"]),
+        alpha=float(grqo_cfg["alpha"]),
+        beta=float(grqo_cfg["beta"]),
+        tau=float(grqo_cfg["tau"]),
+        lambda_grqo=float(grqo_cfg["lambda_grqo"]),
+        teacher_ema=float(grqo_cfg["teacher_ema"]),
         reward_proxy=grqo_cfg["reward_proxy"],
         random_k=grqo_cfg.get("random_k"),
-        alpha_invar=grqo_cfg["alpha_invar"],
-        gamma_var=grqo_cfg["gamma_var"],
-        resnet=True
+        alpha_invar=float(grqo_cfg["alpha_invar"]),
+        gamma_var=float(grqo_cfg["gamma_var"])
     )
 
     model = ResNetGRQO(backbone, grqo_model, backbone_dim, grqo_dim)
