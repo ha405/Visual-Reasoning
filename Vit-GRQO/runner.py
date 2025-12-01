@@ -1,17 +1,5 @@
-import os
-import json
-import torch
-import torch.nn as nn
-import numpy as np
-import logging
-from datetime import datetime
-from train import train_epoch, evaluate
-from torch.utils.data import ConcatDataset
-from transformers import ViTForImageClassification
-from torchvision import models
 
-
-def run_lodo(model_fn, CFG, logger, dataset_key, domains, loaders, optimizer_fn, device, ckpt_root, log_dir, epochs):
+def run_lodo(model_fn, CFG, dataset_key, domains, loaders, optimizer_fn, device, ckpt_root, results_dir, epochs):
 
     lodo_results = {}
 
@@ -36,7 +24,6 @@ def run_lodo(model_fn, CFG, logger, dataset_key, domains, loaders, optimizer_fn,
         best_ckpt_path = os.path.join(ckpt_root, f"best_{target_domain}.ckpt")
 
         print(f"\n=== LODO: Leaving out domain '{target_domain}' ===")
-        logger.info(f"=== LODO: Leaving out domain '{target_domain}' ===")
 
         for epoch in range(1, epochs + 1):
             train_loss, train_cls, train_grqo, train_acc = train_epoch(model, combined_train_loader, optimizer, device)
@@ -49,38 +36,32 @@ def run_lodo(model_fn, CFG, logger, dataset_key, domains, loaders, optimizer_fn,
                 f"Train - Loss: {train_loss:.4f}, Cls: {train_cls:.4f}, GRQO: {train_grqo:.4f}, Acc: {train_acc:.4f} | "
                 f"Val - Loss: {val_loss:.4f}, Cls: {val_cls:.4f}, GRQO: {val_grqo:.4f}, Acc: {val_acc:.4f}"
             )
-            logger.info(
-                f"[{target_domain}] Epoch {epoch}/{epochs} | "
-                f"Train - Loss: {train_loss:.4f}, Cls: {train_cls:.4f}, GRQO: {train_grqo:.4f}, Acc: {train_acc:.4f} | "
-                f"Val - Loss: {val_loss:.4f}, Cls: {val_cls:.4f}, GRQO: {val_grqo:.4f}, Acc: {val_acc:.4f}"
-            )
 
             if val_acc > best_acc:
                 best_acc = val_acc
                 torch.save(model.state_dict(), best_ckpt_path)
                 print(f"[{target_domain}] New best val acc: {best_acc:.4f}")
-                logger.info(f"[{target_domain}] New best val acc: {best_acc:.4f}")
 
-        lodo_results[target_domain] = float(best_acc)
         print(f"[{target_domain}] Best Acc: {best_acc:.4f}")
-        logger.info(f"[{target_domain}] Best Acc: {best_acc:.4f}")
         print("-" * 60)
-        logger.info("-" * 60)
+
+        # Cleanup to prevent memory accumulation between LODO runs
+        del model, optimizer, combined_train_loader, val_loader
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    summary_path = os.path.join(log_dir, f"lodo_summary_{timestamp}.json")
+    summary_path = os.path.join(results_dir, f"lodo_summary_{timestamp}.json")
     with open(summary_path, "w") as f:
         json.dump({"lodo_results": lodo_results, "timestamp": timestamp}, f, indent=2)
 
     mean_acc = float(np.mean(list(lodo_results.values())))
     print(f"LODO finished | Mean Acc: {mean_acc:.4f}")
     print(f"Summary saved to {summary_path}")
-    logger.info(f"LODO finished | Mean Acc: {mean_acc:.4f} | Summary saved to {summary_path}")
     
     return lodo_results, mean_acc, summary_path
-
-
-def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimizer_fn, device, ckpt_root=None, log_dir=None, epochs=10):
+def run_baseline(model_name, CFG, dataset_key, domains, loaders, optimizer_fn, device, ckpt_root=None, results_dir=None, epochs=10):
     lodo_results = {}
 
     for target_domain in domains:
@@ -88,7 +69,6 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
 
         if "vit" in model_name.lower():
             print(f"Initializing ViT baseline: {model_name}")
-            logger.info(f"Initializing ViT baseline: {model_name}")
             model = ViTForImageClassification.from_pretrained(
                 model_name,
                 num_labels=CFG["datasets"][dataset_key]["num_classes"],
@@ -96,7 +76,6 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
             ).to(device)
         elif "resnet" in model_name.lower():
             print(f"Initializing ResNet baseline: {model_name}")
-            logger.info(f"Initializing ResNet baseline: {model_name}")
             if "resnet18" in model_name.lower():
                 backbone = getattr(models, model_name)(
                     weights=models.ResNet18_Weights.IMAGENET1K_V1 if "18" in model_name else None
@@ -131,7 +110,6 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
         best_val_acc = 0.0
 
         print(f"\n=== Baseline LODO: Leaving out domain '{target_domain}' ===")
-        logger.info(f"=== Baseline LODO: Leaving out domain '{target_domain}' ===")
 
         for epoch in range(1, epochs + 1):
             model.train()
@@ -178,22 +156,20 @@ def run_baseline(model_name, CFG, logger, dataset_key, domains, loaders, optimiz
                 f"Train - Loss: {train_loss:.4f}, Acc: {train_acc:.4f} | "
                 f"Val Acc: {val_acc:.4f}"
             )
-            logger.info(
-                f"[{target_domain}] Epoch {epoch}/{epochs} | "
-                f"Train - Loss: {train_loss:.4f}, Acc: {train_acc:.4f} | "
-                f"Val Acc: {val_acc:.4f}"
-            )
 
             best_val_acc = max(best_val_acc, val_acc)
 
         lodo_results[target_domain] = float(best_val_acc)
         print(f"[{target_domain}] Best Val Acc: {best_val_acc:.4f}")
         print("-" * 60)
-        logger.info(f"[{target_domain}] Best Val Acc: {best_val_acc:.4f}")
-        logger.info("-" * 60)
+
+        # Cleanup to prevent memory accumulation between LODO runs
+        del model, optimizer, combined_train_loader, val_loader
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        gc.collect()
 
     mean_acc = float(np.mean(list(lodo_results.values())))
     print(f"Baseline LODO ({model_name}) finished | Mean Acc: {mean_acc:.4f}")
-    logger.info(f"Baseline LODO ({model_name}) finished | Mean Acc: {mean_acc:.4f}")
 
     return lodo_results, mean_acc

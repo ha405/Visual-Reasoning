@@ -133,7 +133,7 @@ class RMNISTDataset(BaseDomainDataset):
             dataset,
             batch_size=self.batch_size,
             shuffle=train,
-            num_workers=4,
+            num_workers=0,  # Set to 0 for Windows compatibility
             pin_memory=True,
             worker_init_fn=seed_worker,
             generator=g,
@@ -196,7 +196,7 @@ class CMNISTDataset(BaseDomainDataset):
             dataset,
             batch_size=self.batch_size,
             shuffle=train,
-            num_workers=4,
+            num_workers=0,  # Set to 0 for Windows compatibility
             pin_memory=True,
             worker_init_fn=seed_worker,
             generator=g,

@@ -1,7 +1,0 @@
-{
-    "alpha": 0.1,
-    "beta": 0.1,
-    "temperature": 1.0,
-    "dropout": 0.5,
-    "lambda_grqo": 0.5
-}

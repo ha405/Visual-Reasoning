@@ -1,9 +1,0 @@
-2025-12-01 11:14:52,552 | INFO | Initialized experiment directories for PACS
-2025-12-01 11:14:52,552 | INFO | Logs: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\logs
-2025-12-01 11:14:52,552 | INFO | Checkpoints: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\checkpoints
-2025-12-01 11:14:52,552 | INFO | Plots: d:\Haseeb\SPROJ\GRQO\Vit-GRQO\resnet50_experiments\PACS\plots
-2025-12-01 11:14:53,043 | INFO | === LODO: Leaving out domain 'art_painting' ===
-2025-12-01 11:15:21,417 | INFO | [art_painting] Epoch 1/10 | Train - Loss: 0.5263, Cls: 0.5076, GRQO: 0.0186, Acc: 0.8220 | Val - Loss: 0.5114, Cls: 0.5070, GRQO: 0.0044, Acc: 0.8281
-2025-12-01 11:15:21,636 | INFO | [art_painting] New best val acc: 0.8281
-2025-12-01 11:15:49,998 | INFO | [art_painting] Epoch 2/10 | Train - Loss: 0.0958, Cls: 0.0939, GRQO: 0.0019, Acc: 0.9721 | Val - Loss: 0.4968, Cls: 0.4955, GRQO: 0.0013, Acc: 0.8374
-2025-12-01 11:15:50,219 | INFO | [art_painting] New best val acc: 0.8374

@@ -47,41 +47,34 @@ def train_epoch(model, train_loader, optimizer, device):
     return avg_loss, avg_cls_loss, avg_grqo_loss, accuracy
 
 
-def evaluate(model, val_loader, device, need_input_grads=False, sync_every_n_batches=50):
+def evaluate(model, val_loader, device):
     model.eval()
     total_loss = total_cls_loss = total_grqo_loss = 0.0
     correct = 0
     total_samples = 0
 
-    for batch_idx, (images, labels, domain_labels) in enumerate(val_loader):
-        images = images.to(device, non_blocking=True)
-        labels = labels.to(device, non_blocking=True)
-        domain_labels = domain_labels.to(device, non_blocking=True)
+    with torch.no_grad():  # Fixed: use no_grad instead of enable_grad
+        for batch_idx, (images, labels, domain_labels) in enumerate(val_loader):
+            images = images.to(device, non_blocking=True)
+            labels = labels.to(device, non_blocking=True)
+            domain_labels = domain_labels.to(device, non_blocking=True)
 
-        with torch.enable_grad():
             output = model(images, labels, domain_labels)
             loss = output['loss']
             cls_loss = output.get('cls_loss', torch.tensor(0.0, device=device))
             grqo_loss = output.get('grqo_loss', torch.tensor(0.0, device=device))
             preds = output['preds']
 
-            if need_input_grads:
-                input_grads = torch.autograd.grad(loss, images, retain_graph=False, create_graph=False)[0]
-                _ = input_grads.detach()
-                del input_grads
+            total_loss += float(loss.item()) * images.size(0)
+            total_cls_loss += float(cls_loss.item()) * images.size(0)
+            total_grqo_loss += float(grqo_loss.item()) * images.size(0)
+            correct += int((preds == labels).sum().item())
+            total_samples += labels.size(0)
 
-        total_loss += float(loss.item()) * images.size(0)
-        total_cls_loss += float(cls_loss.item()) * images.size(0)
-        total_grqo_loss += float(grqo_loss.item()) * images.size(0)
-        correct += int((preds == labels).sum().item())
-        total_samples += labels.size(0)
-
-        del output, loss, cls_loss, grqo_loss, preds, images, labels, domain_labels
-
-        if (batch_idx + 1) % sync_every_n_batches == 0:
-            if torch.cuda.is_available():
-                torch.cuda.synchronize()
-                torch.cuda.empty_cache()
+            # Periodic CUDA synchronization and cleanup
+            if (batch_idx + 1) % 50 == 0:
+                if torch.cuda.is_available():
+                    torch.cuda.synchronize()
 
     avg_loss = total_loss / total_samples if total_samples else 0.0
     avg_cls_loss = total_cls_loss / total_samples if total_samples else 0.0
@@ -93,4 +86,5 @@ def evaluate(model, val_loader, device, need_input_grads=False, sync_every_n_bat
         torch.cuda.empty_cache()
 
     return avg_loss, avg_cls_loss, avg_grqo_loss, accuracy
+
 

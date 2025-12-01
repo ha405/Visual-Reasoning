@@ -1,51 +1,92 @@
 system:
   device: "cuda"
   seed: 42
-  num_workers: 4
-  log_dir: "./logs"
+  num_workers: 0
   ckpt_dir: "./checkpoints"
-  save_freq: 1
-  print_freq: 50
+  results_dir: "./results"
 
 train:
   batch_size: 32
   epochs: 5
   lr: 1e-4
+  weight_decay: 0.01
 
 grqo:
-  topk: 24
-  alpha: 2.0
-  beta: 0.5
-  tau: 1e-3
-  temperature: 0.07
-  hidden_dim: 192
   num_heads: 6
   num_tokens: 24
   num_layers: 3
   dropout: 0.1
   ddropout: 0.1
+  temperature: 0.07
+  alpha: 2.0
+  beta: 0.5
+  tau: 1e-3
   lambda_grqo: 1.0
   teacher_ema: 0.99
-  reward_proxy: "taylor"  # or "gradnorm"
+  reward_proxy: "taylor"
+  random_k: null
+  alpha_invar: 0.5
+  gamma_var: 1.0
+
+models:
+  vit-tiny:
+    pretrained: "WinKawaks/vit-tiny-patch16-224"
+    hidden_dim: 192
+    grqo_dim: 192
+  
+  vit-small:
+    pretrained: "WinKawaks/vit-small-patch16-224"
+    hidden_dim: 384
+    grqo_dim: 384
+  
+  resnet18:
+    pretrained: "IMAGENET1K_V1"
+    backbone_dim: 512
+    grqo_dim: 384
+  
+  resnet34:
+    pretrained: "IMAGENET1K_V1"
+    backbone_dim: 512
+    grqo_dim: 384
+  
+  resnet50:
+    pretrained: "IMAGENET1K_V1"
+    backbone_dim: 2048
+    grqo_dim: 384
 
 datasets:
   PACS:
     root: "D:/Haseeb/SPROJ/PACS ViT/pacs_data/pacs_data"
     domains: ["art_painting", "cartoon", "photo", "sketch"]
-    classes: ["dog", "elephant", "giraffe", "guitar", "horse", "house", "person"]
     num_classes: 7
+    image_size: 224
+
+  VLCS:
+    root: "D:/Haseeb/Datasets/VLCS"
+    domains: ["VOC2007", "LabelMe", "Caltech101", "SUN09"]
+    num_classes: 5
+    image_size: 224
 
   OfficeHome:
     root: "D:/Haseeb/Datasets/OfficeHomeDataset_10072016"
     domains: ["Art", "Clipart", "Product", "Real World"]
     num_classes: 65
+    image_size: 224
 
-  VLCS:
-    root: "D:/Haseeb/Datasets/VLCS"
-    domains: ["VOC2007", "LabelMe", "Caltech101", "SUN09"]
-    classes: ["bird", "car", "chair", "dog", "person"]
-    num_classes: 5
+  RMNIST:
+    root: "D:/Haseeb/Datasets/RMNIST"
+    domains: ["0", "15", "30", "46", "60", "75"]
+    num_classes: 10
+    image_size: 28
 
-da:
-  source_domains: ["photo", "art_painting", "cartoon"]
-  target_domain: "sketch"
+  CMNIST:
+    root: "D:/Haseeb/Datasets/CMNIST"
+    domains: ["red", "green", "blue"]
+    num_classes: 10
+    image_size: 28
+
+  TerraIncognita:
+    root: "D:/Haseeb/Datasets/TerraIncognita"
+    domains: []
+    num_classes: 10
+    image_size: 224
