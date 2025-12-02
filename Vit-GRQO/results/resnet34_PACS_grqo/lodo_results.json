@@ -1,0 +1,10 @@
+{
+  "model": "resnet34",
+  "dataset": "PACS",
+  "lodo_results": {
+    "art_painting": 0.8361138370951914,
+    "cartoon": 0.7854095563139932,
+    "photo": 0.9646706586826347,
+    "sketch": 0.7648256553830491
+  }
+}
