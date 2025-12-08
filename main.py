@@ -7,7 +7,7 @@ import torch
 import warnings
 warnings.filterwarnings("ignore")
 
-from pruning.config import load_config
+from pruning.config import load_config, DATASET_DOMAINS
 from pruning import (
     get_dataloaders,
     get_model,
@@ -41,7 +41,7 @@ def parse_args():
     parser.add_argument('--dataset', type=str, default=None, help='Dataset name')
     parser.add_argument('--data_dir', type=str, default=None, help='Root directory of dataset')
     parser.add_argument('--target_domain', type=str, default=None, help='Target domain name')
-    parser.add_argument('--source_domains', nargs='+', default=None, help='Source domain names')
+    parser.add_argument('--domains', nargs='+', default=None, help='List of all dataset domains')
     parser.add_argument('--batch_size', type=int, default=None, help='Batch size')
     parser.add_argument('--num_workers', type=int, default=None, help='Number of dataloader workers')
     
@@ -112,14 +112,28 @@ def main():
     print(f"Source Domains: {config.source_domains}")
     print("="*60 + "\n")
     
+    # We need the full list of domains to correctly determine sources for each target
+    if config.domains:
+        all_domains = config.domains
+    elif config.dataset in DATASET_DOMAINS:
+        all_domains = DATASET_DOMAINS[config.dataset]
+    else:
+        raise ValueError(
+            f"Domains for dataset '{config.dataset}' are unknown. "
+            "Please specify 'domains' in config or CLI."
+        )
+
     # LODO Logic
     if config.target_domain is None:
-        lodo_domains = config.source_domains
-        print(f"\nNo target domain specified. Running LODO on: {lodo_domains}")
+        lodo_domains = all_domains
+        print(f"\nNo target domain specified. Running LODO on all domains: {lodo_domains}")
     else:
         lodo_domains = [config.target_domain]
+        if config.target_domain not in all_domains:
+             # If target is not in all_domains, warn or add it? 
+             # For safety, let's assume user knows what they are doing but warn if it looks weird.
+             print(f"Warning: Target '{config.target_domain}' not in known domains {all_domains}")
 
-    original_source_domains = list(config.source_domains)
     base_output_dir = config.output_dir
 
     for current_target in lodo_domains:
@@ -129,11 +143,29 @@ def main():
         
         config.target_domain = current_target
         
+        # Source domains are all domains EXCEPT the current target
+        config.source_domains = [d for d in all_domains if d != current_target]
+        
         if len(lodo_domains) > 1:
-             config.source_domains = [d for d in original_source_domains if d != current_target]
              config.output_dir = os.path.join(base_output_dir, f"target_{current_target}")
         else:
-             config.source_domains = original_source_domains
+             config.output_dir = base_output_dir
+
+    base_output_dir = config.output_dir
+
+    for current_target in lodo_domains:
+        print(f"\n{'='*80}")
+        print(f"STARTING LODO PHASE: Target = {current_target}")
+        print(f"{'='*80}\n")
+        
+        config.target_domain = current_target
+        
+        # Source domains are all domains EXCEPT the current target
+        config.source_domains = [d for d in all_domains if d != current_target]
+        
+        if len(lodo_domains) > 1:
+             config.output_dir = os.path.join(base_output_dir, f"target_{current_target}")
+        else:
              config.output_dir = base_output_dir
 
         os.makedirs(config.output_dir, exist_ok=True)

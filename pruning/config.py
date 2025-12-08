@@ -3,12 +3,21 @@ import os
 from dataclasses import dataclass, asdict, field
 from typing import List, Tuple, Optional, Dict, Any
 
+DATASET_DOMAINS = {
+    'pacs': ['art_painting', 'cartoon', 'photo', 'sketch'],
+    'vlcs': ['caltech101', 'labelme', 'sun09', 'voc2007'],
+    'office_home': ['Art', 'Clipart', 'Product', 'Real_World'],
+    'terra_incognita': ['location_38', 'location_43', 'location_46', 'location_100'],
+    'domain_net': ['clipart', 'infograph', 'painting', 'quickdraw', 'real', 'sketch']
+}
+
 @dataclass
 class PruningConfig:
     # Dataset
     dataset: str = 'pacs'
     data_dir: Optional[str] = None
-    source_domains: List[str] = field(default_factory=lambda: ['art_painting', 'cartoon', 'photo'])
+    domains: Optional[List[str]] = None  # Full list of domains for the dataset
+    source_domains: List[str] = field(default_factory=list)
     target_domain: str = 'sketch'
     batch_size: int = 256
     num_workers: int = 2

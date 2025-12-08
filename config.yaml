@@ -3,10 +3,7 @@
 # Dataset Settings
 dataset: pacs
 data_dir: null  # Set this to your dataset directory
-source_domains:
-  - art_painting
-  - cartoon
-  - photo
+domains: null # Optional: List of all domains. If null, uses internal registry defaults.
 target_domain: sketch
 num_classes: 7
 custom_dataset_config:
