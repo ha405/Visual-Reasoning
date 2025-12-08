@@ -4,6 +4,8 @@ import argparse
 import random
 import numpy as np
 import torch
+import warnings
+warnings.filterwarnings("ignore")
 
 from pruning.config import load_config
 from pruning import (
@@ -110,145 +112,171 @@ def main():
     print(f"Source Domains: {config.source_domains}")
     print("="*60 + "\n")
     
-    print("Loading dataset...")
-    source_loaders, target_loader, class_to_idx = get_dataloaders(
-        dataset_name=config.dataset,
-        data_dir=config.data_dir,
-        source_domains=config.source_domains,
-        target_domain=config.target_domain,
-        batch_size=config.batch_size,
-        num_workers=config.num_workers,
-        combine_sources=False
-    )
-    
-    num_classes = config.num_classes if config.num_classes else len(class_to_idx)
-    print(f"Number of classes: {num_classes}\n")
-    
-    print(f"Loading model: {config.model}")
-    model = get_model(
-        model_name=config.model,
-        pretrained=config.pretrained,
-        num_classes=num_classes,
-        checkpoint_path=config.checkpoint_path
-    )
-    model = model.to(device)
-    print(f"Model loaded successfully\n")
-    
-    if config.warmup_epochs > 0 and config.checkpoint_path is None:
-        print("="*60)
-        print("WARMUP PHASE")
-        print("="*60)
-        from pruning import combine_source_loaders
-        import torch.optim as optim
-        
-        combined_loader = combine_source_loaders(source_loaders, config.batch_size, config.num_workers)
-        optimizer = optim.Adam(model.parameters(), lr=config.lr)
-        
-        best_acc = 0.0
-        for epoch in range(config.warmup_epochs):
-            print(f"\nWarmup Epoch {epoch+1}/{config.warmup_epochs}")
-            train_vanilla(model, combined_loader, optimizer, device, epoch)
-            
-            _, target_acc = evaluate(model, target_loader, device)
-            print(f"Target Accuracy: {target_acc:.2f}%")
-            
-            if target_acc > best_acc:
-                best_acc = target_acc
-                warmup_ckpt = os.path.join(config.checkpoint_dir, 'warmup_best.pth')
-                torch.save(model.state_dict(), warmup_ckpt)
-                print(f"Saved warmup checkpoint: {warmup_ckpt}")
-        
-        model.load_state_dict(torch.load(warmup_ckpt))
-        print(f"\nWarmup complete. Best accuracy: {best_acc:.2f}%\n")
-    
-    print("="*60)
-    print("PRUNING PHASE")
-    print("="*60)
-    
-    SFT = (config.training_strategy == 'SFT')
-    
-    if config.pruning_method == 'fixed_rate':
-        pruned_model, mask = fixed_rate_pruning(
-            model=model,
-            source_loaders_list=source_loaders,
-            target_loader=target_loader,
-            device=device,
-            prune_rates=config.prune_rates,
-            retrain_epochs=config.retrain_epochs,
-            lr=config.lr,
-            alpha=config.alpha,
-            batch_size=config.batch_size,
-            num_workers=config.num_workers,
-            SFT=SFT,
-            importance_type=config.importance_type,
-            keep_overall_best=config.keep_overall_best
-        )
-    
-    elif config.pruning_method == 'taylor':
-        pruned_model, mask = taylor_pruning(
-            model=model,
-            source_loaders_list=source_loaders,
-            target_loader=target_loader,
-            device=device,
-            prune_rates=config.prune_rates,
-            retrain_epochs=config.retrain_epochs,
-            lr=config.lr,
-            alpha=config.alpha,
-            batch_size=config.batch_size,
-            num_workers=config.num_workers,
-            SFT=SFT,
-            importance_type=config.importance_type,
-            keep_overall_best=config.keep_overall_best
-        )
-    
-    elif config.pruning_method == 'adaptive':
-        pruned_model, mask = adaptive_layerwise_pruning(
-            model=model,
-            source_loaders_list=source_loaders,
-            target_loader=target_loader,
-            device=device,
-            retrain_epochs=config.retrain_epochs,
-            lr=config.lr,
-            alpha=config.alpha,
-            batch_size=config.batch_size,
-            num_workers=config.num_workers,
-            SFT=SFT,
-            pruning_strategy=config.pruning_strategy,
-            candidate_rates=config.candidate_rates,
-            iterations=config.iterations,
-            calibration_samples=config.calibration_samples,
-            relative_acc_drop_threshold=config.relative_acc_drop_threshold
-        )
-    
+    # LODO Logic
+    if config.target_domain is None:
+        lodo_domains = config.source_domains
+        print(f"\nNo target domain specified. Running LODO on: {lodo_domains}")
     else:
-        raise ValueError(f"Unknown pruning method: {config.pruning_method}")
-    
-    print("\n" + "="*60)
-    print("FINAL RESULTS")
-    print("="*60)
-    _, final_acc = evaluate(pruned_model, target_loader, device, mask=mask)
-    print(f"Final Target Accuracy: {final_acc:.2f}%")
-    
-    final_model_path = os.path.join(config.output_dir, 'final_model.pth')
-    final_mask_path = os.path.join(config.output_dir, 'final_mask.pth')
-    torch.save(pruned_model.state_dict(), final_model_path)
-    torch.save(mask, final_mask_path)
-    print(f"Saved final model to: {final_model_path}")
-    print(f"Saved final mask to: {final_mask_path}")
-    
-    total_params = sum(p.numel() for p in pruned_model.parameters())
-    if mask:
-        pruned_params = sum((m == 0).sum().item() for m in mask.values())
-        pruning_ratio = pruned_params / total_params * 100
-        print(f"\nPruning Statistics:")
-        print(f"  Total parameters: {total_params:,}")
-        print(f"  Pruned parameters: {pruned_params:,}")
-        print(f"  Pruning ratio: {pruning_ratio:.2f}%")
-    
-    print("\n" + "="*60)
-    print("EXPERIMENT COMPLETE")
-    print("="*60)
-    print(f"Results saved to: {config.output_dir}\n")
+        lodo_domains = [config.target_domain]
+
+    original_source_domains = list(config.source_domains)
+    base_output_dir = config.output_dir
+
+    for current_target in lodo_domains:
+        print(f"\n{'='*80}")
+        print(f"STARTING LODO PHASE: Target = {current_target}")
+        print(f"{'='*80}\n")
+        
+        config.target_domain = current_target
+        
+        if len(lodo_domains) > 1:
+             config.source_domains = [d for d in original_source_domains if d != current_target]
+             config.output_dir = os.path.join(base_output_dir, f"target_{current_target}")
+        else:
+             config.source_domains = original_source_domains
+             config.output_dir = base_output_dir
+
+        os.makedirs(config.output_dir, exist_ok=True)
+
+        print("Loading dataset...")
+        source_loaders, target_loader, class_to_idx = get_dataloaders(
+            dataset_name=config.dataset,
+            data_dir=config.data_dir,
+            source_domains=config.source_domains,
+            target_domain=config.target_domain,
+            batch_size=config.batch_size,
+            num_workers=config.num_workers,
+            combine_sources=False
+        )
+        
+        num_classes = config.num_classes if config.num_classes else len(class_to_idx)
+        print(f"Number of classes: {num_classes}\n")
+        
+        print(f"Loading model: {config.model}")
+        model = get_model(
+            model_name=config.model,
+            pretrained=config.pretrained,
+            num_classes=num_classes,
+            checkpoint_path=config.checkpoint_path
+        )
+        model = model.to(device)
+        print(f"Model loaded successfully\n")
+        
+        if config.warmup_epochs > 0 and config.checkpoint_path is None:
+            print("="*60)
+            print("WARMUP PHASE")
+            print("="*60)
+            from pruning import combine_source_loaders
+            import torch.optim as optim
+            
+            combined_loader = combine_source_loaders(source_loaders, config.batch_size, config.num_workers)
+            optimizer = optim.Adam(model.parameters(), lr=config.lr)
+            
+            best_acc = 0.0
+            for epoch in range(config.warmup_epochs):
+                print(f"\nWarmup Epoch {epoch+1}/{config.warmup_epochs}")
+                train_vanilla(model, combined_loader, optimizer, device, epoch)
+                
+                _, target_acc = evaluate(model, target_loader, device)
+                print(f"Target Accuracy: {target_acc:.2f}%")
+                
+                if target_acc > best_acc:
+                    best_acc = target_acc
+                    warmup_ckpt = os.path.join(config.checkpoint_dir, 'warmup_best.pth')
+                    torch.save(model.state_dict(), warmup_ckpt)
+                    print(f"Saved warmup checkpoint: {warmup_ckpt}")
+            
+            model.load_state_dict(torch.load(warmup_ckpt))
+            print(f"\nWarmup complete. Best accuracy: {best_acc:.2f}%\n")
+        
+        print("="*60)
+        print("PRUNING PHASE")
+        print("="*60)
+        
+        SFT = (config.training_strategy == 'SFT')
+        
+        if config.pruning_method == 'fixed_rate':
+            pruned_model, mask = fixed_rate_pruning(
+                model=model,
+                source_loaders_list=source_loaders,
+                target_loader=target_loader,
+                device=device,
+                prune_rates=config.prune_rates,
+                retrain_epochs=config.retrain_epochs,
+                lr=config.lr,
+                alpha=config.alpha,
+                batch_size=config.batch_size,
+                num_workers=config.num_workers,
+                SFT=SFT,
+                importance_type=config.importance_type,
+                keep_overall_best=config.keep_overall_best
+            )
+        
+        elif config.pruning_method == 'taylor':
+            pruned_model, mask = taylor_pruning(
+                model=model,
+                source_loaders_list=source_loaders,
+                target_loader=target_loader,
+                device=device,
+                prune_rates=config.prune_rates,
+                retrain_epochs=config.retrain_epochs,
+                lr=config.lr,
+                alpha=config.alpha,
+                batch_size=config.batch_size,
+                num_workers=config.num_workers,
+                SFT=SFT,
+                importance_type=config.importance_type,
+                keep_overall_best=config.keep_overall_best
+            )
+        
+        elif config.pruning_method == 'adaptive':
+            pruned_model, mask = adaptive_layerwise_pruning(
+                model=model,
+                source_loaders_list=source_loaders,
+                target_loader=target_loader,
+                device=device,
+                retrain_epochs=config.retrain_epochs,
+                lr=config.lr,
+                alpha=config.alpha,
+                batch_size=config.batch_size,
+                num_workers=config.num_workers,
+                SFT=SFT,
+                pruning_strategy=config.pruning_strategy,
+                candidate_rates=config.candidate_rates,
+                iterations=config.iterations,
+                calibration_samples=config.calibration_samples,
+                relative_acc_drop_threshold=config.relative_acc_drop_threshold
+            )
+        
+        else:
+            raise ValueError(f"Unknown pruning method: {config.pruning_method}")
+        
+        print("\n" + "="*60)
+        print("FINAL RESULTS")
+        print("="*60)
+        _, final_acc = evaluate(pruned_model, target_loader, device, mask=mask)
+        print(f"Final Target Accuracy: {final_acc:.2f}%")
+        
+        final_model_path = os.path.join(config.output_dir, 'final_model.pth')
+        final_mask_path = os.path.join(config.output_dir, 'final_mask.pth')
+        torch.save(pruned_model.state_dict(), final_model_path)
+        torch.save(mask, final_mask_path)
+        print(f"Saved final model to: {final_model_path}")
+        print(f"Saved final mask to: {final_mask_path}")
+        
+        total_params = sum(p.numel() for p in pruned_model.parameters())
+        if mask:
+            pruned_params = sum((m == 0).sum().item() for m in mask.values())
+            pruning_ratio = pruned_params / total_params * 100
+            print(f"\nPruning Statistics:")
+            print(f"  Total parameters: {total_params:,}")
+            print(f"  Pruned parameters: {pruned_params:,}")
+            print(f"  Pruning ratio: {pruning_ratio:.2f}%")
+        
+        print("\n" + "="*60)
+        print("EXPERIMENT COMPLETE")
+        print("="*60)
+        print(f"Results saved to: {config.output_dir}\n")
 
 
 if __name__ == '__main__':

@@ -28,12 +28,12 @@ def fixed_rate_pruning(model, source_loaders_list, target_loader, device,
     
     _, best_overall_acc = evaluate(model, target_loader, device)
     print(f"Initial Baseline Target Accuracy: {best_overall_acc:.2f}%")
-    torch.save(model.state_dict(), "best_pruned_model.pth")
+    torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, "best_pruned_model.pth")
 
     if keep_overall_best:
         overall_best_acc = best_overall_acc
         overall_best_ckpt = "best_overall_model.pth"
-        torch.save(model.state_dict(), overall_best_ckpt)
+        torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, overall_best_ckpt)
 
     combined_source_loader = combine_source_loaders(source_loaders_list, batch_size, num_workers)
 
@@ -41,7 +41,9 @@ def fixed_rate_pruning(model, source_loaders_list, target_loader, device,
         it = i + 1
         print(f"\n--- Pruning Iteration {it}/{len(prune_rates)} with base rate {p_rate} ---")
         
-        model.load_state_dict(torch.load("best_pruned_model.pth"))
+        checkpoint = torch.load("best_pruned_model.pth")
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
         
         if importance_type == "activation":
             importance = compute_activation_importance(
@@ -68,6 +70,8 @@ def fixed_rate_pruning(model, source_loaders_list, target_loader, device,
                 cumulative_mask[k] = v
         
         best_iter_acc = 0.0
+        best_iter_ckpt = "best_iter_model.pth"
+        
         for epoch in range(retrain_epochs):
             print(f"\nRetraining Epoch {epoch+1}/{retrain_epochs}")
             if not SFT:
@@ -80,20 +84,33 @@ def fixed_rate_pruning(model, source_loaders_list, target_loader, device,
             
             if target_acc > best_iter_acc:
                 best_iter_acc = target_acc
-                torch.save(model.state_dict(), "best_pruned_model.pth")
+                torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, best_iter_ckpt)
             
             if keep_overall_best and target_acc > overall_best_acc:
                 overall_best_acc = target_acc
-                torch.save(model.state_dict(), overall_best_ckpt)
+                torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, overall_best_ckpt)
+                print(f"  [New Overall Best: {overall_best_acc:.2f}%]")
         
         print(f"Iteration {it} | Best Accuracy in this round: {best_iter_acc:.2f}%")
         if keep_overall_best:
             print(f"Overall Best Accuracy so far: {overall_best_acc:.2f}%")
+        
+        # Always load the best model from THIS iteration to proceed
+        checkpoint = torch.load(best_iter_ckpt)
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
+        torch.save(checkpoint, "best_pruned_model.pth")
     
     if keep_overall_best:
-        model.load_state_dict(torch.load(overall_best_ckpt))
+        print(f"\nLoading overall best model (Acc: {overall_best_acc:.2f}%)")
+        checkpoint = torch.load(overall_best_ckpt)
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
     else:
-        model.load_state_dict(torch.load("best_pruned_model.pth"))
+        print(f"\nLoading final pruned model (Acc: {best_iter_acc:.2f}%)")
+        checkpoint = torch.load("best_pruned_model.pth")
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
     
     return model, cumulative_mask
 
@@ -106,17 +123,19 @@ def taylor_pruning(model, source_loaders_list, target_loader, device,
     cumulative_mask = {}
     
     _, best_overall_acc = evaluate(model, target_loader, device)
-    torch.save(model.state_dict(), "best_pruned_model.pth")
+    torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, "best_pruned_model.pth")
 
     if keep_overall_best:
         overall_best_acc = best_overall_acc
         overall_best_ckpt = "best_overall_model.pth"
-        torch.save(model.state_dict(), overall_best_ckpt)
+        torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, overall_best_ckpt)
 
     combined_source_loader = combine_source_loaders(source_loaders_list, batch_size, num_workers)
 
     for i, p_rate in enumerate(prune_rates):
-        model.load_state_dict(torch.load("best_pruned_model.pth"))
+        checkpoint = torch.load("best_pruned_model.pth")
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
         
         if importance_type == "taylor":
             importance = compute_taylor_importance(
@@ -139,26 +158,47 @@ def taylor_pruning(model, source_loaders_list, target_loader, device,
                 cumulative_mask[k] = v
         
         best_iter_acc = 0.0
+        best_iter_ckpt = "best_iter_model.pth"
+
         for epoch in range(retrain_epochs):
+            print(f"\nRetraining Epoch {epoch+1}/{retrain_epochs}")
             if not SFT:
                 train_DI(model, combined_source_loader, optimizer, device, epoch, alpha, cumulative_mask)
             else:
                 train_SFT(model, combined_source_loader, optimizer, device, epoch, alpha, cumulative_mask)
             
             _, target_acc = evaluate(model, target_loader, device, mask=cumulative_mask)
+            print(f"  Epoch {epoch+1} Target Accuracy: {target_acc:.2f}%")
             
             if target_acc > best_iter_acc:
                 best_iter_acc = target_acc
-                torch.save(model.state_dict(), "best_pruned_model.pth")
+                torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, best_iter_ckpt)
             
             if keep_overall_best and target_acc > overall_best_acc:
                 overall_best_acc = target_acc
-                torch.save(model.state_dict(), overall_best_ckpt)
+                torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, overall_best_ckpt)
+                print(f"  [New Overall Best: {overall_best_acc:.2f}%]")
+        
+        print(f"Iteration {i+1} | Best Accuracy in this round: {best_iter_acc:.2f}%")
+        if keep_overall_best:
+            print(f"Overall Best Accuracy so far: {overall_best_acc:.2f}%")
+
+        # Always load the best model from THIS iteration to proceed
+        checkpoint = torch.load(best_iter_ckpt)
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
+        torch.save(checkpoint, "best_pruned_model.pth")
     
     if keep_overall_best:
-        model.load_state_dict(torch.load(overall_best_ckpt))
+        print(f"\nLoading overall best model (Acc: {overall_best_acc:.2f}%)")
+        checkpoint = torch.load(overall_best_ckpt)
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
     else:
-        model.load_state_dict(torch.load("best_pruned_model.pth"))
+        print(f"\nLoading final pruned model (Acc: {best_iter_acc:.2f}%)")
+        checkpoint = torch.load("best_pruned_model.pth")
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
     
     return model, cumulative_mask
 
@@ -174,7 +214,7 @@ def adaptive_layerwise_pruning(model, source_loaders_list, target_loader, device
 
     _, best_overall_acc = evaluate(model, target_loader, device)
     print(f"Initial Baseline Target Accuracy: {best_overall_acc:.2f}%")
-    torch.save(model.state_dict(), "best_pruned_model.pth")
+    torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, "best_pruned_model.pth")
     
     combined_source_loader = combine_source_loaders(source_loaders_list, batch_size, num_workers)
     source_calib_loaders = create_calibration_loaders(source_loaders_list, calibration_samples)
@@ -182,7 +222,9 @@ def adaptive_layerwise_pruning(model, source_loaders_list, target_loader, device
 
     for i in range(iterations):
         print(f"\n--- Pruning Iteration {i+1}/{iterations} ---")
-        model.load_state_dict(torch.load("best_pruned_model.pth"))
+        checkpoint = torch.load("best_pruned_model.pth")
+        model.load_state_dict(checkpoint['model'])
+        cumulative_mask = checkpoint['mask']
 
         if pruning_strategy == "source_magnitude":
             iter_mask = select_prune_mask_by_source_heuristics(
@@ -213,9 +255,11 @@ def adaptive_layerwise_pruning(model, source_loaders_list, target_loader, device
             print(f"  Epoch {epoch+1} Full Target Accuracy: {target_acc:.2f}%")
             if target_acc > best_iter_acc:
                 best_iter_acc = target_acc
-                torch.save(model.state_dict(), "best_pruned_model.pth")
+                torch.save({'model': model.state_dict(), 'mask': cumulative_mask}, "best_pruned_model.pth")
         print(f"Iteration {i+1} | Best Accuracy in this round: {best_iter_acc:.2f}%")
 
-    model.load_state_dict(torch.load("best_pruned_model.pth"))
+    checkpoint = torch.load("best_pruned_model.pth")
+    model.load_state_dict(checkpoint['model'])
+    cumulative_mask = checkpoint['mask']
     apply_mask(model, cumulative_mask)
     return model, cumulative_mask

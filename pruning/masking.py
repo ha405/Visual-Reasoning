@@ -12,6 +12,9 @@ def generate_mask_from_importance(model, importance, prune_rate=0.1, cumulative_
     new_mask = {}
     print(f"\nGenerating mask with base iterative prune rate: {prune_rate}")
     
+    total_pruned = 0
+    total_params = 0
+    
     for layer_name, scores in importance.items():
         weight_name = f"{layer_name}.weight"
 
@@ -21,6 +24,7 @@ def generate_mask_from_importance(model, importance, prune_rate=0.1, cumulative_
             var_across_domains = scores.var(dim=1)
 
         num_total_filters = scores.shape[0]
+        total_params += num_total_filters
 
         if weight_name in cumulative_mask:
             prev_mask_flat = cumulative_mask[weight_name][:, 0, 0, 0]
@@ -46,14 +50,13 @@ def generate_mask_from_importance(model, importance, prune_rate=0.1, cumulative_
             
             layer_mask = torch.ones(num_total_filters, device=scores.device)
             layer_mask[prune_indices_original] = 0.0
-            print(f"  - Layer '{layer_name}': Pruning {k}/{num_active_filters} active filters (rate {current_prune_rate:.3f}).")
+            total_pruned += k
             
             module = get_layer(model, layer_name)
             full_mask = layer_mask.view(-1, 1, 1, 1).expand_as(module.weight)
             new_mask[weight_name] = full_mask.clone()
-        else:
-            print(f"  - Layer '{layer_name}': No filters pruned.")
-
+    
+    print(f"  - Pruned {total_pruned} filters across all layers.")
     return new_mask
 
 
@@ -63,6 +66,7 @@ def generate_mask_from_taylor_importance(model, importance, prune_rate=0.1, cumu
     new_mask = {}
     print(f"\nGenerating Taylor mask with base prune rate: {prune_rate}")
 
+    total_pruned = 0
     for layer_name, scores in importance.items():
         weight_name = f"{layer_name}.weight"
         num_total_filters = scores.shape[0]
@@ -91,14 +95,13 @@ def generate_mask_from_taylor_importance(model, importance, prune_rate=0.1, cumu
 
             layer_mask = torch.ones(num_total_filters, device=scores.device)
             layer_mask[prune_indices_original] = 0.0
-            print(f"  - Layer '{layer_name}': Pruning {k}/{num_active_filters} active filters (rate {current_prune_rate:.3f}).")
+            total_pruned += k
 
             module = get_layer(model, layer_name)
             full_mask = layer_mask.view(-1, 1, 1, 1).expand_as(module.weight)
             new_mask[weight_name] = full_mask.clone()
-        else:
-            print(f"  - Layer '{layer_name}': No filters pruned.")
 
+    print(f"  - Pruned {total_pruned} filters across all layers.")
     return new_mask
 
 
