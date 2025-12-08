@@ -1,24 +1,9 @@
 import torch
 import torch.nn as nn
 from tqdm.notebook import tqdm
-from torch.utils.data import ConcatDataset, DataLoader
 
-def get_layer(model, name):
-    return dict(model.named_modules())[name]
+from .utils import apply_mask
 
-def apply_mask(model, mask):
-    if not mask:
-        return
-    with torch.no_grad():
-        for name, param in model.named_parameters():
-            if name in mask:
-                param.data.mul_(mask[name])
-            
-
-def combine_source_loaders(source_loaders, batch_size, num_workers):
-    datasets = [loader.dataset for loader in source_loaders]
-    combined_dataset = ConcatDataset(datasets)
-    return DataLoader(combined_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 
 def evaluate(model, loader, device, mask=None):
     model.to(device)
@@ -41,6 +26,7 @@ def evaluate(model, loader, device, mask=None):
     avg_loss = total_loss / total
     accuracy = 100 * correct / total
     return avg_loss, accuracy
+
 
 def train_DI(model, source_loader, optimizer, device, epoch, alpha=1.0, mask=None):
     model.to(device)
@@ -69,6 +55,7 @@ def train_DI(model, source_loader, optimizer, device, epoch, alpha=1.0, mask=Non
             apply_mask(model, mask)
             pbar.set_postfix({"Mean Loss": f"{mean_loss.item():.4f}", "Var Loss": f"{variance_loss.item():.4f}"})
 
+
 def train_vanilla(model, train_loader, optimizer, device, epoch, mask=None):
     model.to(device)
     model.train()
@@ -84,6 +71,7 @@ def train_vanilla(model, train_loader, optimizer, device, epoch, mask=None):
         optimizer.step()
         apply_mask(model, mask)
         pbar.set_postfix({"Loss": f"{loss.item():.4f}"})
+
 
 def train_SFT(model, source_loader, optimizer, device, epoch, alpha=1.0, mask=None):
     model.to(device)

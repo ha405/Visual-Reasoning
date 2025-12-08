@@ -6,6 +6,7 @@ from torchvision import datasets, transforms
 IMAGENET_MEAN = [0.5, 0.5, 0.5]
 IMAGENET_STD = [0.5, 0.5, 0.5]
 
+
 class DomainDataset(Dataset):
     def __init__(self, base_dataset, domain_id):
         self.base_dataset = base_dataset
@@ -17,6 +18,7 @@ class DomainDataset(Dataset):
     def __getitem__(self, idx):
         img, label = self.base_dataset[idx]
         return img, label, self.domain_id
+
 
 def get_pacs_dataloaders(data_dir, source_domains, target_domain, batch_size, num_workers=2, combine_sources=True):
     train_transform = transforms.Compose([
@@ -73,3 +75,23 @@ def get_pacs_dataloaders(data_dir, source_domains, target_domain, batch_size, nu
 
     class_to_idx = target_dataset.class_to_idx
     return final_source_loaders, target_loader, class_to_idx
+
+
+DATASET_REGISTRY = {
+    'pacs': get_pacs_dataloaders,
+}
+
+
+def get_dataloaders(dataset_name, **kwargs):
+    if dataset_name not in DATASET_REGISTRY:
+        raise ValueError(
+            f"Dataset '{dataset_name}' not found in registry. "
+            f"Available datasets: {list(DATASET_REGISTRY.keys())}"
+        )
+    
+    return DATASET_REGISTRY[dataset_name](**kwargs)
+
+
+def register_dataset(name, loader_func):
+    DATASET_REGISTRY[name] = loader_func
+    print(f"Registered dataset: {name}")

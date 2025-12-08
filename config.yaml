@@ -1,0 +1,56 @@
+# Consolidated Configuration File
+
+# Dataset Settings
+dataset: pacs
+data_dir: null  # Set this to your dataset directory
+source_domains:
+  - art_painting
+  - cartoon
+  - photo
+target_domain: sketch
+num_classes: 7
+custom_dataset_config:
+  domain_folders: null
+  class_to_idx: null
+  transform: imagenet
+
+# Model Settings
+model: resnet50
+pretrained: true
+checkpoint_path: null
+
+# Training Settings
+batch_size: 128
+num_workers: 2
+lr: 0.0005
+alpha: 1.0
+training_strategy: DI
+warmup_epochs: 5
+retrain_epochs: 5
+device: cuda
+seed: 42
+
+# Pruning Settings
+pruning_method: taylor
+importance_type: taylor
+prune_rates:
+  - 0.1
+  - 0.1
+  - 0.1
+keep_overall_best: true
+
+# Adaptive Pruning Settings (only used if pruning_method is 'adaptive')
+pruning_strategy: target_error
+candidate_rates:
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+iterations: 3
+calibration_samples: 1000
+relative_acc_drop_threshold: 0.1
+
+# Output Settings
+output_dir: ./outputs
+checkpoint_dir: ./checkpoints
+experiment_name: pacs_sketch_taylor_resnet50
